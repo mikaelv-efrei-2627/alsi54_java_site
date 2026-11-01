@@ -1356,7 +1356,7 @@
     "href": "tp1.html#préparation",
     "title": "TP1 - Environnement de développement, Jeu de rôle",
     "section": "4.1 Préparation",
-    "text": "4.1 Préparation\nUtilisez le lien moodle pour créer votre projet sur GitHub classroom. Vous devrez commit & push votre code à la fin du TP.",
+    "text": "4.1 Préparation\n\nUtilisez ce lien d’invitation Classroom50 pour créer votre projet sur GitHub.\nCliquez sur “Accept assignment” puis “Open repository”\nCopiez l’URL de votre nouveau repository GitHub\nLancez IntelliJ\nAllez dans File -&gt; Settings -&gt; Version Control -&gt; GitHub\n\nSi vous avez déjà un compte associé, passez à l’étape 6\nSinon, cliquez sur le + puis Login In with token\nCliquez sur Generate…. Cela ouvre la page de création de token GitHub dans votre navigateur.\nSous Note, tapez un nom quelconque, 90 jours d’expiration, laissez les droits par défaut.\nScrollez tout en bas et cliquez sur Generate token\nCopiez le token généré\nCollez le token dans IntelliJ\nIntelliJ sait maintenant comment vous authentifier sur GitHub. Cliquez sur OK.\n\nDans IntelliJ : File -&gt; Project from version control…\nCollez l’URL de votre repository GitHub et choisissez un répertoire de destination pour cloner le projet\n\nVous devrez commit & push votre code à la fin du TP.",
     "crumbs": [
       "TPs",
       "TP1 - Environnement de développement, Jeu de rôle"
