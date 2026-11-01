@@ -1,0 +1,1671 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.37">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Mikaël Valot">
+
+<title>CM1 - Syntaxe de base – ALSI54 Programmation Java</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-88e8eab2b9e74ff2b2dcb2dc0227e102.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-35673c1328022ec05f8a1bab69fe76b7.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-88e8eab2b9e74ff2b2dcb2dc0227e102.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-626bc743731229bd8adb76e0f8fa352c.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-626bc743731229bd8adb76e0f8fa352c.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-626bc743731229bd8adb76e0f8fa352c.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
+
+
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./cm1.html">Cours</a></li><li class="breadcrumb-item"><a href="./cm1.html">CM1 - Syntaxe de base</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+      <a href="./index.html" class="sidebar-logo-link">
+      <img src="./figures/logo-noir.png" alt="" class="sidebar-logo light-content py-0 d-lg-inline d-none">
+      <img src="./figures/logo-noir.png" alt="" class="sidebar-logo dark-content py-0 d-lg-inline d-none">
+      </a>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Cours</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cm1.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">CM1 - Syntaxe de base</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">TPs</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tp1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">TP1 - Environnement de développement, Jeu de rôle</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul class="collapse">
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">1</span> Introduction</a>
+  <ul class="collapse">
+  <li><a href="#pourquoi-apprendre-java" id="toc-pourquoi-apprendre-java" class="nav-link" data-scroll-target="#pourquoi-apprendre-java"><span class="header-section-number">1.1</span> Pourquoi apprendre Java</a></li>
+  <li><a href="#historique" id="toc-historique" class="nav-link" data-scroll-target="#historique"><span class="header-section-number">1.2</span> Historique</a></li>
+  <li><a href="#références" id="toc-références" class="nav-link" data-scroll-target="#références"><span class="header-section-number">1.3</span> Références</a></li>
+  </ul></li>
+  <li><a href="#java-jvm-jdk" id="toc-java-jvm-jdk" class="nav-link" data-scroll-target="#java-jvm-jdk"><span class="header-section-number">2</span> Java, JVM, JDK</a>
+  <ul class="collapse">
+  <li><a href="#caractéristiques-de-la-jvm" id="toc-caractéristiques-de-la-jvm" class="nav-link" data-scroll-target="#caractéristiques-de-la-jvm"><span class="header-section-number">2.1</span> Caractéristiques de la JVM</a></li>
+  <li><a href="#le-garbage-collector-ramasse-miettes" id="toc-le-garbage-collector-ramasse-miettes" class="nav-link" data-scroll-target="#le-garbage-collector-ramasse-miettes"><span class="header-section-number">2.2</span> Le Garbage Collector (ramasse-miettes)</a></li>
+  <li><a href="#le-jdk-java-development-kit" id="toc-le-jdk-java-development-kit" class="nav-link" data-scroll-target="#le-jdk-java-development-kit"><span class="header-section-number">2.3</span> Le JDK (Java Development Kit)</a></li>
+  </ul></li>
+  <li><a href="#syntaxe-de-base" id="toc-syntaxe-de-base" class="nav-link" data-scroll-target="#syntaxe-de-base"><span class="header-section-number">3</span> Syntaxe de base</a>
+  <ul class="collapse">
+  <li><a href="#anatomie-dun-programme-java" id="toc-anatomie-dun-programme-java" class="nav-link" data-scroll-target="#anatomie-dun-programme-java"><span class="header-section-number">3.1</span> Anatomie d’un programme Java</a></li>
+  <li><a href="#déclaration-de-variable" id="toc-déclaration-de-variable" class="nav-link" data-scroll-target="#déclaration-de-variable"><span class="header-section-number">3.2</span> Déclaration de variable</a></li>
+  <li><a href="#exemples-de-déclarations" id="toc-exemples-de-déclarations" class="nav-link" data-scroll-target="#exemples-de-déclarations"><span class="header-section-number">3.3</span> Exemples de déclarations</a></li>
+  <li><a href="#affectation" id="toc-affectation" class="nav-link" data-scroll-target="#affectation"><span class="header-section-number">3.4</span> Affectation</a></li>
+  <li><a href="#types" id="toc-types" class="nav-link" data-scroll-target="#types"><span class="header-section-number">3.5</span> Types</a></li>
+  <li><a href="#références-1" id="toc-références-1" class="nav-link" data-scroll-target="#références-1"><span class="header-section-number">3.6</span> Références</a></li>
+  <li><a href="#opérateurs-arithmétiques" id="toc-opérateurs-arithmétiques" class="nav-link" data-scroll-target="#opérateurs-arithmétiques"><span class="header-section-number">3.7</span> Opérateurs arithmétiques</a></li>
+  <li><a href="#affectations-avec-opérateurs-arithmétiques" id="toc-affectations-avec-opérateurs-arithmétiques" class="nav-link" data-scroll-target="#affectations-avec-opérateurs-arithmétiques"><span class="header-section-number">3.8</span> Affectations avec opérateurs arithmétiques</a></li>
+  <li><a href="#opérateurs-relationnels" id="toc-opérateurs-relationnels" class="nav-link" data-scroll-target="#opérateurs-relationnels"><span class="header-section-number">3.9</span> Opérateurs relationnels</a></li>
+  <li><a href="#opérateurs-logiques" id="toc-opérateurs-logiques" class="nav-link" data-scroll-target="#opérateurs-logiques"><span class="header-section-number">3.10</span> Opérateurs logiques</a></li>
+  <li><a href="#expressions-vs-instructions" id="toc-expressions-vs-instructions" class="nav-link" data-scroll-target="#expressions-vs-instructions"><span class="header-section-number">3.11</span> Expressions vs instructions</a></li>
+  <li><a href="#notion-de-bloc" id="toc-notion-de-bloc" class="nav-link" data-scroll-target="#notion-de-bloc"><span class="header-section-number">3.12</span> Notion de bloc</a></li>
+  </ul></li>
+  <li><a href="#instructions-conditionnelles" id="toc-instructions-conditionnelles" class="nav-link" data-scroll-target="#instructions-conditionnelles"><span class="header-section-number">4</span> Instructions conditionnelles</a>
+  <ul class="collapse">
+  <li><a href="#if-else" id="toc-if-else" class="nav-link" data-scroll-target="#if-else"><span class="header-section-number">4.1</span> if-else</a></li>
+  <li><a href="#switch-case" id="toc-switch-case" class="nav-link" data-scroll-target="#switch-case"><span class="header-section-number">4.2</span> switch-case</a></li>
+  <li><a href="#switch-case---exemple" id="toc-switch-case---exemple" class="nav-link" data-scroll-target="#switch-case---exemple"><span class="header-section-number">4.3</span> switch-case - exemple</a></li>
+  <li><a href="#switch-case---java-17" id="toc-switch-case---java-17" class="nav-link" data-scroll-target="#switch-case---java-17"><span class="header-section-number">4.4</span> switch-case - Java 17</a></li>
+  </ul></li>
+  <li><a href="#boucles" id="toc-boucles" class="nav-link" data-scroll-target="#boucles"><span class="header-section-number">5</span> Boucles</a>
+  <ul class="collapse">
+  <li><a href="#while" id="toc-while" class="nav-link" data-scroll-target="#while"><span class="header-section-number">5.1</span> while</a></li>
+  <li><a href="#do-while" id="toc-do-while" class="nav-link" data-scroll-target="#do-while"><span class="header-section-number">5.2</span> do-while</a></li>
+  <li><a href="#for" id="toc-for" class="nav-link" data-scroll-target="#for"><span class="header-section-number">5.3</span> for</a></li>
+  <li><a href="#for---exemples" id="toc-for---exemples" class="nav-link" data-scroll-target="#for---exemples"><span class="header-section-number">5.4</span> for - exemples</a></li>
+  </ul></li>
+  <li><a href="#classe-et-objet" id="toc-classe-et-objet" class="nav-link" data-scroll-target="#classe-et-objet"><span class="header-section-number">6</span> Classe et Objet</a>
+  <ul class="collapse">
+  <li><a href="#classe" id="toc-classe" class="nav-link" data-scroll-target="#classe"><span class="header-section-number">6.1</span> Classe</a></li>
+  <li><a href="#classe---exemple" id="toc-classe---exemple" class="nav-link" data-scroll-target="#classe---exemple"><span class="header-section-number">6.2</span> Classe - exemple</a></li>
+  <li><a href="#objet" id="toc-objet" class="nav-link" data-scroll-target="#objet"><span class="header-section-number">6.3</span> Objet</a></li>
+  <li><a href="#accéder-aux-membres" id="toc-accéder-aux-membres" class="nav-link" data-scroll-target="#accéder-aux-membres"><span class="header-section-number">6.4</span> Accéder aux membres</a></li>
+  <li><a href="#attributs" id="toc-attributs" class="nav-link" data-scroll-target="#attributs"><span class="header-section-number">6.5</span> Attributs</a></li>
+  <li><a href="#constructeurs" id="toc-constructeurs" class="nav-link" data-scroll-target="#constructeurs"><span class="header-section-number">6.6</span> Constructeurs</a></li>
+  <li><a href="#méthodes" id="toc-méthodes" class="nav-link" data-scroll-target="#méthodes"><span class="header-section-number">6.7</span> Méthodes</a></li>
+  </ul></li>
+  <li><a href="#tableaux" id="toc-tableaux" class="nav-link" data-scroll-target="#tableaux"><span class="header-section-number">7</span> Tableaux</a>
+  <ul class="collapse">
+  <li><a href="#caractéristiques" id="toc-caractéristiques" class="nav-link" data-scroll-target="#caractéristiques"><span class="header-section-number">7.1</span> Caractéristiques</a></li>
+  <li><a href="#déclaration" id="toc-déclaration" class="nav-link" data-scroll-target="#déclaration"><span class="header-section-number">7.2</span> Déclaration</a></li>
+  <li><a href="#allocation-mémoire" id="toc-allocation-mémoire" class="nav-link" data-scroll-target="#allocation-mémoire"><span class="header-section-number">7.3</span> Allocation mémoire</a></li>
+  <li><a href="#accès" id="toc-accès" class="nav-link" data-scroll-target="#accès"><span class="header-section-number">7.4</span> Accès</a></li>
+  </ul></li>
+  <li><a href="#packages" id="toc-packages" class="nav-link" data-scroll-target="#packages"><span class="header-section-number">8</span> Packages</a>
+  <ul class="collapse">
+  <li><a href="#package" id="toc-package" class="nav-link" data-scroll-target="#package"><span class="header-section-number">8.1</span> Package</a></li>
+  <li><a href="#package-et-répertoire" id="toc-package-et-répertoire" class="nav-link" data-scroll-target="#package-et-répertoire"><span class="header-section-number">8.2</span> Package et répertoire</a></li>
+  <li><a href="#imports" id="toc-imports" class="nav-link" data-scroll-target="#imports"><span class="header-section-number">8.3</span> Imports</a></li>
+  <li><a href="#imports---exemple" id="toc-imports---exemple" class="nav-link" data-scroll-target="#imports---exemple"><span class="header-section-number">8.4</span> Imports - exemple</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./cm1.html">Cours</a></li><li class="breadcrumb-item"><a href="./cm1.html">CM1 - Syntaxe de base</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">CM1 - Syntaxe de base</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Mikaël Valot </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="introduction" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Introduction</h1>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="figures/Java_programming_language_logo.svg" class="img-fluid figure-img"></p>
+<figcaption>Java</figcaption>
+</figure>
+</div>
+<section id="pourquoi-apprendre-java" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="pourquoi-apprendre-java"><span class="header-section-number">1.1</span> Pourquoi apprendre Java</h2>
+<ul>
+<li>Programmation Orientée Objet</li>
+<li>Toujours populaire
+<ul>
+<li><a href="https://trends.google.fr/trends/explore?cat=958&amp;date=today%205-y&amp;q=%2Fm%2F07sbkfb,%2Fm%2F0jgqg,%2Fm%2F05z1_,%2Fm%2F02p97&amp;hl=fr">Google trends</a></li>
+<li><a href="https://survey.stackoverflow.co/2024/technology#most-popular-technologies-language-prof">StackOverflow survey</a></li>
+</ul></li>
+<li>Développement Backend <a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></li>
+<li>Apps Android</li>
+</ul>
+</section>
+<section id="historique" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="historique"><span class="header-section-number">1.2</span> Historique</h2>
+<ul>
+<li><div class="line-block">1996 Java 1.0, première version publique.<br>
+<img src="https://upload.wikimedia.org/wikipedia/fr/thumb/6/63/Sun_Microsystems_Logo.svg/langfr-210px-Sun_Microsystems_Logo.svg.png" class="img-fluid" alt="Sun"><br>
+“Write Once, run anywhere”</div></li>
+<li>1998 Java 1.2: API Collections</li>
+<li>2006 Open source, license GPL</li>
+<li><div class="line-block">2010 Oracle acquiert Sun Microsystems<br>
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Oracle_logo.svg/langfr-210px-Oracle_logo.svg.png" class="img-fluid" alt="Oracle"></div></li>
+<li>2004 Java SE 5.0: Type Génériques</li>
+<li>2014 Java SE 8: Streams</li>
+<li>2021 Java SE 17 LTS: pattern matching, sealed</li>
+<li>2025 Java SE 25 LTS</li>
+</ul>
+<div class="notes">
+<p>Les versions “LTS” : Long Term Support sont a privilégier pour leur stabilité.</p>
+</div>
+</section>
+<section id="références" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="références"><span class="header-section-number">1.3</span> Références</h2>
+<ul>
+<li><a href="https://docs.oracle.com/en/java/javase/22/">JDK 22 Documentation</a></li>
+<li><a href="https://docs.oracle.com/javase/tutorial/">The Java Tutorials</a></li>
+<li><a href="https://hyperskill.org/knowledge-map/73?track=17">JetBrains Hyperskill</a></li>
+<li>“Programmer avec Java” O’Reilly 2019</li>
+<li>Plus récent: “Java in a Nutshell, 8th edition” <a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a></li>
+</ul>
+</section>
+</section>
+<section id="java-jvm-jdk" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Java, JVM, JDK</h1>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="figures/jvm.png" class="img-fluid figure-img"></p>
+<figcaption>JVM</figcaption>
+</figure>
+</div>
+<div class="notes">
+<p>La Java Virtual Machine est une “machine” qui va interpréter et exécuter du <em>bytecode</em> java. Le code source .java est compilé en bytecode dans un fichier .class.</p>
+</div>
+<section id="caractéristiques-de-la-jvm" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="caractéristiques-de-la-jvm"><span class="header-section-number">2.1</span> Caractéristiques de la JVM</h2>
+<ul>
+<li>indépendance. Write Once, Run Anywhere</li>
+<li>gestion mémoire</li>
+<li>sécurité</li>
+<li>chargement dynamique</li>
+<li>compilation Just In Time</li>
+<li>multithreading</li>
+<li>d’autres langages peuvent être utilisés: Scala, Kotlin, Clojure, Groovy</li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center collapsed" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<ul>
+<li>plusieurs implémentations de la JVM co-existent: Oracle JDK, OpenJDK, Zulu, GraalVM, …</li>
+<li>indépendance de la plate-forme: le même bytecode peut être exécuté sur Windows x86, Mac, Linux ARM, …</li>
+<li>gestion de la mémoire: La JVM gère sa mémoire automatiquement grâce à son Garbage Collector (GC). Le GC permet aux développeurs de ne pas se soucier de la libération mémoire des objets.</li>
+<li>chargement dynamique: les classes sont chargées au “runtime”.</li>
+<li>sécurité: des “policies” permettent de contrôler l’accès aux resources système.</li>
+<li>JIT: le bytecode exécuté fréquemment est compilé en language machine</li>
+<li>multithreading: Plusieurs tâches peuvent être exécutées en même temps.</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<section id="le-garbage-collector-ramasse-miettes" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="le-garbage-collector-ramasse-miettes"><span class="header-section-number">2.2</span> Le Garbage Collector (ramasse-miettes)</h2>
+<ul>
+<li>Gestion de la mémoire automatique</li>
+<li>Les objets sont détruits lorsqu’ils ne sont plus utilisés.</li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb1-1"><a href="#cb1-1"></a>MyClass objet <span class="op">=</span> <span class="kw">new</span> <span class="fu">MyClass</span><span class="op">();</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="co">// (...)</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a>objet <span class="op">=</span> <span class="kw">null</span><span class="op">;</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="co">// Le GC va libérer la mémoire occupée par objet</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ul>
+<li>vous ne pouvez pas détruire l’objet vous-même!</li>
+</ul>
+<div class="notes">
+<p>Le GC est un avantage majeur par rapport à d’autres langages objets comme C++. Un inconvénient est qu’il peut parfois geler le programme en cours d’exécution (Stop The World).</p>
+</div>
+</section>
+<section id="le-jdk-java-development-kit" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="le-jdk-java-development-kit"><span class="header-section-number">2.3</span> Le JDK (Java Development Kit)</h2>
+<ul>
+<li>Ensemble d’outils dont le développeur a besoin pour réaliser des programmes en Java</li>
+<li>Examples de programmes contenus dans le JDK:
+<ul>
+<li><code>javac.exe</code>: le compilateur Java</li>
+<li><code>java.exe</code>: la machine virtuelle</li>
+<li><code>javadoc.exe</code>: le générateur de documentation</li>
+<li><code>jar.exe</code>: permet de créer des fichiers “.jar” contenant tous les .class d’une bibliothèque ou d’une application.</li>
+<li><code>jshell.exe</code>: permet d’exécuter du code Java rapidement avec un REPL</li>
+</ul></li>
+</ul>
+<div class="notes">
+<ul>
+<li>Le JDK est installé automatiquement avec IntelliJ IDEA</li>
+<li>Vous pouvez choisir d’installer une autre version ou une autre implémentation</li>
+</ul>
+</div>
+</section>
+</section>
+<section id="syntaxe-de-base" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Syntaxe de base</h1>
+<section id="anatomie-dun-programme-java" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="anatomie-dun-programme-java"><span class="header-section-number">3.1</span> Anatomie d’un programme Java</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb2-1"><a href="#cb2-1"></a><span class="co">/**</span> </span>
+<span id="cb2-2"><a href="#cb2-2"></a> <span class="co">*</span> Ce programme imprime</span>
+<span id="cb2-3"><a href="#cb2-3"></a> <span class="co">*</span> <span class="co">"</span>Hello World<span class="co">"</span> sur la sortie standard</span>
+<span id="cb2-4"><a href="#cb2-4"></a> <span class="co">*/</span></span>
+<span id="cb2-5"><a href="#cb2-5"></a><span class="kw">public</span> <span class="kw">class</span> PremierProgramme <span class="op">{</span></span>
+<span id="cb2-6"><a href="#cb2-6"></a>    <span class="kw">public</span> <span class="dt">static</span> <span class="dt">void</span> <span class="fu">main</span><span class="op">(</span><span class="bu">String</span><span class="op">[]</span> args<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-7"><a href="#cb2-7"></a>       <span class="co">// imprime sur la sortie</span></span>
+<span id="cb2-8"><a href="#cb2-8"></a>        <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span><span class="st">"Hello World"</span><span class="op">);</span> </span>
+<span id="cb2-9"><a href="#cb2-9"></a>    <span class="op">}</span></span>
+<span id="cb2-10"><a href="#cb2-10"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ul>
+<li>compiler: <code>javac PremierProgramme.java</code></li>
+<li>exécuter: <code>java PremierProgramme</code></li>
+</ul>
+<div class="notes">
+<ul>
+<li><code>PremierProgramme</code> est le nom de la <strong>classe</strong> principale</li>
+<li><code>main</code> est la procédure point d’entrée du programme.
+<ul>
+<li>elle prend en paramètre un tableau de <code>String</code>, qui contient les arguments du programme</li>
+<li>elle ne renvoie rien, son type de retour est <code>void</code></li>
+</ul></li>
+<li><code>System.out.println</code> est une fonction qui permet d’écrire sur la sortie standard.</li>
+<li>chaque instruction se termine par <code>;</code></li>
+<li>commentaires de code:
+<ul>
+<li><code>//</code> pour un commentaire sur une ligne</li>
+<li><code>/*</code> au début et <code>*/</code> à la fin pour un commentaire multi-ligne</li>
+<li><code>/**</code> au début et <code>*/</code> à la fin pour la documentation</li>
+</ul></li>
+<li><code>public</code> est un modificateur de visibilité. Nous les verrons plus tard.</li>
+<li><code>static</code> est un modificateur qui indique que la procédure <code>main</code> appartient à la classe elle-même. Nous verrons son rôle plus tard.</li>
+</ul>
+</div>
+</section>
+<section id="déclaration-de-variable" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="déclaration-de-variable"><span class="header-section-number">3.2</span> Déclaration de variable</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb3-1"><a href="#cb3-1"></a><span class="bu">Type</span> myVariable<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ul>
+<li>case-sensitive: <code>myVariable</code> est différent de <code>myvariable</code></li>
+<li>convention
+<ul>
+<li>camel case: <code>thisIsALongVariableName</code></li>
+<li>premier caractère en minuscules.</li>
+</ul></li>
+</ul>
+</section>
+<section id="exemples-de-déclarations" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="exemples-de-déclarations"><span class="header-section-number">3.3</span> Exemples de déclarations</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb4-1"><a href="#cb4-1"></a><span class="co">// entier</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="dt">int</span> myInt<span class="op">;</span></span>
+<span id="cb4-3"><a href="#cb4-3"></a></span>
+<span id="cb4-4"><a href="#cb4-4"></a><span class="co">// booléen</span></span>
+<span id="cb4-5"><a href="#cb4-5"></a><span class="dt">boolean</span> bool<span class="op">;</span></span>
+<span id="cb4-6"><a href="#cb4-6"></a></span>
+<span id="cb4-7"><a href="#cb4-7"></a><span class="co">// chaîne de caractères</span></span>
+<span id="cb4-8"><a href="#cb4-8"></a><span class="bu">String</span> myString<span class="op">;</span></span>
+<span id="cb4-9"><a href="#cb4-9"></a></span>
+<span id="cb4-10"><a href="#cb4-10"></a><span class="co">// tableau</span></span>
+<span id="cb4-11"><a href="#cb4-11"></a><span class="dt">int</span><span class="op">[]</span> myArray<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="affectation" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="affectation"><span class="header-section-number">3.4</span> Affectation</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb5-1"><a href="#cb5-1"></a>myInt <span class="op">=</span> <span class="dv">5</span><span class="op">;</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a>myString <span class="op">=</span> <span class="st">"Hello world"</span><span class="op">;</span></span>
+<span id="cb5-3"><a href="#cb5-3"></a>bool <span class="op">=</span> <span class="kw">true</span><span class="op">;</span></span>
+<span id="cb5-4"><a href="#cb5-4"></a></span>
+<span id="cb5-5"><a href="#cb5-5"></a>myArray <span class="op">=</span> <span class="kw">new</span> <span class="dt">char</span><span class="op">[</span><span class="dv">3</span><span class="op">];</span></span>
+<span id="cb5-6"><a href="#cb5-6"></a>myArray<span class="op">[</span><span class="dv">0</span><span class="op">]</span> <span class="op">=</span> <span class="ch">'a'</span><span class="op">;</span></span>
+<span id="cb5-7"><a href="#cb5-7"></a>myArray<span class="op">[</span><span class="dv">1</span><span class="op">]</span> <span class="op">=</span> <span class="ch">'b'</span><span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Déclaration et affectation en une ligne:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb6-1"><a href="#cb6-1"></a><span class="dt">int</span> myInt2 <span class="op">=</span> <span class="dv">4</span><span class="op">;</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="bu">String</span> myString <span class="op">=</span> <span class="st">"Hello world"</span><span class="op">;</span></span>
+<span id="cb6-3"><a href="#cb6-3"></a><span class="dt">boolean</span> bool <span class="op">=</span> <span class="kw">true</span><span class="op">;</span></span>
+<span id="cb6-4"><a href="#cb6-4"></a><span class="dt">int</span><span class="op">[]</span> myArray <span class="op">=</span> <span class="kw">new</span> <span class="dt">int</span><span class="op">[</span><span class="dv">5</span><span class="op">];</span></span>
+<span id="cb6-5"><a href="#cb6-5"></a><span class="dt">int</span><span class="op">[]</span> myArray <span class="op">=</span> <span class="op">{</span> <span class="dv">4</span><span class="op">,</span> <span class="dv">5</span><span class="op">,</span> <span class="dv">6</span> <span class="op">};</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Depuis le JDK 10, on peut utiliser <code>var</code> pour demander au compilateur d’inférer (deviner) le type:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb7-1"><a href="#cb7-1"></a><span class="dt">var</span> myInt <span class="op">=</span> <span class="dv">4</span><span class="op">;</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a><span class="dt">var</span> myStr <span class="op">=</span> <span class="st">"Hello world"</span><span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</div>
+</section>
+<section id="types" class="level2" data-number="3.5">
+<h2 data-number="3.5" class="anchored" data-anchor-id="types"><span class="header-section-number">3.5</span> Types</h2>
+<ul>
+<li>types primitifs: l’affectation copie la valeur
+<ul>
+<li><code>byte</code>, <code>short</code>, <code>int</code>, <code>long</code>: entiers signés sur 8, 16, 32, 64 bits</li>
+<li><code>float</code>, <code>double</code>: nombre virgule flottante sur 32 ou 64 bits</li>
+<li><code>boolean</code></li>
+<li><code>char</code>: caractère</li>
+</ul></li>
+<li>tableaux et objets: l’affectation copie une <strong>référence</strong>, similaire à un pointeur en C</li>
+</ul>
+<div class="notes">
+<p>La classe <code>String</code> est le type chaîne de caractères. Nous verrons les classes dans le cours suivant.</p>
+</div>
+</section>
+<section id="références-1" class="level2" data-number="3.6">
+<h2 data-number="3.6" class="anchored" data-anchor-id="références-1"><span class="header-section-number">3.6</span> Références</h2>
+<section id="types-primitifs" class="level3" data-number="3.6.1">
+<h3 data-number="3.6.1" class="anchored" data-anchor-id="types-primitifs"><span class="header-section-number">3.6.1</span> Types primitifs</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb8-1"><a href="#cb8-1"></a><span class="dt">int</span> a <span class="op">=</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb8-2"><a href="#cb8-2"></a><span class="dt">int</span> b <span class="op">=</span> a<span class="op">;</span></span>
+<span id="cb8-3"><a href="#cb8-3"></a>a <span class="op">=</span> <span class="dv">2</span><span class="op">;</span></span>
+<span id="cb8-4"><a href="#cb8-4"></a><span class="co">// Que vaut b ?</span></span>
+<span id="cb8-5"><a href="#cb8-5"></a><span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span>b<span class="op">);</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>La valeur est copiée.</p>
+</section>
+<section id="objets-et-tableaux" class="level3" data-number="3.6.2">
+<h3 data-number="3.6.2" class="anchored" data-anchor-id="objets-et-tableaux"><span class="header-section-number">3.6.2</span> Objets et tableaux</h3>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb9-1"><a href="#cb9-1"></a><span class="dt">int</span><span class="op">[]</span> a <span class="op">=</span> <span class="op">{</span> <span class="dv">1</span><span class="op">,</span> <span class="dv">2</span><span class="op">,</span> <span class="dv">3</span> <span class="op">};</span></span>
+<span id="cb9-2"><a href="#cb9-2"></a><span class="dt">int</span><span class="op">[]</span> b <span class="op">=</span> a<span class="op">;</span></span>
+<span id="cb9-3"><a href="#cb9-3"></a>a<span class="op">[</span><span class="dv">0</span><span class="op">]</span> <span class="op">=</span> <span class="dv">4</span><span class="op">;</span></span>
+<span id="cb9-4"><a href="#cb9-4"></a><span class="co">// Que contient b?</span></span>
+<span id="cb9-5"><a href="#cb9-5"></a><span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span>b<span class="op">[</span><span class="dv">0</span><span class="op">]);</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>La référence est copiée, les 2 variables pointent sur le même tableau.</p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+   array["4, 2, 3"]
+   a --&gt; array
+   b --&gt; array
+
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>On peut utiliser <code>System.arraycopy</code> pour copier les cellules d’un tableau</p>
+</div>
+</div>
+</section>
+</section>
+<section id="opérateurs-arithmétiques" class="level2" data-number="3.7">
+<h2 data-number="3.7" class="anchored" data-anchor-id="opérateurs-arithmétiques"><span class="header-section-number">3.7</span> Opérateurs arithmétiques</h2>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>opérateur</th>
+<th>description</th>
+<th>exemple</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>+</td>
+<td>addition</td>
+<td><code>2 + 2</code></td>
+</tr>
+<tr class="even">
+<td>+</td>
+<td>concaténation de String</td>
+<td><code>"Hello " + " world"</code></td>
+</tr>
+<tr class="odd">
+<td>-</td>
+<td>soustraction</td>
+<td><code>3 - 2</code></td>
+</tr>
+<tr class="even">
+<td>*</td>
+<td>multiplication</td>
+<td><code>3 * 4</code></td>
+</tr>
+<tr class="odd">
+<td>/</td>
+<td>division</td>
+<td><code>40 / 3</code></td>
+</tr>
+<tr class="even">
+<td>%</td>
+<td>modulo (reste de la division)</td>
+<td><code>10 % 3</code></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="affectations-avec-opérateurs-arithmétiques" class="level2" data-number="3.8">
+<h2 data-number="3.8" class="anchored" data-anchor-id="affectations-avec-opérateurs-arithmétiques"><span class="header-section-number">3.8</span> Affectations avec opérateurs arithmétiques</h2>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>opérateur</th>
+<th>exemple</th>
+<th>équivalent à</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>+=</td>
+<td>a += 4</td>
+<td>a = a + 4</td>
+</tr>
+<tr class="even">
+<td>++</td>
+<td>a++</td>
+<td>a = a + 1</td>
+</tr>
+<tr class="odd">
+<td>-=</td>
+<td>a -= 4</td>
+<td>a = a - 4</td>
+</tr>
+<tr class="even">
+<td>–</td>
+<td>a–</td>
+<td>a = a - 1</td>
+</tr>
+<tr class="odd">
+<td>*=</td>
+<td>a *= 2</td>
+<td>a = a * 2</td>
+</tr>
+<tr class="even">
+<td>/=</td>
+<td>a /= 2</td>
+<td>a = a / 2</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="opérateurs-relationnels" class="level2" data-number="3.9">
+<h2 data-number="3.9" class="anchored" data-anchor-id="opérateurs-relationnels"><span class="header-section-number">3.9</span> Opérateurs relationnels</h2>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>opérateur</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>==</td>
+<td>égalité</td>
+</tr>
+<tr class="even">
+<td>!=</td>
+<td>différent de</td>
+</tr>
+<tr class="odd">
+<td>&gt;</td>
+<td>supérieur à</td>
+</tr>
+<tr class="even">
+<td>&gt;=</td>
+<td>supérieur ou égal à</td>
+</tr>
+<tr class="odd">
+<td>&lt;</td>
+<td>inférieur à</td>
+</tr>
+<tr class="even">
+<td>&lt;=</td>
+<td>inférieur ou égal à</td>
+</tr>
+</tbody>
+</table>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Warning
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li><code>==</code> sur des objets compare la référence et non le contenu!</li>
+<li>Pour comparer le contenu de deux objets, on utilisera <code>equals()</code></li>
+</ul>
+</div>
+</div>
+</section>
+<section id="opérateurs-logiques" class="level2" data-number="3.10">
+<h2 data-number="3.10" class="anchored" data-anchor-id="opérateurs-logiques"><span class="header-section-number">3.10</span> Opérateurs logiques</h2>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>opérateur</th>
+<th>description</th>
+<th>exemple</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>&amp;&amp;</td>
+<td>et</td>
+<td><code>i &gt; 2 &amp;&amp; i &lt; 4</code></td>
+</tr>
+<tr class="even">
+<td>||</td>
+<td>ou</td>
+<td><code>s == "hello" || s == "world"</code></td>
+</tr>
+<tr class="odd">
+<td>!</td>
+<td>non</td>
+<td><code>!(i &gt; 2)</code></td>
+</tr>
+<tr class="even">
+<td>?:</td>
+<td>ternaire (if-then-else)</td>
+<td><code>i &gt; 10 ? "big" : "small"</code></td>
+</tr>
+</tbody>
+</table>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Il existe également des opérateurs <a href="https://docs.oracle.com/javase/tutorial/java/nutsandbolts/op3.html">“bitwise” et “bit shift”</a>, qui manipulent les bits d’un entier. Ils peuvent être utiles pour optimiser certains algorithmes.</p>
+</div>
+</div>
+</section>
+<section id="expressions-vs-instructions" class="level2" data-number="3.11">
+<h2 data-number="3.11" class="anchored" data-anchor-id="expressions-vs-instructions"><span class="header-section-number">3.11</span> Expressions vs instructions</h2>
+<ul>
+<li>une <em>expression</em> est composée de variables, opérateurs et invocations de méthodes</li>
+<li>son évaluation produit une seule valeur</li>
+<li>exemples d’expressions:</li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb10-1"><a href="#cb10-1"></a><span class="op">(</span>x <span class="op">+</span> y<span class="op">)</span> <span class="op">/</span> <span class="dv">100</span></span>
+<span id="cb10-2"><a href="#cb10-2"></a><span class="bu">Math</span><span class="op">.</span><span class="fu">min</span><span class="op">(</span><span class="dv">10</span><span class="op">,</span> <span class="dv">5</span><span class="op">*</span><span class="dv">2</span> <span class="op">-</span> <span class="dv">1</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ul>
+<li>une <em>instruction</em> (statement) est équivalent à une phrase. Elle doit se terminer par un <code>;</code></li>
+<li>exemples d’instructions:</li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb11-1"><a href="#cb11-1"></a>i <span class="op">=</span> <span class="dv">3</span> <span class="op">*</span> <span class="dv">2</span><span class="op">;</span></span>
+<span id="cb11-2"><a href="#cb11-2"></a>i<span class="op">++;</span></span>
+<span id="cb11-3"><a href="#cb11-3"></a><span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span><span class="st">"hello"</span><span class="op">);</span></span>
+<span id="cb11-4"><a href="#cb11-4"></a>joueur <span class="op">=</span> <span class="kw">new</span> <span class="fu">Personnage</span><span class="op">();</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="notion-de-bloc" class="level2" data-number="3.12">
+<h2 data-number="3.12" class="anchored" data-anchor-id="notion-de-bloc"><span class="header-section-number">3.12</span> Notion de bloc</h2>
+<ul>
+<li>un <strong>bloc</strong> d’instructions est compris entre 2 accolades <code>{</code> et <code>}</code></li>
+<li>les déclarations de variables contenues dans le bloc ont une <strong>portée</strong> limitée à ce bloc.</li>
+<li>un bloc peut accéder aux variables du bloc qui l’englobe.</li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb12-1"><a href="#cb12-1"></a><span class="op">{</span> </span>
+<span id="cb12-2"><a href="#cb12-2"></a>   <span class="dt">int</span> i <span class="op">=</span> <span class="dv">2</span><span class="op">;</span></span>
+<span id="cb12-3"><a href="#cb12-3"></a>   <span class="op">{</span></span>
+<span id="cb12-4"><a href="#cb12-4"></a>      <span class="dt">int</span> j <span class="op">=</span> i <span class="op">+</span> <span class="dv">1</span><span class="op">;</span> <span class="co">// autorisé, on peut utiliser i</span></span>
+<span id="cb12-5"><a href="#cb12-5"></a>   <span class="op">}</span></span>
+<span id="cb12-6"><a href="#cb12-6"></a>   i <span class="op">=</span> i <span class="op">+</span> j<span class="op">;</span> <span class="co">// erreur: j n'est pas défini</span></span>
+<span id="cb12-7"><a href="#cb12-7"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+</section>
+<section id="instructions-conditionnelles" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Instructions conditionnelles</h1>
+<section id="if-else" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="if-else"><span class="header-section-number">4.1</span> if-else</h2>
+<ul>
+<li>Forme générale</li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb13-1"><a href="#cb13-1"></a><span class="cf">if</span> <span class="op">(</span>condition<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb13-2"><a href="#cb13-2"></a>   <span class="co">// instructions si condition == true</span></span>
+<span id="cb13-3"><a href="#cb13-3"></a><span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb13-4"><a href="#cb13-4"></a>   <span class="co">// instructions si condition == false</span></span>
+<span id="cb13-5"><a href="#cb13-5"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ul>
+<li>Exemple</li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb14-1"><a href="#cb14-1"></a><span class="cf">if</span> <span class="op">(</span>x <span class="op">&lt;</span> <span class="dv">3</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb14-2"><a href="#cb14-2"></a>   <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span><span class="st">"x est inférieur à 3"</span><span class="op">);</span></span>
+<span id="cb14-3"><a href="#cb14-3"></a><span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb14-4"><a href="#cb14-4"></a>   <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span><span class="st">"x est supérieur à 3"</span><span class="op">);</span></span>
+<span id="cb14-5"><a href="#cb14-5"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ul>
+<li>Exemple avec plusieurs if</li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb15-1"><a href="#cb15-1"></a><span class="cf">if</span> <span class="op">(</span>x <span class="op">&lt;</span> <span class="dv">3</span><span class="op">)</span> </span>
+<span id="cb15-2"><a href="#cb15-2"></a>   <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span><span class="st">"x est inférieur à 3"</span><span class="op">);</span></span>
+<span id="cb15-3"><a href="#cb15-3"></a><span class="cf">else</span> <span class="cf">if</span> <span class="op">(</span>x <span class="op">==</span> <span class="dv">3</span><span class="op">)</span></span>
+<span id="cb15-4"><a href="#cb15-4"></a>   <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span><span class="st">"x est égal à 3"</span><span class="op">);</span></span>
+<span id="cb15-5"><a href="#cb15-5"></a><span class="cf">else</span> </span>
+<span id="cb15-6"><a href="#cb15-6"></a>   <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span><span class="st">"x est supérieur à 3"</span><span class="op">);</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>La convention en Java est de faire démarrer l’accolade ouvrante <code>{</code> sur la même ligne que le <code>if</code> ou le <code>else</code></p>
+</div>
+</div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Les accolades ne sont pas obligatoires si il n’y a qu’une instruction à exécuter.</p>
+</div>
+</div>
+</section>
+<section id="switch-case" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="switch-case"><span class="header-section-number">4.2</span> switch-case</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb16-1"><a href="#cb16-1"></a><span class="cf">switch</span> <span class="op">(</span>variable<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb16-2"><a href="#cb16-2"></a>    <span class="cf">case</span> valeur1<span class="op">:</span> </span>
+<span id="cb16-3"><a href="#cb16-3"></a>        <span class="co">// instructions si variable == valeur1</span></span>
+<span id="cb16-4"><a href="#cb16-4"></a>        <span class="cf">break</span><span class="op">;</span></span>
+<span id="cb16-5"><a href="#cb16-5"></a></span>
+<span id="cb16-6"><a href="#cb16-6"></a>    <span class="cf">case</span> valeur2<span class="op">:</span></span>
+<span id="cb16-7"><a href="#cb16-7"></a>    <span class="cf">case</span> valeur3<span class="op">:</span></span>
+<span id="cb16-8"><a href="#cb16-8"></a>        <span class="co">// instructions si variable == valeur2 || variable == valeur3</span></span>
+<span id="cb16-9"><a href="#cb16-9"></a>        <span class="cf">break</span><span class="op">;</span></span>
+<span id="cb16-10"><a href="#cb16-10"></a></span>
+<span id="cb16-11"><a href="#cb16-11"></a>    <span class="kw">default</span><span class="op">:</span></span>
+<span id="cb16-12"><a href="#cb16-12"></a>        <span class="co">// instructions si variable ne correspond à aucun cas</span></span>
+<span id="cb16-13"><a href="#cb16-13"></a>        <span class="cf">break</span><span class="op">;</span></span>
+<span id="cb16-14"><a href="#cb16-14"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="switch-case---exemple" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="switch-case---exemple"><span class="header-section-number">4.3</span> switch-case - exemple</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb17-1"><a href="#cb17-1"></a><span class="cf">switch</span> <span class="op">(</span>mois<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb17-2"><a href="#cb17-2"></a>    <span class="cf">case</span> <span class="dv">1</span><span class="op">:</span> <span class="co">// Janvier</span></span>
+<span id="cb17-3"><a href="#cb17-3"></a>    <span class="cf">case</span> <span class="dv">3</span><span class="op">:</span> <span class="co">// Mars</span></span>
+<span id="cb17-4"><a href="#cb17-4"></a>    <span class="cf">case</span> <span class="dv">5</span><span class="op">:</span> <span class="co">// Mai</span></span>
+<span id="cb17-5"><a href="#cb17-5"></a>    <span class="cf">case</span> <span class="dv">7</span><span class="op">:</span> <span class="co">// Juillet</span></span>
+<span id="cb17-6"><a href="#cb17-6"></a>    <span class="cf">case</span> <span class="dv">8</span><span class="op">:</span> <span class="co">// Août</span></span>
+<span id="cb17-7"><a href="#cb17-7"></a>    <span class="cf">case</span> <span class="dv">10</span><span class="op">:</span> <span class="co">// Octobre</span></span>
+<span id="cb17-8"><a href="#cb17-8"></a>    <span class="cf">case</span> <span class="dv">12</span><span class="op">:</span> <span class="co">// Décembre</span></span>
+<span id="cb17-9"><a href="#cb17-9"></a>        jours <span class="op">=</span> <span class="dv">31</span><span class="op">;</span></span>
+<span id="cb17-10"><a href="#cb17-10"></a>        <span class="cf">break</span><span class="op">;</span></span>
+<span id="cb17-11"><a href="#cb17-11"></a>    <span class="cf">case</span> <span class="dv">4</span><span class="op">:</span> <span class="co">// Avril</span></span>
+<span id="cb17-12"><a href="#cb17-12"></a>    <span class="cf">case</span> <span class="dv">6</span><span class="op">:</span> <span class="co">// Juin</span></span>
+<span id="cb17-13"><a href="#cb17-13"></a>    <span class="cf">case</span> <span class="dv">9</span><span class="op">:</span> <span class="co">// Septembre</span></span>
+<span id="cb17-14"><a href="#cb17-14"></a>    <span class="cf">case</span> <span class="dv">11</span><span class="op">:</span> <span class="co">// Novembre</span></span>
+<span id="cb17-15"><a href="#cb17-15"></a>        jours <span class="op">=</span> <span class="dv">30</span><span class="op">;</span></span>
+<span id="cb17-16"><a href="#cb17-16"></a>        <span class="cf">break</span><span class="op">;</span></span>
+<span id="cb17-17"><a href="#cb17-17"></a>    <span class="cf">case</span> <span class="dv">2</span><span class="op">:</span> <span class="co">// Février</span></span>
+<span id="cb17-18"><a href="#cb17-18"></a>        <span class="co">// Vérification si l'année est bissextile</span></span>
+<span id="cb17-19"><a href="#cb17-19"></a>        <span class="cf">if</span> <span class="op">((</span>annee <span class="op">%</span> <span class="dv">4</span> <span class="op">==</span> <span class="dv">0</span> <span class="op">&amp;&amp;</span> annee <span class="op">%</span> <span class="dv">100</span> <span class="op">!=</span> <span class="dv">0</span><span class="op">)</span> <span class="op">||</span> <span class="op">(</span>annee <span class="op">%</span> <span class="dv">400</span> <span class="op">==</span> <span class="dv">0</span><span class="op">))</span> <span class="op">{</span></span>
+<span id="cb17-20"><a href="#cb17-20"></a>            jours <span class="op">=</span> <span class="dv">29</span><span class="op">;</span> <span class="co">// Année bissextile</span></span>
+<span id="cb17-21"><a href="#cb17-21"></a>        <span class="op">}</span> <span class="cf">else</span> <span class="op">{</span></span>
+<span id="cb17-22"><a href="#cb17-22"></a>            jours <span class="op">=</span> <span class="dv">28</span><span class="op">;</span> <span class="co">// Année non bissextile</span></span>
+<span id="cb17-23"><a href="#cb17-23"></a>        <span class="op">}</span></span>
+<span id="cb17-24"><a href="#cb17-24"></a>        <span class="cf">break</span><span class="op">;</span></span>
+<span id="cb17-25"><a href="#cb17-25"></a>    <span class="kw">default</span><span class="op">:</span></span>
+<span id="cb17-26"><a href="#cb17-26"></a>        <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span><span class="st">"Numéro de mois invalide."</span><span class="op">);</span></span>
+<span id="cb17-27"><a href="#cb17-27"></a>        <span class="cf">break</span><span class="op">;</span> <span class="co">// On arrête l'exécution du programme</span></span>
+<span id="cb17-28"><a href="#cb17-28"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="switch-case---java-17" class="level2" data-number="4.4">
+<h2 data-number="4.4" class="anchored" data-anchor-id="switch-case---java-17"><span class="header-section-number">4.4</span> switch-case - Java 17</h2>
+<p>Les versions 12, 14 et 17 de Java ont grandement amélioré les possibilités du <code>switch</code>:</p>
+<ul>
+<li><code>switch</code> peut maintenant être une expression <code>int jours = switch(...)</code>. C’est plus concis et évite d’oublier les <code>break</code>.</li>
+<li>les <code>case</code> peuvent “matcher” plusieurs valeurs</li>
+<li>on peut ajouter des “guarded” condition avec <code>when</code></li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb18-1"><a href="#cb18-1"></a><span class="dt">int</span> jours <span class="op">=</span> <span class="cf">switch</span> <span class="op">(</span>mois<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb18-2"><a href="#cb18-2"></a>    <span class="cf">case</span> <span class="dv">1</span><span class="op">,</span> <span class="dv">3</span><span class="op">,</span> <span class="dv">5</span><span class="op">,</span> <span class="dv">7</span><span class="op">,</span> <span class="dv">8</span><span class="op">,</span> <span class="dv">10</span><span class="op">,</span> <span class="dv">12</span> <span class="op">-&gt;</span> <span class="dv">31</span><span class="op">;</span>  <span class="co">// Mois de 31 jours</span></span>
+<span id="cb18-3"><a href="#cb18-3"></a>    <span class="cf">case</span> <span class="dv">4</span><span class="op">,</span> <span class="dv">6</span><span class="op">,</span> <span class="dv">9</span><span class="op">,</span> <span class="dv">11</span> <span class="op">-&gt;</span> <span class="dv">30</span><span class="op">;</span>            <span class="co">// Mois de 30 jours</span></span>
+<span id="cb18-4"><a href="#cb18-4"></a>    <span class="cf">case</span> <span class="dv">2</span> <span class="fu">when</span> <span class="op">(</span>annee <span class="op">%</span> <span class="dv">4</span> <span class="op">==</span> <span class="dv">0</span> <span class="op">&amp;&amp;</span> annee <span class="op">%</span> <span class="dv">100</span> <span class="op">!=</span> <span class="dv">0</span><span class="op">)</span> <span class="op">||</span> <span class="op">(</span>annee <span class="op">%</span> <span class="dv">400</span> <span class="op">==</span> <span class="dv">0</span><span class="op">)</span> <span class="op">-&gt;</span> <span class="dv">29</span><span class="op">;</span> <span class="co">// Février bissextile</span></span>
+<span id="cb18-5"><a href="#cb18-5"></a>    <span class="cf">case</span> <span class="dv">2</span> <span class="op">-&gt;</span> <span class="dv">28</span><span class="op">;</span>  <span class="co">// Février non bissextile</span></span>
+<span id="cb18-6"><a href="#cb18-6"></a>    <span class="kw">default</span> <span class="op">-&gt;</span> <span class="op">{</span></span>
+<span id="cb18-7"><a href="#cb18-7"></a>        <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span><span class="st">"Numéro de mois invalide."</span><span class="op">);</span></span>
+<span id="cb18-8"><a href="#cb18-8"></a>        <span class="cf">yield</span> <span class="op">-</span><span class="dv">1</span><span class="op">;</span>  <span class="co">// Valeur d'erreur</span></span>
+<span id="cb18-9"><a href="#cb18-9"></a>    <span class="op">}</span></span>
+<span id="cb18-10"><a href="#cb18-10"></a><span class="op">};</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+</section>
+<section id="boucles" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Boucles</h1>
+<section id="while" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="while"><span class="header-section-number">5.1</span> while</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb19-1"><a href="#cb19-1"></a><span class="cf">while</span> <span class="op">(</span>expression<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb19-2"><a href="#cb19-2"></a>    <span class="co">// instructions</span></span>
+<span id="cb19-3"><a href="#cb19-3"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Exemple:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb20-1"><a href="#cb20-1"></a><span class="dt">int</span> count <span class="op">=</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb20-2"><a href="#cb20-2"></a><span class="cf">while</span> <span class="op">(</span>count <span class="op">&lt;</span> <span class="dv">11</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb20-3"><a href="#cb20-3"></a>    <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span><span class="st">"Count is: "</span> <span class="op">+</span> count<span class="op">);</span></span>
+<span id="cb20-4"><a href="#cb20-4"></a>    count<span class="op">++;</span></span>
+<span id="cb20-5"><a href="#cb20-5"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="do-while" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="do-while"><span class="header-section-number">5.2</span> do-while</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb21-1"><a href="#cb21-1"></a><span class="cf">do</span> <span class="op">{</span></span>
+<span id="cb21-2"><a href="#cb21-2"></a>    <span class="co">// instructions</span></span>
+<span id="cb21-3"><a href="#cb21-3"></a><span class="op">}</span> <span class="cf">while</span> <span class="op">(</span>expression<span class="op">);</span> </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Exemple:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb22-1"><a href="#cb22-1"></a><span class="dt">int</span> count <span class="op">=</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb22-2"><a href="#cb22-2"></a><span class="cf">do</span> <span class="op">{</span></span>
+<span id="cb22-3"><a href="#cb22-3"></a>    <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span><span class="st">"Count is: "</span> <span class="op">+</span> count<span class="op">);</span></span>
+<span id="cb22-4"><a href="#cb22-4"></a>    count<span class="op">++;</span></span>
+<span id="cb22-5"><a href="#cb22-5"></a><span class="op">}</span> <span class="cf">while</span> <span class="op">(</span>count <span class="op">&lt;</span> <span class="dv">11</span><span class="op">);</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ul>
+<li>la différence est que dans le cas du <code>do...while</code>, les instructions du bloc sont toujours exécutées au moins une fois, même si la condition est <code>false</code>.</li>
+</ul>
+</section>
+<section id="for" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="for"><span class="header-section-number">5.3</span> for</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb23-1"><a href="#cb23-1"></a><span class="cf">for</span> <span class="op">(</span>initialisation<span class="op">;</span> tant_que<span class="op">;</span> incrément<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb23-2"><a href="#cb23-2"></a>    <span class="co">// instructions</span></span>
+<span id="cb23-3"><a href="#cb23-3"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ul>
+<li>l’instruction d’initialisation est exécutée une seule fois.</li>
+<li>tant que l’expression <code>tant_que</code> est <code>true</code>, la boucle continue</li>
+<li>l’instruction d’incrément est invoquée après chaque itération</li>
+</ul>
+</section>
+<section id="for---exemples" class="level2" data-number="5.4">
+<h2 data-number="5.4" class="anchored" data-anchor-id="for---exemples"><span class="header-section-number">5.4</span> for - exemples</h2>
+<ul>
+<li>faire varier i de 0 à 9</li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb24-1"><a href="#cb24-1"></a><span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> <span class="dv">10</span><span class="op">;</span> i<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb24-2"><a href="#cb24-2"></a>    <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span><span class="st">"Count is: "</span> <span class="op">+</span> i<span class="op">);</span></span>
+<span id="cb24-3"><a href="#cb24-3"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ul>
+<li>faire varier i de 9 à 0. S’arrêter dès qu’on trouve <code>valeur</code> dans <code>array</code>.</li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb25"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb25-1"><a href="#cb25-1"></a><span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">9</span><span class="op">;</span> i <span class="op">&gt;=</span> <span class="dv">0</span> <span class="op">&amp;&amp;</span> <span class="op">!</span>found<span class="op">;</span> i<span class="op">--)</span> <span class="op">{</span></span>
+<span id="cb25-2"><a href="#cb25-2"></a>    <span class="cf">if</span> <span class="op">(</span>array<span class="op">[</span>i<span class="op">]</span> <span class="op">==</span> valeur<span class="op">)</span></span>
+<span id="cb25-3"><a href="#cb25-3"></a>        found <span class="op">=</span> <span class="kw">true</span><span class="op">;</span></span>
+<span id="cb25-4"><a href="#cb25-4"></a>    <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span><span class="st">"Count is: "</span> <span class="op">+</span> i<span class="op">);</span></span>
+<span id="cb25-5"><a href="#cb25-5"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+</section>
+<section id="classe-et-objet" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> Classe et Objet</h1>
+<section id="classe" class="level2" data-number="6.1">
+<h2 data-number="6.1" class="anchored" data-anchor-id="classe"><span class="header-section-number">6.1</span> Classe</h2>
+<p>Une classe permet de déclarer un nouveau <strong>type</strong> qui permet de regrouper:</p>
+<ul>
+<li>une liste d’<strong>attributs</strong>
+<ul>
+<li>caractéristiques ou propriétés</li>
+</ul></li>
+<li>une liste de <strong>constructeurs</strong>
+<ul>
+<li>fonctions qui permettent d’initialiser les attributs lors de la création d’un objet.</li>
+<li>Ils n’ont pas de type de retour car ils renvoient toujours le type de la classe</li>
+</ul></li>
+<li>une liste de <strong>méthodes</strong>
+<ul>
+<li>fonctions ou procédures qui peuvent modifier ou lire les attributs</li>
+</ul></li>
+</ul>
+</section>
+<section id="classe---exemple" class="level2" data-number="6.2">
+<h2 data-number="6.2" class="anchored" data-anchor-id="classe---exemple"><span class="header-section-number">6.2</span> Classe - exemple</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb26"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb26-1"><a href="#cb26-1"></a><span class="kw">class</span> Person <span class="op">{</span></span>
+<span id="cb26-2"><a href="#cb26-2"></a>    <span class="co">// attributs</span></span>
+<span id="cb26-3"><a href="#cb26-3"></a>    <span class="bu">String</span> nom<span class="op">;</span></span>
+<span id="cb26-4"><a href="#cb26-4"></a>    <span class="dt">int</span> age<span class="op">;</span></span>
+<span id="cb26-5"><a href="#cb26-5"></a></span>
+<span id="cb26-6"><a href="#cb26-6"></a>    <span class="co">// constructeur</span></span>
+<span id="cb26-7"><a href="#cb26-7"></a>    <span class="fu">Person</span><span class="op">(</span><span class="bu">String</span> nom<span class="op">,</span> <span class="dt">int</span> age<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb26-8"><a href="#cb26-8"></a>        <span class="kw">this</span><span class="op">.</span><span class="fu">nom</span> <span class="op">=</span> nom<span class="op">;</span></span>
+<span id="cb26-9"><a href="#cb26-9"></a>        <span class="kw">this</span><span class="op">.</span><span class="fu">age</span> <span class="op">=</span> age<span class="op">;</span></span>
+<span id="cb26-10"><a href="#cb26-10"></a>    <span class="op">}</span></span>
+<span id="cb26-11"><a href="#cb26-11"></a></span>
+<span id="cb26-12"><a href="#cb26-12"></a>    <span class="co">// méthode</span></span>
+<span id="cb26-13"><a href="#cb26-13"></a>    <span class="dt">void</span> <span class="fu">presentation</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb26-14"><a href="#cb26-14"></a>        <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span><span class="st">"Bonjour, je m'appelle "</span> <span class="op">+</span> nom <span class="op">+</span></span>
+<span id="cb26-15"><a href="#cb26-15"></a>            <span class="st">" et j'ai "</span> <span class="op">+</span> age <span class="op">+</span> <span class="st">" ans."</span><span class="op">);</span></span>
+<span id="cb26-16"><a href="#cb26-16"></a>    <span class="op">}</span></span>
+<span id="cb26-17"><a href="#cb26-17"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Les attributs et méthodes constituent les <strong>membres</strong> de la classe.</p>
+</section>
+<section id="objet" class="level2" data-number="6.3">
+<h2 data-number="6.3" class="anchored" data-anchor-id="objet"><span class="header-section-number">6.3</span> Objet</h2>
+<ul>
+<li>La classe est comme un moule à partir duquel on peut faire des gâteaux: les objets</li>
+<li>Un <strong>objet</strong> est en quelque sorte un exemplaire de la classe, qui va occuper une zone mémoire.</li>
+<li>Lorsqu’on crée un nouvel objet, on dit qu’on <strong>instancie</strong> un objet de la classe.</li>
+<li>Pour instancier un objet, il faut utiliser <code>new</code> et appeler l’un des constructeurs.</li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb27"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb27-1"><a href="#cb27-1"></a>Person anne <span class="op">=</span> <span class="kw">new</span> <span class="fu">Person</span><span class="op">(</span><span class="st">"Anne"</span><span class="op">,</span> <span class="dv">49</span><span class="op">);</span></span>
+<span id="cb27-2"><a href="#cb27-2"></a>Person john <span class="op">=</span> <span class="kw">new</span> <span class="fu">Person</span><span class="op">(</span><span class="st">"John"</span><span class="op">,</span> <span class="dv">40</span><span class="op">);</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="accéder-aux-membres" class="level2" data-number="6.4">
+<h2 data-number="6.4" class="anchored" data-anchor-id="accéder-aux-membres"><span class="header-section-number">6.4</span> Accéder aux membres</h2>
+<p>Pour accéder à un attribut d’un objet ou pour appeler une méthode, il faut utiliser le point:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb28"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb28-1"><a href="#cb28-1"></a>objet<span class="op">.</span><span class="fu">attribut</span><span class="op">;</span></span>
+<span id="cb28-2"><a href="#cb28-2"></a>objet<span class="op">.</span><span class="fu">methode</span><span class="op">(</span>arg0<span class="op">,</span> arg1<span class="op">);</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Avec la classe <code>Person</code>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb29"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb29-1"><a href="#cb29-1"></a><span class="bu">String</span> nomAnne <span class="op">=</span> anne<span class="op">.</span><span class="fu">nom</span><span class="op">;</span></span>
+<span id="cb29-2"><a href="#cb29-2"></a>anne<span class="op">.</span><span class="fu">presentation</span><span class="op">();</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="attributs" class="level2" data-number="6.5">
+<h2 data-number="6.5" class="anchored" data-anchor-id="attributs"><span class="header-section-number">6.5</span> Attributs</h2>
+<p>Ils se déclarent comme ceci:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb30"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb30-1"><a href="#cb30-1"></a><span class="bu">Type</span> nomAttribut<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>On peut leur donner une valeur par défaut:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb31"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb31-1"><a href="#cb31-1"></a><span class="bu">Type</span> nomAttribut <span class="op">=</span> defaultValue<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Exemple:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb32"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb32-1"><a href="#cb32-1"></a><span class="bu">String</span> greeting <span class="op">=</span> <span class="st">"Hello"</span><span class="op">;</span></span>
+<span id="cb32-2"><a href="#cb32-2"></a><span class="dt">int</span> age<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="constructeurs" class="level2" data-number="6.6">
+<h2 data-number="6.6" class="anchored" data-anchor-id="constructeurs"><span class="header-section-number">6.6</span> Constructeurs</h2>
+<p>Ils se déclarent comme ceci:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb33"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb33-1"><a href="#cb33-1"></a><span class="co">// Constructeur sans paramètre</span></span>
+<span id="cb33-2"><a href="#cb33-2"></a><span class="fu">NomClasse</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb33-3"><a href="#cb33-3"></a>    <span class="co">// ...</span></span>
+<span id="cb33-4"><a href="#cb33-4"></a><span class="op">}</span></span>
+<span id="cb33-5"><a href="#cb33-5"></a></span>
+<span id="cb33-6"><a href="#cb33-6"></a><span class="co">// Constructeur avec 2 paramètres arg0 et arg1</span></span>
+<span id="cb33-7"><a href="#cb33-7"></a><span class="fu">NomClasse</span><span class="op">(</span>Type0 arg0<span class="op">,</span> Type1 arg1<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb33-8"><a href="#cb33-8"></a>    <span class="kw">this</span><span class="op">.</span><span class="fu">arg0</span> <span class="op">=</span> arg0<span class="op">;</span></span>
+<span id="cb33-9"><a href="#cb33-9"></a>    <span class="co">// ...</span></span>
+<span id="cb33-10"><a href="#cb33-10"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ul>
+<li>Dans le corps d’un constructeur, on fait souvent appel au mot-clé <code>this</code>, qui référence l’objet en cours de création.</li>
+<li>Vous pouvez déclarer plusieurs constructeurs par classe. Ils doivent par contre avoir une <strong>signature</strong> différente.</li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Si vous ne déclarez pas de constructeur, Java va déclarer un constructeur sans paramètre par défaut. Il faut en effet toujours pouvoir instancier la classe.</p>
+</div>
+</div>
+</section>
+<section id="méthodes" class="level2" data-number="6.7">
+<h2 data-number="6.7" class="anchored" data-anchor-id="méthodes"><span class="header-section-number">6.7</span> Méthodes</h2>
+<p>Elles se déclarent comme ceci:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb34"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb34-1"><a href="#cb34-1"></a><span class="co">// Méthode renvoyant un TypeRetour et qui prend 2 paramètres arg0 et arg1</span></span>
+<span id="cb34-2"><a href="#cb34-2"></a>TypeRetour <span class="fu">nomMethode</span><span class="op">(</span>Type0 arg0<span class="op">,</span> Type1 arg1<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb34-3"><a href="#cb34-3"></a>    <span class="co">// instructions</span></span>
+<span id="cb34-4"><a href="#cb34-4"></a>    <span class="cf">return</span> valeurDeRetour<span class="op">;</span></span>
+<span id="cb34-5"><a href="#cb34-5"></a><span class="op">}</span></span>
+<span id="cb34-6"><a href="#cb34-6"></a></span>
+<span id="cb34-7"><a href="#cb34-7"></a><span class="co">// Méthode qui ne renvoie aucune valeur et qui prend 1 paramètre arg0</span></span>
+<span id="cb34-8"><a href="#cb34-8"></a><span class="dt">void</span> <span class="fu">nomMethode</span><span class="op">(</span>Type0 arg0<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb34-9"><a href="#cb34-9"></a>    <span class="co">// instructions</span></span>
+<span id="cb34-10"><a href="#cb34-10"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Exemple:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb35"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb35-1"><a href="#cb35-1"></a><span class="bu">String</span> <span class="fu">concatene</span><span class="op">(</span><span class="bu">String</span> chaine1<span class="op">,</span> <span class="bu">String</span> chaine2<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb35-2"><a href="#cb35-2"></a>    <span class="cf">return</span> chaine1 <span class="op">+</span> chaine2<span class="op">;</span></span>
+<span id="cb35-3"><a href="#cb35-3"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+</section>
+<section id="tableaux" class="level1" data-number="7">
+<h1 data-number="7"><span class="header-section-number">7</span> Tableaux</h1>
+<section id="caractéristiques" class="level2" data-number="7.1">
+<h2 data-number="7.1" class="anchored" data-anchor-id="caractéristiques"><span class="header-section-number">7.1</span> Caractéristiques</h2>
+<p>Les tableaux en Java sont de véritables objets qui peuvent être transmis et traités comme tels.</p>
+<ul>
+<li>Les tableaux fournissent un moyen de stocker une liste de données.</li>
+<li>Chaque élément du tableau reçoit une donnée individuelle.</li>
+<li>Ces données sont placées et enlevées en fonction des besoins.</li>
+<li>Les éléments d’un tableau sont d’un même type.</li>
+</ul>
+</section>
+<section id="déclaration" class="level2" data-number="7.2">
+<h2 data-number="7.2" class="anchored" data-anchor-id="déclaration"><span class="header-section-number">7.2</span> Déclaration</h2>
+<p>Déclaration des variables tableaux :</p>
+<ul>
+<li>Il faut définir une variable dans laquelle le tableau sera stocké.</li>
+<li>Les variables de type tableaux indiquent le type des objets à stocker et le nom du tableau suivi d’une paire de crochets vides :</li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb36"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb36-1"><a href="#cb36-1"></a><span class="bu">String</span> superTableau<span class="op">[];</span></span>
+<span id="cb36-2"><a href="#cb36-2"></a><span class="bu">Point</span> dots<span class="op">[];</span></span>
+<span id="cb36-3"><a href="#cb36-3"></a><span class="dt">int</span> ages<span class="op">[];</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ul>
+<li>Note : on peut aussi accoler les crochets au type</li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb37"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb37-1"><a href="#cb37-1"></a><span class="bu">String</span><span class="op">[]</span> superTableau<span class="op">;</span></span>
+<span id="cb37-2"><a href="#cb37-2"></a><span class="bu">Point</span><span class="op">[]</span> dots<span class="op">;</span></span>
+<span id="cb37-3"><a href="#cb37-3"></a><span class="dt">int</span><span class="op">[]</span> ages<span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="allocation-mémoire" class="level2" data-number="7.3">
+<h2 data-number="7.3" class="anchored" data-anchor-id="allocation-mémoire"><span class="header-section-number">7.3</span> Allocation mémoire</h2>
+<ul>
+<li>Une fois déclaré, il faut créer l’objet à proprement parler (réservation de la place mémoire)</li>
+<li>Première méthode : en utilisant l’opérateur new</li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb38"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb38-1"><a href="#cb38-1"></a><span class="bu">String</span><span class="op">[]</span> noms <span class="op">=</span> <span class="kw">new</span> <span class="bu">String</span><span class="op">[</span><span class="dv">10</span><span class="op">];</span></span>
+<span id="cb38-2"><a href="#cb38-2"></a><span class="dt">int</span><span class="op">[]</span> ages <span class="op">=</span> <span class="kw">new</span> <span class="dt">int</span><span class="op">[</span><span class="dv">99</span><span class="op">];</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ul>
+<li>Deuxième méthode : à la déclaration en initialisant les valeurs. Dans ce cas la liste des éléments est entre <code>{}</code> et les éléments sont séparés par une virgule.</li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb39"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb39-1"><a href="#cb39-1"></a><span class="bu">String</span><span class="op">[]</span> pays <span class="op">=</span> <span class="op">{</span><span class="st">"France"</span><span class="op">,</span> <span class="st">"Japon"</span><span class="op">,</span> <span class="st">"USA"</span><span class="op">};</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="accès" class="level2 smaller" data-number="7.4">
+<h2 class="smaller anchored" data-number="7.4" data-anchor-id="accès"><span class="header-section-number">7.4</span> Accès</h2>
+<ul>
+<li>L’accès aux éléments du tableau se fait via une expression “indicée”</li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb40"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb40-1"><a href="#cb40-1"></a><span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span>pays<span class="op">[</span><span class="dv">1</span><span class="op">]);</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ul>
+<li>Affectation d’une valeur à un élément de tableau donné :</li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb41"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb41-1"><a href="#cb41-1"></a>tableau<span class="op">[</span><span class="dv">1</span><span class="op">]</span> <span class="op">=</span> <span class="dv">15</span><span class="op">;</span></span>
+<span id="cb41-2"><a href="#cb41-2"></a>mots<span class="op">[</span><span class="dv">0</span><span class="op">]</span> <span class="op">=</span> <span class="st">"une"</span><span class="op">;</span></span>
+<span id="cb41-3"><a href="#cb41-3"></a>mots<span class="op">[</span><span class="dv">10</span><span class="op">]</span> <span class="op">=</span> mots<span class="op">[</span><span class="dv">0</span><span class="op">];</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ul>
+<li>Java refuse d’accéder ou d’attribuer une valeur à un élément de tableau hors limite. Dans ce cas une erreur (“exception”) de type <code>IndexOutOfBoundsException</code> est générée</li>
+<li>Pour éviter les erreurs à l’exécution on doit tester la validité de l’indice par rapport à la taille du tableau disponible en utilisant l’attribut <code>length</code>.</li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb42"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb42-1"><a href="#cb42-1"></a><span class="dt">int</span> taille <span class="op">=</span> tableau<span class="op">.</span><span class="fu">length</span><span class="op">;</span> <span class="co">// retourne la taille</span></span>
+<span id="cb42-2"><a href="#cb42-2"></a><span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> taille<span class="op">;</span> i<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb42-3"><a href="#cb42-3"></a>    myArray<span class="op">[</span>i<span class="op">]</span> <span class="op">=</span> …<span class="op">;</span></span>
+<span id="cb42-4"><a href="#cb42-4"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+</section>
+<section id="packages" class="level1" data-number="8">
+<h1 data-number="8"><span class="header-section-number">8</span> Packages</h1>
+<section id="package" class="level2" data-number="8.1">
+<h2 data-number="8.1" class="anchored" data-anchor-id="package"><span class="header-section-number">8.1</span> Package</h2>
+<p>Un package est un espace de nommage qui permet de regrouper les classes qui ont un rapport entre elles.</p>
+<p>C’est un concept similaire à un répertoire dans un système de fichier.</p>
+<p>Exemple: regarder le package <code>java.text</code></p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Note
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Les noms de packages sont en minuscules et suivent en général cette convention:</p>
+<ul>
+<li>projets commerciaux: <code>com.nom_compagnie.nom_projet...</code></li>
+<li>projets opensource: <code>org.nom_projet...</code></li>
+<li>JDK: <code>java...</code></li>
+</ul>
+</div>
+</div>
+</section>
+<section id="package-et-répertoire" class="level2" data-number="8.2">
+<h2 data-number="8.2" class="anchored" data-anchor-id="package-et-répertoire"><span class="header-section-number">8.2</span> Package et répertoire</h2>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Exemple.java</strong></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb43" data-filename="Exemple.java"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb43-1"><a href="#cb43-1"></a><span class="kw">package</span><span class="im"> org</span><span class="op">.</span><span class="im">efrei</span><span class="op">.</span><span class="im">exemple</span><span class="op">;</span></span>
+<span id="cb43-2"><a href="#cb43-2"></a></span>
+<span id="cb43-3"><a href="#cb43-3"></a><span class="kw">class</span> Exemple <span class="op">{</span></span>
+<span id="cb43-4"><a href="#cb43-4"></a>    <span class="co">// ...</span></span>
+<span id="cb43-5"><a href="#cb43-5"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<p>Le fichier <code>Exemple.java</code> doit être placé dans un répertoire <code>org/efrei/exemple</code>.</p>
+</section>
+<section id="imports" class="level2" data-number="8.3">
+<h2 data-number="8.3" class="anchored" data-anchor-id="imports"><span class="header-section-number">8.3</span> Imports</h2>
+<p>Pour utiliser une classe d’un autre package, il faut l’<strong>importer</strong> avec l’instruction:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb44"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb44-1"><a href="#cb44-1"></a><span class="kw">import</span> <span class="im">nom_package</span><span class="op">.</span><span class="im">nom_classe</span><span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Les imports doivent être situés entre la déclaration de <code>package</code> et la classe.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>On peut utiliser le caractère joker <code>*</code> pour importer toutes les classes d’un package. C’est par contre souvent une mauvaise pratique, car vous pouvez potentiellement importer des centaines de classes.</p>
+<p>Un développeur qui lira ce code ne saura pas quelles classes du package sont réellement utilisées.</p>
+</div>
+</div>
+</section>
+<section id="imports---exemple" class="level2" data-number="8.4">
+<h2 data-number="8.4" class="anchored" data-anchor-id="imports---exemple"><span class="header-section-number">8.4</span> Imports - exemple</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb45"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb45-1"><a href="#cb45-1"></a><span class="kw">package</span><span class="im"> org</span><span class="op">.</span><span class="im">efrei</span><span class="op">.</span><span class="im">exemple</span><span class="op">;</span></span>
+<span id="cb45-2"><a href="#cb45-2"></a></span>
+<span id="cb45-3"><a href="#cb45-3"></a><span class="kw">import</span> <span class="im">java</span><span class="op">.</span><span class="im">util</span><span class="op">.</span><span class="im">Scanner</span><span class="op">;</span></span>
+<span id="cb45-4"><a href="#cb45-4"></a><span class="kw">import</span> <span class="im">java</span><span class="op">.</span><span class="im">math</span><span class="op">.*;</span></span>
+<span id="cb45-5"><a href="#cb45-5"></a></span>
+<span id="cb45-6"><a href="#cb45-6"></a><span class="kw">class</span> Exemple <span class="op">{</span></span>
+<span id="cb45-7"><a href="#cb45-7"></a>    <span class="co">// ...</span></span>
+<span id="cb45-8"><a href="#cb45-8"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+
+
+</section>
+</section>
+
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>Dans le contexte des systèmes informatiques multicouches, backend est un terme désignant une couche logicielle accédant à des données mais, à l’inverse du frontend, ne gère pas d’interface utilisateur. Par extension, on parle aussi de développeur ou ingénieur backend.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>Il est important de savoir lire des documents techniques en Anglais. Les livres, documentations, forums les plus récents sont toujours en Anglais.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

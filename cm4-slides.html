@@ -1,0 +1,1146 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-html/tabby.min.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.9.37">
+
+  <meta name="author" content="Mikaël Valot">
+  <title>ALSI54 Programmation Java – CM4 - Exceptions, Tests</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="site_libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="site_libs/revealjs/dist/reveal.css">
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+      vertical-align: middle;
+    }
+    /* CSS for syntax highlighting */
+    html { -webkit-text-size-adjust: 100%; }
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="site_libs/revealjs/dist/theme/quarto-2740581606dc327e82f18f789b69d8a0.css">
+  <link href="site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+  <script src="site_libs/quarto-diagram/mermaid.min.js"></script>
+  <script src="site_libs/quarto-diagram/mermaid-init.js"></script>
+  <link href="site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
+</head>
+<body class="quarto-light">
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide" class="quarto-title-block center">
+  <h1 class="title">CM4 - Exceptions, Tests</h1>
+
+<div class="quarto-title-authors">
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+Mikaël Valot 
+</div>
+</div>
+</div>
+
+</section><section id="TOC">
+<nav role="doc-toc"> 
+<h2 id="toc-title">Contenu</h2>
+<ul>
+<li><a href="#/exceptions" id="/toc-exceptions"><span class="header-section-number">1</span> Exceptions</a></li>
+<li><a href="#/exceptions-bonnes-pratiques" id="/toc-exceptions-bonnes-pratiques"><span class="header-section-number">2</span> Exceptions : bonnes pratiques</a></li>
+<li><a href="#/tests-unitaires" id="/toc-tests-unitaires"><span class="header-section-number">3</span> Tests unitaires</a></li>
+<li><a href="#/tests-unitaires-bonnes-pratiques" id="/toc-tests-unitaires-bonnes-pratiques"><span class="header-section-number">4</span> Tests unitaires : bonnes pratiques</a></li>
+</ul>
+</nav>
+</section>
+<section>
+<section id="exceptions" class="title-slide slide level1 center" data-number="1">
+<h1><span class="header-section-number">1</span> Exceptions</h1>
+<p>Les exceptions permettent au développeur de traiter le “unhappy path” dans un programme.</p>
+</section>
+<section id="happy-path" class="slide level2" data-number="1.1">
+<h2><span class="header-section-number">1.1</span> Happy path</h2>
+<p>On écrit du code comme si tout se passait bien :</p>
+<ul>
+<li>l’utilisateur n’entre pas de données erronées</li>
+<li>le fichier à ouvrir existe</li>
+<li>le disque n’est pas plein</li>
+<li>la JVM a toujours de la mémoire</li>
+<li>le réseau est disponible</li>
+<li>…</li>
+</ul>
+</section>
+<section id="unhappy-path" class="slide level2" data-number="1.2">
+<h2><span class="header-section-number">1.2</span> Unhappy path</h2>
+<p>Le développeur doit décider comment le programme traite certains problèmes.</p>
+<ul>
+<li>certains problèmes ne peuvent pas être traités. Ils doivent faire terminer le programme :
+<ul>
+<li>disque / mémoire pleins</li>
+<li>bug</li>
+<li>…</li>
+</ul></li>
+<li>d’autres problèmes peuvent être traités.
+<ul>
+<li>saisie utilisateur erronée</li>
+<li>réseau indisponible : réessayer</li>
+<li>…</li>
+</ul></li>
+</ul>
+</section>
+<section id="lever-une-exception" class="slide level2" data-number="1.3">
+<h2><span class="header-section-number">1.3</span> Lever une Exception</h2>
+<p>Une <strong>Exception</strong> est un objet Java qui peut être :</p>
+<ul>
+<li>levé avec <code>throw myException</code></li>
+<li>attrapé avec <code>try</code> - <code>catch</code></li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb1-1"><a></a>    <span class="kw">public</span> <span class="dt">static</span> <span class="dt">double</span> <span class="fu">checkPositive</span><span class="op">(</span><span class="dt">double</span> nombre<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb1-2"><a></a>        <span class="cf">if</span> <span class="op">(</span>nombre <span class="op">&lt;</span> <span class="dv">0</span><span class="op">)</span></span>
+<span id="cb1-3"><a></a>            <span class="cf">throw</span> <span class="kw">new</span> <span class="bu">IllegalArgumentException</span><span class="op">(</span><span class="st">"Le nombre doit être positif"</span><span class="op">);</span></span>
+<span id="cb1-4"><a></a></span>
+<span id="cb1-5"><a></a>        <span class="cf">return</span> nombre<span class="op">;</span></span>
+<span id="cb1-6"><a></a>    <span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ul>
+<li>L’instruction <code>throw</code> <strong>stoppe</strong> l’exécution de la fonction et transmet l’exception à la méthode appelante.</li>
+</ul>
+</section>
+<section id="exception---appelant" class="slide level2 scrollable" data-number="1.4">
+<h2><span class="header-section-number">1.4</span> Exception - appelant</h2>
+<p>Une méthode <code>area</code> qui appelle <code>checkPositive</code> a deux possibilités :</p>
+<ol type="1">
+<li>ne rien faire =&gt; l’exception <code>IllegalArgumentException</code> est transmise à l’appelant de <code>surface</code>
+<ul>
+<li>si l’appelant est <code>main</code>, le programme se termine</li>
+</ul></li>
+</ol>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb2-1"><a></a>    <span class="kw">public</span> <span class="dt">static</span> <span class="dt">double</span> <span class="fu">area</span><span class="op">(</span><span class="dt">double</span> x<span class="op">,</span> <span class="dt">double</span> y<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-2"><a></a>        <span class="cf">return</span> <span class="fu">checkPositive</span><span class="op">(</span>x<span class="op">)</span> <span class="op">*</span> <span class="fu">checkPositive</span><span class="op">(</span>y<span class="op">);</span></span>
+<span id="cb2-3"><a></a>    <span class="op">}</span></span>
+<span id="cb2-4"><a></a></span>
+<span id="cb2-5"><a></a>    <span class="kw">public</span> <span class="dt">static</span> <span class="dt">void</span> <span class="fu">main</span><span class="op">(</span><span class="bu">String</span><span class="op">[]</span> args<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-6"><a></a>        <span class="dt">var</span> s <span class="op">=</span> <span class="fu">surface</span><span class="op">(</span><span class="dv">3</span><span class="op">,</span> <span class="op">-</span><span class="dv">2</span><span class="op">);</span></span>
+<span id="cb2-7"><a></a>        <span class="co">// le programme se termine avec IllegalArgumentException</span></span>
+<span id="cb2-8"><a></a>        <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span>s<span class="op">);</span></span>
+<span id="cb2-9"><a></a>    <span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="exception---try-catch" class="slide level2 scrollable" data-number="1.5">
+<h2><span class="header-section-number">1.5</span> Exception - try catch</h2>
+<ol start="2" type="1">
+<li>attraper l’exception avec <code>try</code> - <code>catch</code></li>
+</ol>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb3-1"><a></a>    <span class="kw">public</span> <span class="dt">static</span> <span class="dt">double</span> <span class="fu">surfaceCatch</span><span class="op">(</span><span class="dt">double</span> x<span class="op">,</span> <span class="dt">double</span> y<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb3-2"><a></a>        <span class="cf">try</span> <span class="op">{</span></span>
+<span id="cb3-3"><a></a>            <span class="cf">return</span> <span class="fu">checkPositive</span><span class="op">(</span>x<span class="op">)</span> <span class="op">*</span> <span class="fu">checkPositive</span><span class="op">(</span>y<span class="op">);</span></span>
+<span id="cb3-4"><a></a>        <span class="op">}</span> <span class="cf">catch</span> <span class="op">(</span><span class="bu">IllegalArgumentException</span> e<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb3-5"><a></a>            e<span class="op">.</span><span class="fu">printStackTrace</span><span class="op">();</span> <span class="co">// affiche la pile d'exécution</span></span>
+<span id="cb3-6"><a></a>            <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb3-7"><a></a>        <span class="op">}</span></span>
+<span id="cb3-8"><a></a>    <span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="exceptions---hiérarchie" class="slide level2" data-number="1.6">
+<h2><span class="header-section-number">1.6</span> Exceptions - hiérarchie</h2>
+<div class="cell" data-reveal="true" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class=""><p></p>
+<div>
+<pre class="mermaid mermaid-js">classDiagram
+    class Error
+    &lt;&lt;unchecked&gt;&gt; Error
+
+    class RuntimeException
+    &lt;&lt;unchecked&gt;&gt; RuntimeException
+
+    Throwable &lt;|-- Exception
+    Exception &lt;|-- RuntimeException 
+    Exception &lt;|-- IOException 
+    Throwable &lt;|-- Error
+    Error &lt;|-- OutOfMemoryError
+    Error &lt;|-- NoClassDefFoundError
+    RuntimeException &lt;|-- IndexOutOfBoundsException 
+    RuntimeException &lt;|-- ClassCastException 
+    RuntimeException &lt;|-- NullPointerException 
+
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+</section>
+<section id="checked-exceptions" class="slide level2" data-number="1.7">
+<h2><span class="header-section-number">1.7</span> Checked Exceptions</h2>
+<p>Si une “checked” exception est envoyée, la méthode qui l’entoure doit :</p>
+<ul>
+<li>soit l’attraper avec <code>try</code> - <code>catch</code></li>
+<li>soit déclarer avec <code>throws</code> le ou les types d’exceptions pouvant être lancées</li>
+</ul>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>java.io.File</strong></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4" data-filename="java.io.File"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb4-1"><a></a>    <span class="kw">public</span> <span class="bu">String</span> <span class="fu">getCanonicalPath</span><span class="op">()</span> <span class="kw">throws</span> <span class="bu">IOException</span> <span class="op">{</span></span>
+<span id="cb4-2"><a></a>        <span class="cf">if</span> <span class="op">(</span><span class="fu">isInvalid</span><span class="op">())</span> <span class="op">{</span></span>
+<span id="cb4-3"><a></a>            <span class="cf">throw</span> <span class="kw">new</span> <span class="bu">IOException</span><span class="op">(</span><span class="st">"Invalid file path"</span><span class="op">);</span></span>
+<span id="cb4-4"><a></a>        <span class="op">}</span></span>
+<span id="cb4-5"><a></a>        <span class="cf">return</span> FS<span class="op">.</span><span class="fu">canonicalize</span><span class="op">(</span>FS<span class="op">.</span><span class="fu">resolve</span><span class="op">(</span><span class="kw">this</span><span class="op">));</span></span>
+<span id="cb4-6"><a></a>    <span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="checked-exceptions-contamination" class="slide level2" data-number="1.8">
+<h2><span class="header-section-number">1.8</span> Checked Exceptions contamination</h2>
+<ul>
+<li>Une checked exception “contamine” toutes les méthodes appelantes.</li>
+<li>Elles doivent toutes déclarer <code>throws ...</code>, jusqu’à ce que l’exception soit attrapée avec <code>try</code> - <code>catch</code>.</li>
+</ul>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>java.io.File</strong></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5" data-filename="java.io.File"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb5-1"><a></a>    <span class="kw">public</span> <span class="bu">File</span> <span class="fu">getCanonicalFile</span><span class="op">()</span> <span class="kw">throws</span> <span class="bu">IOException</span> <span class="op">{</span></span>
+<span id="cb5-2"><a></a>        <span class="bu">String</span> canonPath <span class="op">=</span> <span class="fu">getCanonicalPath</span><span class="op">();</span></span>
+<span id="cb5-3"><a></a>        <span class="co">// ...</span></span>
+<span id="cb5-4"><a></a>    <span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="unchecked-exceptions" class="slide level2" data-number="1.9">
+<h2><span class="header-section-number">1.9</span> Unchecked Exceptions</h2>
+<ul>
+<li>Les exceptions “unchecked” n’ont pas besoin d’être déclarées dans les signatures de méthodes</li>
+<li>Elles sont filles de l’une de ces 2 classes :
+<ul>
+<li><code>Error</code> : en général ce sont des erreur impossibles à traiter</li>
+<li><code>RuntimeException</code></li>
+</ul></li>
+</ul>
+</section>
+<section id="try---catch---finally" class="slide level2 smaller" data-number="1.10">
+<h2><span class="header-section-number">1.10</span> try - catch - finally</h2>
+<ul>
+<li>Un bloc <code>try</code> - <code>catch</code> peut être suivi d’un bloc d’instructions <code>finally</code></li>
+<li>les instructions du bloc <code>finally</code> sont toujours exécutées, même si une exception est lancée</li>
+<li>usage typique : fermer proprement une ressource</li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb6-1"><a></a>    <span class="kw">public</span> <span class="dt">static</span> <span class="dt">int</span> <span class="fu">getPlayerScore</span><span class="op">(</span><span class="bu">File</span> file<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb6-2"><a></a>        <span class="bu">Scanner</span> contents <span class="op">=</span> <span class="kw">null</span><span class="op">;</span></span>
+<span id="cb6-3"><a></a>        <span class="cf">try</span> <span class="op">{</span></span>
+<span id="cb6-4"><a></a>            contents <span class="op">=</span> <span class="kw">new</span> <span class="bu">Scanner</span><span class="op">(</span>file<span class="op">);</span></span>
+<span id="cb6-5"><a></a>            <span class="cf">return</span> <span class="bu">Integer</span><span class="op">.</span><span class="fu">parseInt</span><span class="op">(</span>contents<span class="op">.</span><span class="fu">nextLine</span><span class="op">());</span></span>
+<span id="cb6-6"><a></a>        <span class="op">}</span> <span class="cf">catch</span> <span class="op">(</span><span class="bu">FileNotFoundException</span> ex<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb6-7"><a></a>            <span class="bu">System</span><span class="op">.</span><span class="fu">err</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span><span class="st">"File not found: "</span> <span class="op">+</span> file<span class="op">);</span></span>
+<span id="cb6-8"><a></a>            <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb6-9"><a></a>        <span class="op">}</span> <span class="cf">finally</span> <span class="op">{</span></span>
+<span id="cb6-10"><a></a>            <span class="cf">if</span> <span class="op">(</span>contents <span class="op">!=</span> <span class="kw">null</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb6-11"><a></a>                contents<span class="op">.</span><span class="fu">close</span><span class="op">();</span></span>
+<span id="cb6-12"><a></a>            <span class="op">}</span></span>
+<span id="cb6-13"><a></a>        <span class="op">}</span></span>
+<span id="cb6-14"><a></a>    <span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="try-with-resource" class="slide level2 smaller" data-number="1.11">
+<h2><span class="header-section-number">1.11</span> try with resource</h2>
+<ul>
+<li>La syntaxe précédente est un peu verbeuse</li>
+<li>si la ressource implémente <code>AutoCloseable</code>, la fermeture peut se faire automatiquement</li>
+</ul>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>java.lang.AutoCloseable</strong></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7" data-filename="java.lang.AutoCloseable"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb7-1"><a></a><span class="kw">public</span> <span class="kw">interface</span> AutoCloseable <span class="op">{</span></span>
+<span id="cb7-2"><a></a>    <span class="dt">void</span> <span class="fu">close</span><span class="op">()</span> <span class="kw">throws</span> <span class="bu">Exception</span><span class="op">;</span></span>
+<span id="cb7-3"><a></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<ul>
+<li>il faut initialiser la ressource avec <code>try(var ressource = new ...) { ... }</code></li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb8-1"><a></a>    <span class="kw">public</span> <span class="dt">static</span> <span class="dt">int</span> <span class="fu">getPlayerScore</span><span class="op">(</span><span class="bu">File</span> file<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb8-2"><a></a>        <span class="cf">try</span> <span class="op">(</span><span class="dt">var</span> contents <span class="op">=</span> <span class="kw">new</span> <span class="bu">Scanner</span><span class="op">(</span>file<span class="op">))</span> <span class="op">{</span></span>
+<span id="cb8-3"><a></a>            <span class="cf">return</span> <span class="bu">Integer</span><span class="op">.</span><span class="fu">parseInt</span><span class="op">(</span>contents<span class="op">.</span><span class="fu">nextLine</span><span class="op">());</span></span>
+<span id="cb8-4"><a></a>        <span class="op">}</span> <span class="cf">catch</span> <span class="op">(</span><span class="bu">FileNotFoundException</span> ex<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb8-5"><a></a>            <span class="bu">System</span><span class="op">.</span><span class="fu">err</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span><span class="st">"File not found: "</span> <span class="op">+</span> file<span class="op">);</span></span>
+<span id="cb8-6"><a></a>            <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb8-7"><a></a>        <span class="op">}</span></span>
+<span id="cb8-8"><a></a>    <span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="try-avec-plusieurs-catch" class="slide level2" data-number="1.12">
+<h2><span class="header-section-number">1.12</span> try avec plusieurs catch</h2>
+<ul>
+<li>le bloc try peut envoyer plusieurs types d’exceptions</li>
+<li>on peut décider de les traiter différemment</li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb9-1"><a></a><span class="kw">public</span> <span class="dt">static</span> <span class="dt">int</span> <span class="fu">getPlayerScore</span><span class="op">(</span><span class="bu">File</span> file<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb9-2"><a></a>    <span class="cf">try</span> <span class="op">(</span><span class="dt">var</span> contents <span class="op">=</span> <span class="kw">new</span> <span class="bu">Scanner</span><span class="op">(</span>file<span class="op">))</span> <span class="op">{</span></span>
+<span id="cb9-3"><a></a>        <span class="cf">return</span> <span class="bu">Integer</span><span class="op">.</span><span class="fu">parseInt</span><span class="op">(</span>contents<span class="op">.</span><span class="fu">nextLine</span><span class="op">());</span></span>
+<span id="cb9-4"><a></a>    <span class="op">}</span> <span class="cf">catch</span> <span class="op">(</span><span class="bu">IOException</span> e<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb9-5"><a></a>        <span class="bu">System</span><span class="op">.</span><span class="fu">err</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span><span class="st">"Player file wouldn't load!"</span><span class="op">,</span> e<span class="op">);</span></span>
+<span id="cb9-6"><a></a>        <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb9-7"><a></a>    <span class="op">}</span> <span class="cf">catch</span> <span class="op">(</span><span class="bu">NumberFormatException</span> e<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb9-8"><a></a>        <span class="bu">System</span><span class="op">.</span><span class="fu">err</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span><span class="st">"Player file was corrupted!"</span><span class="op">,</span> e<span class="op">);</span></span>
+<span id="cb9-9"><a></a>        <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb9-10"><a></a>    <span class="op">}</span></span>
+<span id="cb9-11"><a></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="try-avec-union-catch" class="slide level2" data-number="1.13">
+<h2><span class="header-section-number">1.13</span> try avec union catch</h2>
+<ul>
+<li>Lorsque le même traitement s’applique à plusieurs types, on peut les “catch” avec <code>Exception1 | Exception2 | ...</code></li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb10-1"><a></a><span class="kw">public</span> <span class="dt">static</span> <span class="dt">int</span> <span class="fu">getPlayerScore</span><span class="op">(</span><span class="bu">File</span> file<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb10-2"><a></a>    <span class="cf">try</span> <span class="op">(</span><span class="bu">Scanner</span> contents <span class="op">=</span> <span class="kw">new</span> <span class="bu">Scanner</span><span class="op">(</span>file<span class="op">))</span> <span class="op">{</span></span>
+<span id="cb10-3"><a></a>        <span class="cf">return</span> <span class="bu">Integer</span><span class="op">.</span><span class="fu">parseInt</span><span class="op">(</span>contents<span class="op">.</span><span class="fu">nextLine</span><span class="op">());</span></span>
+<span id="cb10-4"><a></a>    <span class="op">}</span> <span class="cf">catch</span> <span class="op">(</span><span class="bu">IOException</span> <span class="op">|</span> <span class="bu">NumberFormatException</span> e<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb10-5"><a></a>        logger<span class="op">.</span><span class="fu">warn</span><span class="op">(</span><span class="st">"Failed to load score!"</span><span class="op">,</span> e<span class="op">);</span></span>
+<span id="cb10-6"><a></a>        <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb10-7"><a></a>    <span class="op">}</span></span>
+<span id="cb10-8"><a></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="wooclap" class="slide level2" data-number="1.14">
+<h2><span class="header-section-number">1.14</span> Wooclap</h2>
+</section></section>
+<section>
+<section id="exceptions-bonnes-pratiques" class="title-slide slide level1 smaller center" data-number="2">
+<h1><span class="header-section-number">2</span> Exceptions : bonnes pratiques</h1>
+
+</section>
+<section id="do-not-swallow" class="slide level2" data-number="2.1">
+<h2><span class="header-section-number">2.1</span> Do not swallow</h2>
+<ul>
+<li>ne pas “avaler” les exceptions</li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb11-1"><a></a><span class="kw">public</span> <span class="dt">static</span> <span class="dt">int</span> <span class="fu">getPlayerScore</span><span class="op">(</span><span class="bu">File</span> file<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb11-2"><a></a>    <span class="cf">try</span> <span class="op">(</span><span class="bu">Scanner</span> contents <span class="op">=</span> <span class="kw">new</span> <span class="bu">Scanner</span><span class="op">(</span>file<span class="op">))</span> <span class="op">{</span></span>
+<span id="cb11-3"><a></a>        <span class="cf">return</span> <span class="bu">Integer</span><span class="op">.</span><span class="fu">parseInt</span><span class="op">(</span>contents<span class="op">.</span><span class="fu">nextLine</span><span class="op">());</span></span>
+<span id="cb11-4"><a></a>    <span class="op">}</span> <span class="cf">catch</span> <span class="op">(</span><span class="bu">Exception</span> e<span class="op">)</span> <span class="op">{</span> <span class="op">}</span></span>
+<span id="cb11-5"><a></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb11-6"><a></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Au lieu d’avaler l’exception, il vaut mieux :</p>
+<ul>
+<li>soit lancer un nouveau type d’exception qui sera pris en charge par l’appelant</li>
+<li>soit imprimer ou logger l’erreur</li>
+</ul>
+<aside class="notes">
+<p>La fonction appelante ne sait pas pourquoi le fichier n’a pas été chargé.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="re-throw" class="slide level2" data-number="2.2">
+<h2><span class="header-section-number">2.2</span> Re-throw</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb12-1"><a></a><span class="kw">public</span> <span class="dt">static</span> <span class="dt">int</span> <span class="fu">getPlayerScore</span><span class="op">(</span><span class="bu">File</span> file<span class="op">)</span> <span class="kw">throws</span> GameException <span class="op">{</span></span>
+<span id="cb12-2"><a></a>    <span class="cf">try</span> <span class="op">(</span><span class="dt">var</span> contents <span class="op">=</span> <span class="kw">new</span> <span class="bu">Scanner</span><span class="op">(</span>file<span class="op">))</span> <span class="op">{</span></span>
+<span id="cb12-3"><a></a>        <span class="cf">return</span> <span class="bu">Integer</span><span class="op">.</span><span class="fu">parseInt</span><span class="op">(</span>contents<span class="op">.</span><span class="fu">nextLine</span><span class="op">());</span></span>
+<span id="cb12-4"><a></a>    <span class="op">}</span> <span class="cf">catch</span> <span class="op">(</span><span class="bu">Exception</span> ex<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb12-5"><a></a>        <span class="cf">throw</span> <span class="kw">new</span> <span class="fu">GameException</span><span class="op">(</span><span class="st">"Couldn't load the score"</span><span class="op">,</span> ex<span class="op">);</span></span>
+<span id="cb12-6"><a></a>    <span class="op">}</span></span>
+<span id="cb12-7"><a></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb13-1"><a></a><span class="kw">public</span> <span class="kw">class</span> GameException <span class="kw">extends</span> <span class="bu">Exception</span> <span class="op">{</span></span>
+<span id="cb13-2"><a></a>    <span class="kw">public</span> <span class="fu">GameException</span><span class="op">(</span><span class="bu">String</span> message<span class="op">,</span> <span class="bu">Throwable</span> cause<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb13-3"><a></a>        <span class="kw">super</span><span class="op">(</span>message<span class="op">,</span> cause<span class="op">);</span></span>
+<span id="cb13-4"><a></a>    <span class="op">}</span></span>
+<span id="cb13-5"><a></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="afficher-lexception" class="slide level2" data-number="2.3">
+<h2><span class="header-section-number">2.3</span> Afficher l’exception</h2>
+<ul>
+<li>Alternativement, on peut afficher l’exception sur la console:</li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb14-1"><a></a>    <span class="kw">public</span> <span class="dt">static</span> <span class="dt">int</span> <span class="fu">getPlayerScore</span><span class="op">(</span><span class="bu">File</span> file<span class="op">)</span> <span class="kw">throws</span> GameException <span class="op">{</span></span>
+<span id="cb14-2"><a></a>        <span class="cf">try</span> <span class="op">(</span><span class="dt">var</span> contents <span class="op">=</span> <span class="kw">new</span> <span class="bu">Scanner</span><span class="op">(</span>file<span class="op">))</span> <span class="op">{</span></span>
+<span id="cb14-3"><a></a>            <span class="cf">return</span> <span class="bu">Integer</span><span class="op">.</span><span class="fu">parseInt</span><span class="op">(</span>contents<span class="op">.</span><span class="fu">nextLine</span><span class="op">());</span></span>
+<span id="cb14-4"><a></a>        <span class="op">}</span> <span class="cf">catch</span> <span class="op">(</span><span class="bu">Exception</span> ex<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb14-5"><a></a>            ex<span class="op">.</span><span class="fu">printStackTrace</span><span class="op">();</span></span>
+<span id="cb14-6"><a></a>            <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb14-7"><a></a>        <span class="op">}</span></span>
+<span id="cb14-8"><a></a>    <span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="logger-une-exception" class="slide level2" data-number="2.4">
+<h2><span class="header-section-number">2.4</span> Logger une exception</h2>
+<ul>
+<li>mais dans dans des projets importants, il est préférable d’utiliser un système de logging</li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb15-1"><a></a>    <span class="kw">private</span> <span class="dt">static</span> <span class="dt">final</span> <span class="bu">Logger</span> logger <span class="op">=</span> <span class="bu">Logger</span><span class="op">.</span><span class="fu">getLogger</span><span class="op">(</span><span class="kw">this</span><span class="op">.</span><span class="fu">getClass</span><span class="op">().</span><span class="fu">getName</span><span class="op">());</span></span>
+<span id="cb15-2"><a></a></span>
+<span id="cb15-3"><a></a>    <span class="kw">public</span> <span class="dt">static</span> <span class="dt">int</span> <span class="fu">getPlayerScore</span><span class="op">(</span><span class="bu">File</span> file<span class="op">)</span> <span class="kw">throws</span> GameException <span class="op">{</span></span>
+<span id="cb15-4"><a></a>        <span class="cf">try</span> <span class="op">(</span><span class="dt">var</span> contents <span class="op">=</span> <span class="kw">new</span> <span class="bu">Scanner</span><span class="op">(</span>file<span class="op">))</span> <span class="op">{</span></span>
+<span id="cb15-5"><a></a>            <span class="cf">return</span> <span class="bu">Integer</span><span class="op">.</span><span class="fu">parseInt</span><span class="op">(</span>contents<span class="op">.</span><span class="fu">nextLine</span><span class="op">());</span></span>
+<span id="cb15-6"><a></a>        <span class="op">}</span> <span class="cf">catch</span> <span class="op">(</span><span class="bu">Exception</span> ex<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb15-7"><a></a>            logger<span class="op">.</span><span class="fu">log</span><span class="op">(</span><span class="bu">Level</span><span class="op">.</span><span class="fu">WARNING</span><span class="op">,</span> <span class="st">"Couldn't load the score"</span><span class="op">,</span> ex<span class="op">);</span></span>
+<span id="cb15-8"><a></a>            <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb15-9"><a></a>        <span class="op">}</span></span>
+<span id="cb15-10"><a></a>    <span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="finally-ne-pas-utiliser-return" class="slide level2" data-number="2.5">
+<h2><span class="header-section-number">2.5</span> finally : ne pas utiliser return</h2>
+<ul>
+<li>une autre façon d’avaler une exception est d’utiliser return dans le bloc <code>finally</code></li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb16-1"><a></a><span class="kw">public</span> <span class="dt">static</span> <span class="dt">int</span> <span class="fu">getPlayerScore</span><span class="op">(</span><span class="bu">String</span> playerFile<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb16-2"><a></a>    <span class="dt">int</span> score <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb16-3"><a></a>    <span class="cf">try</span> <span class="op">{</span></span>
+<span id="cb16-4"><a></a>        <span class="cf">throw</span> <span class="kw">new</span> <span class="bu">IOException</span><span class="op">();</span></span>
+<span id="cb16-5"><a></a>    <span class="op">}</span> <span class="cf">finally</span> <span class="op">{</span></span>
+<span id="cb16-6"><a></a>        <span class="cf">return</span> score<span class="op">;</span> <span class="co">// &lt;== IOException est perdue</span></span>
+<span id="cb16-7"><a></a>    <span class="op">}</span></span>
+<span id="cb16-8"><a></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="finally-ne-pas-utiliser-throw" class="slide level2" data-number="2.6">
+<h2><span class="header-section-number">2.6</span> finally : ne pas utiliser throw</h2>
+<ul>
+<li>lorsqu’on lance une exception dans le bloc finally, l’exception originale est perdue.</li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb17-1"><a></a><span class="kw">public</span> <span class="dt">static</span> <span class="dt">int</span> <span class="fu">getPlayerScore</span><span class="op">(</span><span class="bu">String</span> playerFile<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb17-2"><a></a>    <span class="cf">try</span> <span class="op">{</span></span>
+<span id="cb17-3"><a></a>        <span class="co">// ...</span></span>
+<span id="cb17-4"><a></a>    <span class="op">}</span> <span class="cf">catch</span> <span class="op">(</span> <span class="bu">IOException</span> io <span class="op">)</span> <span class="op">{</span></span>
+<span id="cb17-5"><a></a>        <span class="cf">throw</span> <span class="kw">new</span> <span class="bu">IllegalStateException</span><span class="op">(</span>io<span class="op">);</span> <span class="co">// &lt;== mangée par le finally</span></span>
+<span id="cb17-6"><a></a>    <span class="op">}</span> <span class="cf">finally</span> <span class="op">{</span></span>
+<span id="cb17-7"><a></a>        <span class="cf">throw</span> <span class="kw">new</span> <span class="fu">OtherException</span><span class="op">();</span></span>
+<span id="cb17-8"><a></a>    <span class="op">}</span></span>
+<span id="cb17-9"><a></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="checked-vs-unchecked" class="slide level2" data-number="2.7">
+<h2><span class="header-section-number">2.7</span> checked vs unchecked</h2>
+<ul>
+<li>les “checked” exceptions sont à utiliser lorsque l’appelant peut raisonnablement traiter le problème.</li>
+<li>cela force l’appelant à le faire, car la méthode déclare l’exception dans sa signature</li>
+<li>si l’appelant ne peut rien faire, utiliser une “unchecked” exception qui hérite de <code>RuntimeException</code></li>
+<li>les développeurs d’un projet peuvent parfois décider de n’utiliser que des “unchecked”. C’est un débat passionné, voir <a href="https://stackoverflow.com/questions/613954/the-case-against-checked-exceptions">The case against checked exceptions</a></li>
+</ul>
+</section></section>
+<section>
+<section id="tests-unitaires" class="title-slide slide level1 center" data-number="3">
+<h1><span class="header-section-number">3</span> Tests unitaires</h1>
+<p>En programmation, le test unitaire est une procédure permettant de vérifier le bon fonctionnement d’une partie précise d’un logiciel ou d’une portion d’un programme (appelée « unité » ou « module »).</p>
+</section>
+<section id="introduction" class="slide level2" data-number="3.1">
+<h2><span class="header-section-number">3.1</span> Introduction</h2>
+<p>Les tests unitaires sont une étape cruciale dans l’implémentation d’un logiciel. Ils permettent de rendre le code :</p>
+<ul>
+<li>plus robuste : les cas limites sont couverts</li>
+<li>plus lisible : ils constituent une forme de documentation</li>
+<li>plus maintenable : en cas de refactoring, ils permettent de vérifier que le programme fonctionne toujours</li>
+</ul>
+</section>
+<section id="introduction-à-junit" class="slide level2" data-number="3.2">
+<h2><span class="header-section-number">3.2</span> Introduction à JUnit</h2>
+<p>En Java, plusieurs outils permettent d’écrire des tests unitaires. Nous utiliserons JUnit, qui est le plus populaire.</p>
+<p>Un test est une classe contenant des méthodes annotées <code>@Test</code> :</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb18-1"><a></a><span class="kw">import</span> <span class="im">org</span><span class="op">.</span><span class="im">junit</span><span class="op">.</span><span class="im">jupiter</span><span class="op">.</span><span class="im">api</span><span class="op">.</span><span class="im">Test</span><span class="op">;</span></span>
+<span id="cb18-2"><a></a></span>
+<span id="cb18-3"><a></a><span class="kw">import</span> <span class="kw">static</span><span class="im"> org</span><span class="op">.</span><span class="im">junit</span><span class="op">.</span><span class="im">jupiter</span><span class="op">.</span><span class="im">api</span><span class="op">.</span><span class="im">Assertions</span><span class="op">.</span><span class="im">assertEquals</span><span class="op">;</span></span>
+<span id="cb18-4"><a></a></span>
+<span id="cb18-5"><a></a><span class="kw">public</span> <span class="kw">class</span> CircleTest <span class="op">{</span></span>
+<span id="cb18-6"><a></a></span>
+<span id="cb18-7"><a></a>    <span class="at">@Test</span></span>
+<span id="cb18-8"><a></a>    <span class="dt">void</span> <span class="fu">testSurface</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb18-9"><a></a>        <span class="dt">double</span> actual <span class="op">=</span> <span class="kw">new</span> <span class="fu">Cercle</span><span class="op">(</span><span class="fl">1.0</span><span class="op">).</span><span class="fu">surface</span><span class="op">();</span></span>
+<span id="cb18-10"><a></a>        <span class="dt">double</span> expected <span class="op">=</span> <span class="fl">3.141592653589793</span><span class="op">;</span></span>
+<span id="cb18-11"><a></a>        <span class="fu">assertEquals</span><span class="op">(</span>expected<span class="op">,</span> actual<span class="op">);</span></span>
+<span id="cb18-12"><a></a>    <span class="op">}</span></span>
+<span id="cb18-13"><a></a>    </span>
+<span id="cb18-14"><a></a>    <span class="at">@Test</span></span>
+<span id="cb18-15"><a></a>    <span class="dt">void</span> <span class="fu">testScale</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb18-16"><a></a>        <span class="co">// ...</span></span>
+<span id="cb18-17"><a></a>    <span class="op">}</span></span>
+<span id="cb18-18"><a></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="conventions---classe" class="slide level2" data-number="3.3">
+<h2><span class="header-section-number">3.3</span> Conventions - classe</h2>
+<ul>
+<li>la classe de test est le nom de la classe à tester, suivie du suffixe <code>Test</code>.</li>
+<li>elle est située dans le même <strong>package</strong></li>
+<li>elle est située dans un <strong>répertoire différent</strong> du code de production.</li>
+</ul>
+<aside class="notes">
+<p>Cela évite toute possibilité d’exécuter du code de test en production.</p>
+<style type="text/css">
+        span.MJX_Assistive_MathML {
+          position:absolute!important;
+          clip: rect(1px, 1px, 1px, 1px);
+          padding: 1px 0 0 0!important;
+          border: 0!important;
+          height: 1px!important;
+          width: 1px!important;
+          overflow: hidden!important;
+          display:block!important;
+      }</style></aside>
+</section>
+<section id="conventions---méthodes-de-test" class="slide level2 smaller" data-number="3.4">
+<h2><span class="header-section-number">3.4</span> Conventions - méthodes de test</h2>
+<ul>
+<li>Dans l’exemple précédent, <code>testSurface</code> ne nous dit pas beaucoup de choses sur ce qui est testé.</li>
+<li>Une bonne pratique est d’utiliser la formulation “Given / When / Then” dans les noms des méthodes.</li>
+<li>Vous pouvez aussi les ajouter en commentaires pour délimiter les blocs d’instructions correspondantes.</li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb19-1"><a></a>    <span class="at">@Test</span></span>
+<span id="cb19-2"><a></a>    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">givenRayon1_whenSurface_thenReturnSurface</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb19-3"><a></a>        <span class="co">// GIVEN</span></span>
+<span id="cb19-4"><a></a>        <span class="dt">var</span> cercle <span class="op">=</span> <span class="kw">new</span> <span class="fu">Cercle</span><span class="op">(</span><span class="fl">1.0</span><span class="op">);</span></span>
+<span id="cb19-5"><a></a>        <span class="co">// WHEN</span></span>
+<span id="cb19-6"><a></a>        <span class="dt">double</span> actual <span class="op">=</span> cercle<span class="op">.</span><span class="fu">surface</span><span class="op">();</span></span>
+<span id="cb19-7"><a></a>        <span class="co">// THEN</span></span>
+<span id="cb19-8"><a></a>        <span class="dt">double</span> expected <span class="op">=</span> <span class="fl">3.141592653589793</span><span class="op">;</span></span>
+<span id="cb19-9"><a></a>        <span class="fu">assertEquals</span><span class="op">(</span>expected<span class="op">,</span> actual<span class="op">);</span>  </span>
+<span id="cb19-10"><a></a>    <span class="op">}</span></span>
+<span id="cb19-11"><a></a></span>
+<span id="cb19-12"><a></a>    <span class="at">@Test</span></span>
+<span id="cb19-13"><a></a>    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">givenRayonDoubleMaxValue_whenSurface_thenReturnSurfaceInfinity</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb19-14"><a></a>        <span class="co">//...</span></span>
+<span id="cb19-15"><a></a>    <span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="conventions---givenwhenthen" class="slide level2" data-number="3.5">
+<h2><span class="header-section-number">3.5</span> Conventions - Given/When/Then</h2>
+<p>La formulation “Given / When / Then” permet d’écrire des tests d’acceptation, qui seront plus parlants pour discuter des spécifications avec un utilisateur final ou un chef de projet.</p>
+<ul>
+<li><strong>Given</strong> : bloc qui prépare les données. Quelles sont nos données d’entrée ?</li>
+<li><strong>When</strong> : action(s) effectuées, ou scénario de test. Ça sera typiquement un appel de méthode. Mais ça peut être une requête HTTP, …</li>
+<li><strong>Then</strong> : quelles sont les sorties ou conséquences de l’action ? Quelles assertions allons nous vérifier ?</li>
+</ul>
+</section>
+<section id="assertions" class="slide level2" data-number="3.6">
+<h2><span class="header-section-number">3.6</span> Assertions</h2>
+<p>Junit fournit de nombreuses méthodes pour écrire les assertions.</p>
+<ul>
+<li><code>assertEquals(expected, actual)</code> compare 2 types primitifs ou 2 objets en utilisant <code>.equals</code></li>
+<li><code>assertThrows(expectedType, executable)</code> vérifie qu’une instruction lance une exception spécifique</li>
+<li><code>assertNull(obj)</code> teste si un objet est <code>null</code></li>
+<li><code>assertTrue(expr)</code> teste si une expression booléenne est <code>true</code></li>
+<li>voir <a href="https://junit.org/junit5/docs/current/user-guide/#writing-tests-assertions">Junit assertions</a></li>
+</ul>
+</section></section>
+<section>
+<section id="tests-unitaires-bonnes-pratiques" class="title-slide slide level1 center" data-number="4">
+<h1><span class="header-section-number">4</span> Tests unitaires : bonnes pratiques</h1>
+
+</section>
+<section id="test-driven-development" class="slide level2 scrollable" data-number="4.1">
+<h2><span class="header-section-number">4.1</span> Test Driven Development</h2>
+<p>Le TDD est une méthodologie très efficace. Elle a 3 règles simples :</p>
+<ol type="1">
+<li>Vous n’êtes pas autorisé à écrire du code de production, sauf si c’est pour faire passer un test unitaire en échec.</li>
+<li>Vous n’êtes pas autorisé à écrire plus de code dans un test unitaire que ce qui est nécessaire pour le faire échouer ; et les erreurs de compilation sont considérées comme des échecs.</li>
+<li>Vous n’êtes pas autorisé à écrire plus de code de production que ce qui est nécessaire pour faire passer le test unitaire en échec.</li>
+</ol>
+<p>Voir <a href="http://www.butunclebob.com/ArticleS.UncleBob.TheThreeRulesOfTdd">TheThreeRulesOfTdd</a></p>
+</section>
+<section id="écrire-des-tests-spécifiques" class="slide level2" data-number="4.2">
+<h2><span class="header-section-number">4.2</span> Écrire des tests spécifiques</h2>
+<p><strong>Une méthode de test doit tester un seul scénario.</strong></p>
+<ul>
+<li>au lieu d’ajouter de nombreuses assertions au même test, créer d’autres tests.</li>
+<li>ainsi, en cas de problème, il sera plus facile de déterminer quel scénario a échoué</li>
+</ul>
+</section>
+<section id="tester-des-cas-réels" class="slide level2" data-number="4.3">
+<h2><span class="header-section-number">4.3</span> Tester des cas réels</h2>
+<p>Les tests doivent refléter des cas réels d’utilisation du programme. Cela facilite la compréhension du code dans certains cas se produisant en production.</p>
+<ul>
+<li>donner des vrais noms aux utilisateurs, personnes, …</li>
+<li>utiliser des montants, taux d’intérêt, … réalistes</li>
+<li>enchaîner une suite d’actions que l’utilisateur fait régulièrement</li>
+</ul>
+</section>
+<section id="simuler-mock-les-services-externes" class="slide level2" data-number="4.4">
+<h2><span class="header-section-number">4.4</span> simuler (Mock) les services externes</h2>
+<ul>
+<li><p>Un logiciel va typiquement dépendre de services externes: API Web, base de données, fichier, …</p></li>
+<li><p>Il est souhaitable de simuler (mock) ces services externes. On pourra utiliser des interfaces avec une implémentation de test, ou des frameworks comme <a href="https://site.mockito.org/">Mockito</a></p></li>
+<li><p>si les services externes ne sont pas simulés, les tests vont être lents et parfois imprévisibles</p></li>
+</ul>
+</section>
+<section id="éviter-le-copier-coller" class="slide level2" data-number="4.5">
+<h2><span class="header-section-number">4.5</span> Éviter le copier / coller</h2>
+<ul>
+<li>les différents scénarios de tests sont souvent similaires</li>
+<li>il est tentant de copier/coller et changer juste la préparation ou les assertions</li>
+<li>comme pour le code de production, il est préférable de supprimer le code redondant en créant des fonctions utilitaires</li>
+</ul>
+</section>
+<section id="couverture-80" class="slide level2" data-number="4.6">
+<h2><span class="header-section-number">4.6</span> Couverture 80 %</h2>
+<ul>
+<li>IntelliJ offre un outil de <em>code coverage</em></li>
+<li>cela permet de savoir si le code de notre projet est couvert par des tests</li>
+<li>une couverture à 100% est difficile à obtenir</li>
+</ul>
+<p>Une bon compromis est cibler 80% de couverture.</p>
+</section>
+<section id="automatiser-avec-ci-cd" class="slide level2" data-number="4.7">
+<h2><span class="header-section-number">4.7</span> Automatiser avec CI / CD</h2>
+<p>Dans une équipe de développement, la suite de tests est exécutée automatiquement.</p>
+<ul>
+<li>selon les équipes, cela peut être après chaque <code>git push</code>, ou seulement après un merge</li>
+<li>cela permet d’interdire de livrer en production du code qui ne passe pas tous les tests</li>
+</ul>
+<p>L’exécution de la suite de tests fait partie d’un pipeline “Continuous Integration” / Continuous Delivery. <img data-src="https://www.north-47.com/wp-content/uploads/2020/10/CI-CD-pipeline-1.png" alt="CI / CD"></p>
+<!--
+enums ?
+
+-->
+
+
+</section></section>
+    </div>
+  <div class="quarto-auto-generated-content" style="display: none;">
+<p><img src="figures/logo-efrei.svg" class="slide-logo"></p>
+<div class="footer footer-default">
+
+</div>
+</div></div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="site_libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="site_libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="site_libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="site_libs/revealjs/plugin/search/search.js"></script>
+  <script src="site_libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="site_libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': false,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'jumpToSlide': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.toggleScrollView(event)\"><kbd>r</kbd> Scroll View Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"5\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'smaller': false,
+ 
+        // Display controls in the bottom right corner
+        controls: false,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: false,
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'none',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'none',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1050,
+
+        height: 700,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0.1,
+
+        math: {
+          mathjax: 'https://cdn.jsdelivr.net/npm/mathjax@2.7.9/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    <script id="quarto-html-after-body" type="application/javascript">
+      window.document.addEventListener("DOMContentLoaded", function (event) {
+        const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+        tabsets.forEach(function(tabset) {
+          const tabby = new Tabby('#' + tabset.id);
+        });
+        const isCodeAnnotation = (el) => {
+          for (const clz of el.classList) {
+            if (clz.startsWith('code-annotation-')) {                     
+              return true;
+            }
+          }
+          return false;
+        }
+        const onCopySuccess = function(e) {
+          // button target
+          const button = e.trigger;
+          // don't keep focus
+          button.blur();
+          // flash "checked"
+          button.classList.add('code-copy-button-checked');
+          var currentTitle = button.getAttribute("title");
+          button.setAttribute("title", "Copied!");
+          let tooltip;
+          if (window.bootstrap) {
+            button.setAttribute("data-bs-toggle", "tooltip");
+            button.setAttribute("data-bs-placement", "left");
+            button.setAttribute("data-bs-title", "Copied!");
+            tooltip = new bootstrap.Tooltip(button, 
+              { trigger: "manual", 
+                customClass: "code-copy-button-tooltip",
+                offset: [0, -8]});
+            tooltip.show();    
+          }
+          setTimeout(function() {
+            if (tooltip) {
+              tooltip.hide();
+              button.removeAttribute("data-bs-title");
+              button.removeAttribute("data-bs-toggle");
+              button.removeAttribute("data-bs-placement");
+            }
+            button.setAttribute("title", currentTitle);
+            button.classList.remove('code-copy-button-checked');
+          }, 1000);
+          // clear code selection
+          e.clearSelection();
+        }
+        const getTextToCopy = function(trigger) {
+          const outerScaffold = trigger.parentElement.cloneNode(true);
+          const codeEl = outerScaffold.querySelector('code');
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+        }
+        const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+          text: getTextToCopy
+        });
+        clipboard.on('success', onCopySuccess);
+        if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+          const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+            text: getTextToCopy,
+            container: window.document.getElementById('quarto-embedded-source-code-modal')
+          });
+          clipboardModal.on('success', onCopySuccess);
+        }
+          var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+          var mailtoRegex = new RegExp(/^mailto:/);
+            var filterRegex = new RegExp('/' + window.location.host + '/');
+          var isInternal = (href) => {
+              return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+          }
+          // Inspect non-navigation links and adorn them if external
+         var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+          for (var i=0; i<links.length; i++) {
+            const link = links[i];
+            if (!isInternal(link.href)) {
+              // undo the damage that might have been done by quarto-nav.js in the case of
+              // links that we want to consider external
+              if (link.dataset.originalHref !== undefined) {
+                link.href = link.dataset.originalHref;
+              }
+            }
+          }
+        function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+          const config = {
+            allowHTML: true,
+            maxWidth: 500,
+            delay: 100,
+            arrow: false,
+            appendTo: function(el) {
+                return el.closest('section.slide') || el.parentElement;
+            },
+            interactive: true,
+            interactiveBorder: 10,
+            theme: 'light-border',
+            placement: 'bottom-start',
+          };
+          if (contentFn) {
+            config.content = contentFn;
+          }
+          if (onTriggerFn) {
+            config.onTrigger = onTriggerFn;
+          }
+          if (onUntriggerFn) {
+            config.onUntrigger = onUntriggerFn;
+          }
+            config['offset'] = [0,0];
+            config['maxWidth'] = 700;
+          window.tippy(el, config); 
+        }
+        const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+        for (var i=0; i<noterefs.length; i++) {
+          const ref = noterefs[i];
+          tippyHover(ref, function() {
+            // use id or data attribute instead here
+            let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+            try { href = new URL(href).hash; } catch {}
+            const id = href.replace(/^#\/?/, "");
+            const note = window.document.getElementById(id);
+            if (note) {
+              return note.innerHTML;
+            } else {
+              return "";
+            }
+          });
+        }
+        const findCites = (el) => {
+          const parentEl = el.parentElement;
+          if (parentEl) {
+            const cites = parentEl.dataset.cites;
+            if (cites) {
+              return {
+                el,
+                cites: cites.split(' ')
+              };
+            } else {
+              return findCites(el.parentElement)
+            }
+          } else {
+            return undefined;
+          }
+        };
+        var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+        for (var i=0; i<bibliorefs.length; i++) {
+          const ref = bibliorefs[i];
+          const citeInfo = findCites(ref);
+          if (citeInfo) {
+            tippyHover(citeInfo.el, function() {
+              var popup = window.document.createElement('div');
+              citeInfo.cites.forEach(function(cite) {
+                var citeDiv = window.document.createElement('div');
+                citeDiv.classList.add('hanging-indent');
+                citeDiv.classList.add('csl-entry');
+                var biblioDiv = window.document.getElementById('ref-' + cite);
+                if (biblioDiv) {
+                  citeDiv.innerHTML = biblioDiv.innerHTML;
+                }
+                popup.appendChild(citeDiv);
+              });
+              return popup.innerHTML;
+            });
+          }
+        }
+      });
+      </script>
+    
+
+</body></html>

@@ -1,0 +1,1279 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.37">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Mikaël Valot">
+
+<title>CM3 - Héritage, Polymorphisme – ALSI54 Programmation Java</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-88e8eab2b9e74ff2b2dcb2dc0227e102.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-35673c1328022ec05f8a1bab69fe76b7.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-88e8eab2b9e74ff2b2dcb2dc0227e102.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-626bc743731229bd8adb76e0f8fa352c.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-626bc743731229bd8adb76e0f8fa352c.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-626bc743731229bd8adb76e0f8fa352c.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="site_libs/quarto-diagram/mermaid.min.js"></script>
+<script src="site_libs/quarto-diagram/mermaid-init.js"></script>
+<link href="site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
+
+
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">CM3 - Héritage, Polymorphisme</li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+      <a href="./index.html" class="sidebar-logo-link">
+      <img src="./figures/logo-noir.png" alt="" class="sidebar-logo light-content py-0 d-lg-inline d-none">
+      <img src="./figures/logo-noir.png" alt="" class="sidebar-logo dark-content py-0 d-lg-inline d-none">
+      </a>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Cours</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cm1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">CM1 - Syntaxe de base</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">TPs</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tp1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">TP1 - Environnement de développement, Jeu de rôle</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Contenu</h2>
+   
+  <ul class="collapse">
+  <li><a href="#héritage" id="toc-héritage" class="nav-link active" data-scroll-target="#héritage"><span class="header-section-number">1</span> Héritage</a>
+  <ul class="collapse">
+  <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction"><span class="header-section-number">1.1</span> Introduction</a></li>
+  <li><a href="#vocabulaire" id="toc-vocabulaire" class="nav-link" data-scroll-target="#vocabulaire"><span class="header-section-number">1.2</span> Vocabulaire</a></li>
+  <li><a href="#intérêt" id="toc-intérêt" class="nav-link" data-scroll-target="#intérêt"><span class="header-section-number">1.3</span> Intérêt</a></li>
+  <li><a href="#syntaxe" id="toc-syntaxe" class="nav-link" data-scroll-target="#syntaxe"><span class="header-section-number">1.4</span> Syntaxe</a></li>
+  <li><a href="#syntaxe---classe-mère" id="toc-syntaxe---classe-mère" class="nav-link" data-scroll-target="#syntaxe---classe-mère"><span class="header-section-number">1.5</span> Syntaxe - Classe mère</a></li>
+  <li><a href="#syntaxe---classe-fille" id="toc-syntaxe---classe-fille" class="nav-link" data-scroll-target="#syntaxe---classe-fille"><span class="header-section-number">1.6</span> Syntaxe - Classe fille</a></li>
+  <li><a href="#visibilités" id="toc-visibilités" class="nav-link" data-scroll-target="#visibilités"><span class="header-section-number">1.7</span> Visibilités</a></li>
+  <li><a href="#overriding-redéfinition" id="toc-overriding-redéfinition" class="nav-link" data-scroll-target="#overriding-redéfinition"><span class="header-section-number">1.8</span> Overriding (redéfinition)</a></li>
+  <li><a href="#héritage---restrictions" id="toc-héritage---restrictions" class="nav-link" data-scroll-target="#héritage---restrictions"><span class="header-section-number">1.9</span> Héritage - restrictions</a></li>
+  <li><a href="#overloading-surcharge" id="toc-overloading-surcharge" class="nav-link" data-scroll-target="#overloading-surcharge"><span class="header-section-number">1.10</span> Overloading (surcharge)</a></li>
+  <li><a href="#overloading---exemple" id="toc-overloading---exemple" class="nav-link" data-scroll-target="#overloading---exemple"><span class="header-section-number">1.11</span> Overloading - Exemple</a></li>
+  </ul></li>
+  <li><a href="#polymorphisme" id="toc-polymorphisme" class="nav-link" data-scroll-target="#polymorphisme"><span class="header-section-number">2</span> Polymorphisme</a>
+  <ul class="collapse">
+  <li><a href="#polymorphisme-statique" id="toc-polymorphisme-statique" class="nav-link" data-scroll-target="#polymorphisme-statique"><span class="header-section-number">2.1</span> Polymorphisme statique</a></li>
+  <li><a href="#polymorphisme-dynamique---upcast" id="toc-polymorphisme-dynamique---upcast" class="nav-link" data-scroll-target="#polymorphisme-dynamique---upcast"><span class="header-section-number">2.2</span> Polymorphisme dynamique - UpCast</a></li>
+  <li><a href="#polymorphisme-dynamique---downcast" id="toc-polymorphisme-dynamique---downcast" class="nav-link" data-scroll-target="#polymorphisme-dynamique---downcast"><span class="header-section-number">2.3</span> Polymorphisme dynamique - DownCast</a></li>
+  <li><a href="#downcast---pattern-matching" id="toc-downcast---pattern-matching" class="nav-link" data-scroll-target="#downcast---pattern-matching"><span class="header-section-number">2.4</span> DownCast - pattern matching</a></li>
+  <li><a href="#downcast---switch" id="toc-downcast---switch" class="nav-link" data-scroll-target="#downcast---switch"><span class="header-section-number">2.5</span> DownCast - switch</a></li>
+  </ul></li>
+  <li><a href="#classe-abstraite" id="toc-classe-abstraite" class="nav-link" data-scroll-target="#classe-abstraite"><span class="header-section-number">3</span> Classe abstraite</a>
+  <ul class="collapse">
+  <li><a href="#syntaxe-1" id="toc-syntaxe-1" class="nav-link" data-scroll-target="#syntaxe-1"><span class="header-section-number">3.1</span> Syntaxe</a></li>
+  <li><a href="#syntaxe---exemple" id="toc-syntaxe---exemple" class="nav-link" data-scroll-target="#syntaxe---exemple"><span class="header-section-number">3.2</span> Syntaxe - exemple</a></li>
+  <li><a href="#utilisation" id="toc-utilisation" class="nav-link" data-scroll-target="#utilisation"><span class="header-section-number">3.3</span> Utilisation</a></li>
+  </ul></li>
+  <li><a href="#interfaces" id="toc-interfaces" class="nav-link" data-scroll-target="#interfaces"><span class="header-section-number">4</span> Interfaces</a>
+  <ul class="collapse">
+  <li><a href="#syntaxe---déclaration" id="toc-syntaxe---déclaration" class="nav-link" data-scroll-target="#syntaxe---déclaration"><span class="header-section-number">4.1</span> Syntaxe - déclaration</a></li>
+  <li><a href="#syntaxe---sous-classes" id="toc-syntaxe---sous-classes" class="nav-link" data-scroll-target="#syntaxe---sous-classes"><span class="header-section-number">4.2</span> Syntaxe - sous-classes</a></li>
+  <li><a href="#syntaxe---sous-classes-1" id="toc-syntaxe---sous-classes-1" class="nav-link" data-scroll-target="#syntaxe---sous-classes-1"><span class="header-section-number">4.3</span> Syntaxe - sous-classes</a></li>
+  <li><a href="#interface-comparable" id="toc-interface-comparable" class="nav-link" data-scroll-target="#interface-comparable"><span class="header-section-number">4.4</span> Interface Comparable</a></li>
+  <li><a href="#comparable---exemple" id="toc-comparable---exemple" class="nav-link" data-scroll-target="#comparable---exemple"><span class="header-section-number">4.5</span> Comparable - exemple</a></li>
+  <li><a href="#sealed-interface" id="toc-sealed-interface" class="nav-link" data-scroll-target="#sealed-interface"><span class="header-section-number">4.6</span> Sealed interface</a></li>
+  <li><a href="#sealed---sous-classes" id="toc-sealed---sous-classes" class="nav-link" data-scroll-target="#sealed---sous-classes"><span class="header-section-number">4.7</span> Sealed - sous-classes</a></li>
+  <li><a href="#sealed---intérêt" id="toc-sealed---intérêt" class="nav-link" data-scroll-target="#sealed---intérêt"><span class="header-section-number">4.8</span> Sealed - intérêt</a></li>
+  <li><a href="#default-methods" id="toc-default-methods" class="nav-link" data-scroll-target="#default-methods"><span class="header-section-number">4.9</span> default methods</a></li>
+  <li><a href="#default---utilisation" id="toc-default---utilisation" class="nav-link" data-scroll-target="#default---utilisation"><span class="header-section-number">4.10</span> default - utilisation</a></li>
+  <li><a href="#default---conflits" id="toc-default---conflits" class="nav-link" data-scroll-target="#default---conflits"><span class="header-section-number">4.11</span> default - conflits</a></li>
+  <li><a href="#default---super" id="toc-default---super" class="nav-link" data-scroll-target="#default---super"><span class="header-section-number">4.12</span> default - super</a></li>
+  </ul></li>
+  </ul>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="cm3-slides.html"><i class="bi bi-file-slides"></i>RevealJS</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">CM3 - Héritage, Polymorphisme</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Mikaël Valot </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="héritage" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Héritage</h1>
+<section id="introduction" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="introduction"><span class="header-section-number">1.1</span> Introduction</h2>
+<ul>
+<li>L’héritage est mis en œuvre par la construction de classes dérivées</li>
+<li>Il représente la relation : « **est un » ou « est une sorte de »</li>
+</ul>
+<div class="columns">
+<div class="column" style="width:50%;">
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">classDiagram
+    Animal &lt;|-- Chien
+    Animal &lt;|-- Chat
+    Animal &lt;|-- Oiseau
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class="figure"><p></p>
+<div>
+<pre class="mermaid mermaid-js">classDiagram
+    Vehicule &lt;|-- Avion
+    Vehicule &lt;|-- Voiture
+    Voiture &lt;|-- Thermique
+    Voiture &lt;|-- Electrique
+    Vehicule &lt;|-- Moto
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="vocabulaire" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="vocabulaire"><span class="header-section-number">1.2</span> Vocabulaire</h2>
+<ul>
+<li>La classe dont on dérive est dite : classe de base, mère, parente
+<ul>
+<li><code>Animal</code> est la classe de base</li>
+</ul></li>
+<li>Les classes obtenues par dérivation sont dites : classes dérivées, filles, sous classes
+<ul>
+<li><code>Chat</code>, <code>Chien</code> et <code>Oiseau</code> sont des classes dérivées</li>
+</ul></li>
+</ul>
+</section>
+<section id="intérêt" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="intérêt"><span class="header-section-number">1.3</span> Intérêt</h2>
+<ul>
+<li>Permet de réutiliser les <strong>attributs</strong> et les <strong>méthodes</strong> d’une autre classe</li>
+<li>Vision descendante : la possibilité de reprendre ce qui a été déjà fait</li>
+<li>Vision ascendante : la possibilité de regrouper en un seul endroit ce qui est commun à plusieurs</li>
+</ul>
+</section>
+<section id="syntaxe" class="level2" data-number="1.4">
+<h2 data-number="1.4" class="anchored" data-anchor-id="syntaxe"><span class="header-section-number">1.4</span> Syntaxe</h2>
+<ul>
+<li>mot clé : <code>extends</code></li>
+<li>Les constructeurs ne sont pas hérités</li>
+<li>Les mot-clés de visibilité peuvent restreindre l’accès</li>
+<li>Appel au constructeur de la classe héritée via <code>super()</code></li>
+<li>pas d’héritage multiple:
+<ul>
+<li>chaque classe a <strong>une et une seule</strong> classe mère</li>
+</ul></li>
+</ul>
+</section>
+<section id="syntaxe---classe-mère" class="level2" data-number="1.5">
+<h2 data-number="1.5" class="anchored" data-anchor-id="syntaxe---classe-mère"><span class="header-section-number">1.5</span> Syntaxe - Classe mère</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">class</span> Personne <span class="op">{</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a>    <span class="kw">private</span> <span class="bu">String</span> nom<span class="op">;</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a>    <span class="kw">private</span> <span class="dt">int</span> age<span class="op">;</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a></span>
+<span id="cb1-5"><a href="#cb1-5"></a>    <span class="co">// Constructeur de la classe mère</span></span>
+<span id="cb1-6"><a href="#cb1-6"></a>    <span class="kw">public</span> <span class="fu">Personne</span><span class="op">(</span><span class="bu">String</span> nom<span class="op">,</span> <span class="dt">int</span> age<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb1-7"><a href="#cb1-7"></a>        <span class="kw">this</span><span class="op">.</span><span class="fu">nom</span> <span class="op">=</span> nom<span class="op">;</span></span>
+<span id="cb1-8"><a href="#cb1-8"></a>        <span class="kw">this</span><span class="op">.</span><span class="fu">age</span> <span class="op">=</span> age<span class="op">;</span></span>
+<span id="cb1-9"><a href="#cb1-9"></a>    <span class="op">}</span></span>
+<span id="cb1-10"><a href="#cb1-10"></a></span>
+<span id="cb1-11"><a href="#cb1-11"></a>    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">afficherInfo</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb1-12"><a href="#cb1-12"></a>        <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span><span class="st">"Nom: "</span> <span class="op">+</span> nom <span class="op">+</span> <span class="st">", Âge: "</span> <span class="op">+</span> age<span class="op">);</span></span>
+<span id="cb1-13"><a href="#cb1-13"></a>    <span class="op">}</span></span>
+<span id="cb1-14"><a href="#cb1-14"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="syntaxe---classe-fille" class="level2" data-number="1.6">
+<h2 data-number="1.6" class="anchored" data-anchor-id="syntaxe---classe-fille"><span class="header-section-number">1.6</span> Syntaxe - Classe fille</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw">class</span> Etudiant <span class="kw">extends</span> Personne <span class="op">{</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a>    <span class="kw">private</span> <span class="bu">String</span> filiere<span class="op">;</span></span>
+<span id="cb2-3"><a href="#cb2-3"></a></span>
+<span id="cb2-4"><a href="#cb2-4"></a>    <span class="co">// Constructeur de la classe fille</span></span>
+<span id="cb2-5"><a href="#cb2-5"></a>    <span class="kw">public</span> <span class="fu">Etudiant</span><span class="op">(</span><span class="bu">String</span> nom<span class="op">,</span> <span class="dt">int</span> age<span class="op">,</span> <span class="bu">String</span> filiere<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-6"><a href="#cb2-6"></a>        <span class="co">// Super pour appeler le constructeur Personne</span></span>
+<span id="cb2-7"><a href="#cb2-7"></a>        <span class="kw">super</span><span class="op">(</span>nom<span class="op">,</span> age<span class="op">);</span></span>
+<span id="cb2-8"><a href="#cb2-8"></a>        <span class="kw">this</span><span class="op">.</span><span class="fu">filiere</span> <span class="op">=</span> filiere<span class="op">;</span></span>
+<span id="cb2-9"><a href="#cb2-9"></a>    <span class="op">}</span></span>
+<span id="cb2-10"><a href="#cb2-10"></a></span>
+<span id="cb2-11"><a href="#cb2-11"></a>    <span class="kw">public</span> <span class="bu">String</span> <span class="fu">getFiliere</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb2-12"><a href="#cb2-12"></a>        <span class="cf">return</span> filiere<span class="op">;</span></span>
+<span id="cb2-13"><a href="#cb2-13"></a>    <span class="op">}</span></span>
+<span id="cb2-14"><a href="#cb2-14"></a></span>
+<span id="cb2-15"><a href="#cb2-15"></a>    <span class="co">// Redéfinition de la méthode afficherInfo</span></span>
+<span id="cb2-16"><a href="#cb2-16"></a>    <span class="at">@Override</span></span>
+<span id="cb2-17"><a href="#cb2-17"></a>    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">afficherInfo</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb2-18"><a href="#cb2-18"></a>        <span class="kw">super</span><span class="op">.</span><span class="fu">afficherInfo</span><span class="op">();</span></span>
+<span id="cb2-19"><a href="#cb2-19"></a>        <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span><span class="st">"Filière: "</span> <span class="op">+</span> filiere<span class="op">);</span></span>
+<span id="cb2-20"><a href="#cb2-20"></a>    <span class="op">}</span></span>
+<span id="cb2-21"><a href="#cb2-21"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="visibilités" class="level2" data-number="1.7">
+<h2 data-number="1.7" class="anchored" data-anchor-id="visibilités"><span class="header-section-number">1.7</span> Visibilités</h2>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Modifier</th>
+<th>Classe</th>
+<th>Package</th>
+<th>Sous-classe</th>
+<th>Autres</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>public</code></td>
+<td>O</td>
+<td>O</td>
+<td>O</td>
+<td>O</td>
+</tr>
+<tr class="even">
+<td><code>protected</code></td>
+<td>O</td>
+<td>O</td>
+<td>O</td>
+<td>N</td>
+</tr>
+<tr class="odd">
+<td>néant</td>
+<td>O</td>
+<td>O</td>
+<td>N</td>
+<td>N</td>
+</tr>
+<tr class="even">
+<td><code>private</code></td>
+<td>O</td>
+<td>N</td>
+<td>N</td>
+<td>N</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="overriding-redéfinition" class="level2" data-number="1.8">
+<h2 data-number="1.8" class="anchored" data-anchor-id="overriding-redéfinition"><span class="header-section-number">1.8</span> Overriding (redéfinition)</h2>
+<p>Lorsque la classe fille définit une méthode dont la <strong>signature</strong> est compatible avec celle d’une méthode de la classe mère.</p>
+<p><strong>signature</strong> = Nom + types des paramètres + type de retour</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Une bonne pratique est d’ajouter l’annotation <code>@Override</code> sur la méthode redéfinie. Ainsi, si la méthode mère est modifiée, le compilateur signalera que la méthode redéfinie ne redéfinit rien.</p>
+</div>
+</div>
+</section>
+<section id="héritage---restrictions" class="level2" data-number="1.9">
+<h2 data-number="1.9" class="anchored" data-anchor-id="héritage---restrictions"><span class="header-section-number">1.9</span> Héritage - restrictions</h2>
+<ul>
+<li>Une classe fille ne peut pas accéder aux attributs et aux méthodes <code>private</code> de sa classe mère.</li>
+<li>Une méthode ayant le modificateur <code>final</code> dans la classe mère ne peut pas être redéfinie dans la classe fille.</li>
+<li>Une classe mère ayant le modificateur <code>final</code> ne peut pas être étendue.</li>
+</ul>
+</section>
+<section id="overloading-surcharge" class="level2" data-number="1.10">
+<h2 data-number="1.10" class="anchored" data-anchor-id="overloading-surcharge"><span class="header-section-number">1.10</span> Overloading (surcharge)</h2>
+<ul>
+<li>La surcharge est le fait de définir une méthode dans une même classe ou une sous-classe qui:
+<ul>
+<li>a le même nom</li>
+<li>mais qui des paramètres de types différents, ou un nombre de paramètres différent</li>
+</ul></li>
+<li>Les 2 méthodes ont une signature <strong>incompatible</strong></li>
+</ul>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Ne pas confondre overriding (redéfinition, signatures compatibles) et overloading (surcharge, signatures incompatibles)</p>
+</div>
+</div>
+</section>
+<section id="overloading---exemple" class="level2" data-number="1.11">
+<h2 data-number="1.11" class="anchored" data-anchor-id="overloading---exemple"><span class="header-section-number">1.11</span> Overloading - Exemple</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw">class</span> Etudiant <span class="kw">extends</span> Personne <span class="op">{</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a>    <span class="co">// ...</span></span>
+<span id="cb3-3"><a href="#cb3-3"></a></span>
+<span id="cb3-4"><a href="#cb3-4"></a>    <span class="co">// Redéfinition (override) de la méthode afficherInfo</span></span>
+<span id="cb3-5"><a href="#cb3-5"></a>    <span class="at">@Override</span></span>
+<span id="cb3-6"><a href="#cb3-6"></a>    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">afficherInfo</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb3-7"><a href="#cb3-7"></a>        <span class="kw">super</span><span class="op">.</span><span class="fu">afficherInfo</span><span class="op">();</span></span>
+<span id="cb3-8"><a href="#cb3-8"></a>        <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span><span class="st">"Filière: "</span> <span class="op">+</span> filiere<span class="op">);</span></span>
+<span id="cb3-9"><a href="#cb3-9"></a>    <span class="op">}</span></span>
+<span id="cb3-10"><a href="#cb3-10"></a>    </span>
+<span id="cb3-11"><a href="#cb3-11"></a>    <span class="co">// Surcharge (overload) de la méthode afficherInfo</span></span>
+<span id="cb3-12"><a href="#cb3-12"></a>    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">afficherInfo</span><span class="op">(</span><span class="bu">String</span> separateur<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb3-13"><a href="#cb3-13"></a>        <span class="kw">super</span><span class="op">.</span><span class="fu">afficherInfo</span><span class="op">();</span></span>
+<span id="cb3-14"><a href="#cb3-14"></a>        <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span>separateur<span class="op">);</span></span>
+<span id="cb3-15"><a href="#cb3-15"></a>        <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span><span class="st">"Filière: "</span> <span class="op">+</span> filiere<span class="op">);</span></span>
+<span id="cb3-16"><a href="#cb3-16"></a>    <span class="op">}</span></span>
+<span id="cb3-17"><a href="#cb3-17"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+</section>
+<section id="polymorphisme" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Polymorphisme</h1>
+<p>Poly = plusieurs, morphe = formes</p>
+<p>Le polymorphisme est un concept clé de la programmation orientée objet (POO) qui permet à des objets de différents types de répondre à la même interface ou méthode, tout en implémentant des comportements spécifiques selon leur propre type.</p>
+<section id="polymorphisme-statique" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="polymorphisme-statique"><span class="header-section-number">2.1</span> Polymorphisme statique</h2>
+<p>Il est implémenté en utilisant la surcharge et est déterminé au moment de la compilation.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw">public</span> <span class="kw">class</span> Calculatrice <span class="op">{</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a>    <span class="co">// Surcharge de méthodes</span></span>
+<span id="cb4-3"><a href="#cb4-3"></a>    <span class="kw">public</span> <span class="dt">int</span> <span class="fu">addition</span><span class="op">(</span><span class="dt">int</span> a<span class="op">,</span> <span class="dt">int</span> b<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb4-4"><a href="#cb4-4"></a>        <span class="cf">return</span> a <span class="op">+</span> b<span class="op">;</span></span>
+<span id="cb4-5"><a href="#cb4-5"></a>    <span class="op">}</span></span>
+<span id="cb4-6"><a href="#cb4-6"></a></span>
+<span id="cb4-7"><a href="#cb4-7"></a>    <span class="kw">public</span> <span class="dt">double</span> <span class="fu">addition</span><span class="op">(</span><span class="dt">double</span> a<span class="op">,</span> <span class="dt">double</span> b<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb4-8"><a href="#cb4-8"></a>        <span class="cf">return</span> a <span class="op">+</span> b<span class="op">;</span></span>
+<span id="cb4-9"><a href="#cb4-9"></a>    <span class="op">}</span></span>
+<span id="cb4-10"><a href="#cb4-10"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb5-1"><a href="#cb5-1"></a><span class="dt">var</span> calc <span class="op">=</span> <span class="kw">new</span> <span class="fu">Calculatrice</span><span class="op">();</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="co">// La méthode prenant les int est appelée</span></span>
+<span id="cb5-3"><a href="#cb5-3"></a>calc<span class="op">.</span><span class="fu">addition</span><span class="op">(</span><span class="dv">2</span><span class="op">,</span> <span class="dv">2</span><span class="op">);</span></span>
+<span id="cb5-4"><a href="#cb5-4"></a><span class="co">// La méthode prenant les double est appelée</span></span>
+<span id="cb5-5"><a href="#cb5-5"></a>calc<span class="op">.</span><span class="fu">addition</span><span class="op">(</span><span class="fl">2.0</span><span class="op">,</span> <span class="fl">2.0</span><span class="op">);</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="polymorphisme-dynamique---upcast" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="polymorphisme-dynamique---upcast"><span class="header-section-number">2.2</span> Polymorphisme dynamique - UpCast</h2>
+<p>dynamique = Déterminé lors de l’exécution.</p>
+<p>UpCast = Un objet de classe fille est considéré comme une instance de la classe mère. Il est implicite.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb6-1"><a href="#cb6-1"></a>Personne p <span class="op">=</span> <span class="kw">new</span> <span class="fu">Etudiant</span><span class="op">(</span><span class="st">"Alice"</span><span class="op">,</span> <span class="dv">20</span><span class="op">);</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="co">// on peut appeler toutes les méthodes de la classe Personne</span></span>
+<span id="cb6-3"><a href="#cb6-3"></a><span class="co">// la méthode appelée est celle qui a été redéfinie dans la classe Etudiant</span></span>
+<span id="cb6-4"><a href="#cb6-4"></a>p<span class="op">.</span><span class="fu">afficherInfo</span><span class="op">();</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="polymorphisme-dynamique---downcast" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="polymorphisme-dynamique---downcast"><span class="header-section-number">2.3</span> Polymorphisme dynamique - DownCast</h2>
+<p>DownCast = Un objet est considéré comme étant d’une classe fille de sa classe de déclaration. Il est explicite.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb7-1"><a href="#cb7-1"></a>Personne p <span class="op">=</span> <span class="kw">new</span> <span class="fu">Etudiant</span><span class="op">(</span><span class="st">"Alice"</span><span class="op">,</span> <span class="dv">20</span><span class="op">,</span> <span class="st">"ING1"</span><span class="op">);</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a><span class="bu">String</span> s<span class="op">;</span></span>
+<span id="cb7-3"><a href="#cb7-3"></a><span class="cf">if</span> <span class="op">(</span>p <span class="kw">instanceof</span> Etudiant<span class="op">)</span></span>
+<span id="cb7-4"><a href="#cb7-4"></a>    s <span class="op">=</span> <span class="op">((</span>Etudiant<span class="op">)</span>p<span class="op">).</span><span class="fu">getFiliere</span><span class="op">();</span></span>
+<span id="cb7-5"><a href="#cb7-5"></a><span class="cf">else</span></span>
+<span id="cb7-6"><a href="#cb7-6"></a>    s <span class="op">=</span> <span class="st">""</span><span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="downcast---pattern-matching" class="level2" data-number="2.4">
+<h2 data-number="2.4" class="anchored" data-anchor-id="downcast---pattern-matching"><span class="header-section-number">2.4</span> DownCast - pattern matching</h2>
+<p>Depuis Java 14, le <em>pattern matching</em> a amélioré la syntaxe “instanceof” + casting :</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb8"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb8-1"><a href="#cb8-1"></a>Personne p <span class="op">=</span> <span class="kw">new</span> <span class="fu">Etudiant</span><span class="op">(</span><span class="st">"Alice"</span><span class="op">,</span> <span class="dv">20</span><span class="op">,</span> <span class="st">"ING1"</span><span class="op">);</span></span>
+<span id="cb8-2"><a href="#cb8-2"></a><span class="bu">String</span> s<span class="op">;</span></span>
+<span id="cb8-3"><a href="#cb8-3"></a></span>
+<span id="cb8-4"><a href="#cb8-4"></a><span class="cf">if</span> <span class="op">(</span>p <span class="kw">instanceof</span> Etudiant e<span class="op">)</span></span>
+<span id="cb8-5"><a href="#cb8-5"></a>    <span class="co">// On nomme la classe Etudiant une seule fois.</span></span>
+<span id="cb8-6"><a href="#cb8-6"></a>    <span class="co">// Cela évite d'avoir à caster, qui pouvait être une source de bug</span></span>
+<span id="cb8-7"><a href="#cb8-7"></a>    s <span class="op">=</span> e<span class="op">.</span><span class="fu">getFiliere</span><span class="op">();</span></span>
+<span id="cb8-8"><a href="#cb8-8"></a><span class="cf">else</span> </span>
+<span id="cb8-9"><a href="#cb8-9"></a>    s <span class="op">=</span> <span class="st">""</span><span class="op">;</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="downcast---switch" class="level2" data-number="2.5">
+<h2 data-number="2.5" class="anchored" data-anchor-id="downcast---switch"><span class="header-section-number">2.5</span> DownCast - switch</h2>
+<p>Depuis Java 17, le pattern matching a été étendu au <code>switch</code> :</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb9"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb9-1"><a href="#cb9-1"></a>Personne p <span class="op">=</span> <span class="kw">new</span> <span class="fu">Etudiant</span><span class="op">(</span><span class="st">"Alice"</span><span class="op">,</span> <span class="dv">20</span><span class="op">,</span> <span class="st">"ING1"</span><span class="op">);</span></span>
+<span id="cb9-2"><a href="#cb9-2"></a><span class="bu">String</span> s <span class="op">=</span> <span class="cf">switch</span> <span class="op">(</span>p<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb9-3"><a href="#cb9-3"></a>    <span class="cf">case</span> Etudiant e <span class="op">-&gt;</span> e<span class="op">.</span><span class="fu">getFiliere</span><span class="op">();</span></span>
+<span id="cb9-4"><a href="#cb9-4"></a>    <span class="kw">default</span> <span class="op">-&gt;</span> <span class="st">""</span><span class="op">;</span></span>
+<span id="cb9-5"><a href="#cb9-5"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+</section>
+<section id="classe-abstraite" class="level1 smaller" data-number="3">
+<h1 class="smaller" data-number="3"><span class="header-section-number">3</span> Classe abstraite</h1>
+<ul>
+<li>Une classe est dite <strong>abstraite</strong> si une ou plusieurs méthodes ne sont pas implémentées.</li>
+<li>Les méthodes non implémentées sont aussi appelée <strong>méthodes abstraites</strong></li>
+<li>Caractéristiques d’une <strong>méthode abstraite</strong> :
+<ul>
+<li>Sans implémentation</li>
+<li>L’implémentation se fait lors de l’héritage</li>
+</ul></li>
+<li>Caractéristiques d’une <strong>classe abstraite</strong> :
+<ul>
+<li>Au moins une méthode est abstraite</li>
+<li>Impossible de l’instancier directement. Il faut définir une sous classe qui implémente les méthodes abstraites</li>
+</ul></li>
+</ul>
+<section id="syntaxe-1" class="level2 smaller" data-number="3.1">
+<h2 class="smaller anchored" data-number="3.1" data-anchor-id="syntaxe-1"><span class="header-section-number">3.1</span> Syntaxe</h2>
+<p>Mot-clé <code>abstract</code> devant une classe ou une méthode.</p>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Forme.java</strong></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb10" data-filename="Forme.java"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb10-1"><a href="#cb10-1"></a><span class="kw">public</span> <span class="kw">abstract</span> <span class="kw">class</span> Forme <span class="op">{</span></span>
+<span id="cb10-2"><a href="#cb10-2"></a>    <span class="kw">private</span> <span class="bu">String</span> nom<span class="op">;</span></span>
+<span id="cb10-3"><a href="#cb10-3"></a></span>
+<span id="cb10-4"><a href="#cb10-4"></a>    <span class="kw">public</span> <span class="bu">String</span> <span class="fu">getNom</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb10-5"><a href="#cb10-5"></a>        <span class="cf">return</span> nom<span class="op">;</span></span>
+<span id="cb10-6"><a href="#cb10-6"></a>    <span class="op">}</span></span>
+<span id="cb10-7"><a href="#cb10-7"></a></span>
+<span id="cb10-8"><a href="#cb10-8"></a>    <span class="co">// les sous-classes doivent implémenter cette méthode</span></span>
+<span id="cb10-9"><a href="#cb10-9"></a>    <span class="kw">public</span> <span class="kw">abstract</span> <span class="dt">double</span> <span class="fu">surface</span><span class="op">();</span></span>
+<span id="cb10-10"><a href="#cb10-10"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Rectangle.java</strong></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb11" data-filename="Rectangle.java"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb11-1"><a href="#cb11-1"></a><span class="kw">public</span> <span class="kw">class</span> <span class="bu">Rectangle</span> <span class="kw">extends</span> Forme <span class="op">{</span></span>
+<span id="cb11-2"><a href="#cb11-2"></a>    <span class="kw">private</span> <span class="dt">double</span> x<span class="op">,</span> y<span class="op">;</span></span>
+<span id="cb11-3"><a href="#cb11-3"></a></span>
+<span id="cb11-4"><a href="#cb11-4"></a>    <span class="kw">public</span> <span class="bu">Rectangle</span><span class="op">(</span><span class="dt">double</span> x<span class="op">,</span> <span class="dt">double</span> y<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb11-5"><a href="#cb11-5"></a>        <span class="kw">this</span><span class="op">.</span><span class="fu">x</span> <span class="op">=</span> x<span class="op">;</span></span>
+<span id="cb11-6"><a href="#cb11-6"></a>        <span class="kw">this</span><span class="op">.</span><span class="fu">y</span> <span class="op">=</span> y<span class="op">;</span></span>
+<span id="cb11-7"><a href="#cb11-7"></a>    <span class="op">}</span></span>
+<span id="cb11-8"><a href="#cb11-8"></a></span>
+<span id="cb11-9"><a href="#cb11-9"></a>    <span class="at">@Override</span></span>
+<span id="cb11-10"><a href="#cb11-10"></a>    <span class="kw">public</span> <span class="dt">double</span> <span class="fu">surface</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb11-11"><a href="#cb11-11"></a>        <span class="cf">return</span> x <span class="op">*</span> y<span class="op">;</span></span>
+<span id="cb11-12"><a href="#cb11-12"></a>    <span class="op">}</span></span>
+<span id="cb11-13"><a href="#cb11-13"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+<div class="code-with-filename">
+<div class="code-with-filename-file">
+<pre><strong>Cercle.java</strong></pre>
+</div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb12" data-filename="Cercle.java"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb12-1"><a href="#cb12-1"></a><span class="kw">public</span> <span class="kw">class</span> Cercle <span class="kw">extends</span> Forme <span class="op">{</span></span>
+<span id="cb12-2"><a href="#cb12-2"></a>    <span class="kw">private</span> <span class="dt">double</span> rayon<span class="op">;</span></span>
+<span id="cb12-3"><a href="#cb12-3"></a></span>
+<span id="cb12-4"><a href="#cb12-4"></a>    <span class="kw">public</span> <span class="fu">Cercle</span><span class="op">(</span><span class="dt">double</span> rayon<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb12-5"><a href="#cb12-5"></a>        <span class="kw">this</span><span class="op">.</span><span class="fu">rayon</span> <span class="op">=</span> rayon<span class="op">;</span></span>
+<span id="cb12-6"><a href="#cb12-6"></a>    <span class="op">}</span></span>
+<span id="cb12-7"><a href="#cb12-7"></a></span>
+<span id="cb12-8"><a href="#cb12-8"></a>    <span class="at">@Override</span></span>
+<span id="cb12-9"><a href="#cb12-9"></a>    <span class="kw">public</span> <span class="dt">double</span> <span class="fu">surface</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb12-10"><a href="#cb12-10"></a>        <span class="cf">return</span> <span class="bu">Math</span><span class="op">.</span><span class="fu">PI</span> <span class="op">*</span> rayon <span class="op">*</span> rayon<span class="op">;</span></span>
+<span id="cb12-11"><a href="#cb12-11"></a>    <span class="op">}</span></span>
+<span id="cb12-12"><a href="#cb12-12"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</div>
+</section>
+<section id="syntaxe---exemple" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="syntaxe---exemple"><span class="header-section-number">3.2</span> Syntaxe - exemple</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb13"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb13-1"><a href="#cb13-1"></a><span class="kw">public</span> <span class="kw">class</span> Main <span class="op">{</span></span>
+<span id="cb13-2"><a href="#cb13-2"></a>    <span class="kw">public</span> <span class="dt">static</span> <span class="dt">void</span> <span class="fu">main</span><span class="op">(</span><span class="bu">String</span><span class="op">[]</span> args<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb13-3"><a href="#cb13-3"></a>        <span class="bu">List</span><span class="op">&lt;</span>Forme<span class="op">&gt;</span> formes <span class="op">=</span> <span class="bu">Arrays</span><span class="op">.</span><span class="fu">asList</span><span class="op">(</span></span>
+<span id="cb13-4"><a href="#cb13-4"></a>                <span class="kw">new</span> <span class="fu">Cercle</span><span class="op">(</span><span class="dv">2</span><span class="op">),</span></span>
+<span id="cb13-5"><a href="#cb13-5"></a>                <span class="kw">new</span> <span class="fu">Cercle</span><span class="op">(</span><span class="dv">3</span><span class="op">),</span></span>
+<span id="cb13-6"><a href="#cb13-6"></a>                <span class="kw">new</span> <span class="bu">Rectangle</span><span class="op">(</span><span class="dv">4</span><span class="op">,</span> <span class="dv">5</span><span class="op">),</span></span>
+<span id="cb13-7"><a href="#cb13-7"></a>                <span class="kw">new</span> <span class="fu">Cercle</span><span class="op">(</span><span class="dv">7</span><span class="op">),</span></span>
+<span id="cb13-8"><a href="#cb13-8"></a>                <span class="kw">new</span> <span class="bu">Rectangle</span><span class="op">(</span><span class="dv">1</span><span class="op">,</span> <span class="dv">1</span><span class="op">));</span></span>
+<span id="cb13-9"><a href="#cb13-9"></a></span>
+<span id="cb13-10"><a href="#cb13-10"></a>        <span class="dt">var</span> surfaceTotale <span class="op">=</span> <span class="fl">0.0</span><span class="op">;</span></span>
+<span id="cb13-11"><a href="#cb13-11"></a>        <span class="cf">for</span> <span class="op">(</span>Forme forme <span class="op">:</span> formes<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb13-12"><a href="#cb13-12"></a>            <span class="co">// polymorphisme: la méthode "surface" appelée</span></span>
+<span id="cb13-13"><a href="#cb13-13"></a>            <span class="co">// dépend du type de l'objet forme</span></span>
+<span id="cb13-14"><a href="#cb13-14"></a>            surfaceTotale <span class="op">+=</span> forme<span class="op">.</span><span class="fu">surface</span><span class="op">();</span></span>
+<span id="cb13-15"><a href="#cb13-15"></a>        <span class="op">}</span></span>
+<span id="cb13-16"><a href="#cb13-16"></a>    <span class="op">}</span></span>
+<span id="cb13-17"><a href="#cb13-17"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="utilisation" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="utilisation"><span class="header-section-number">3.3</span> Utilisation</h2>
+<p>Une classe abstraite sert de <strong>modèle</strong> pour créer des classes concrètes qui en hériteront.</p>
+<p>Une classe abstraite définit une <strong>implémentation partielle</strong>:</p>
+<ul>
+<li>Les méthodes <strong>concrètes</strong> ont des instructions</li>
+<li>Les méthodes <strong>abstraites</strong> n’en ont pas</li>
+</ul>
+<p>Les classes <strong>concrètes</strong> qui en hériteront doivent compléter cette implémentation.</p>
+</section>
+</section>
+<section id="interfaces" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Interfaces</h1>
+<p>Une interface:</p>
+<ul>
+<li>est une classe qui ne possède que des méthodes <strong>abstraites</strong> et des <strong>constantes</strong> (attributs <code>final</code>)</li>
+<li>peut aussi déclarer des implémentations par <code>default</code> (voir plus loin)</li>
+<li>se déclare avec le mot-clé <code>interface</code></li>
+<li>n’implémente aucune méthode</li>
+<li>décrit un ensemble de méthodes en fournissant uniquement leur signature</li>
+<li>peut être considérée comme une classe 100 % abstraite</li>
+</ul>
+<section id="syntaxe---déclaration" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="syntaxe---déclaration"><span class="header-section-number">4.1</span> Syntaxe - déclaration</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb14"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb14-1"><a href="#cb14-1"></a><span class="kw">public</span> <span class="kw">interface</span> Carnivore <span class="op">{</span></span>
+<span id="cb14-2"><a href="#cb14-2"></a>    <span class="dt">void</span> <span class="fu">manger</span><span class="op">(</span>Animal animal<span class="op">);</span></span>
+<span id="cb14-3"><a href="#cb14-3"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb15"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb15-1"><a href="#cb15-1"></a><span class="kw">public</span> <span class="kw">interface</span> Herbivore <span class="op">{</span></span>
+<span id="cb15-2"><a href="#cb15-2"></a>    <span class="dt">void</span> <span class="fu">manger</span><span class="op">(</span>Vegetal vegetal<span class="op">);</span></span>
+<span id="cb15-3"><a href="#cb15-3"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ul>
+<li>Il n’est pas nécessaire de préfixer les méthodes avec <code>abstract</code></li>
+<li>Toutes les méthodes sont par défaut <code>public</code></li>
+</ul>
+</section>
+<section id="syntaxe---sous-classes" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="syntaxe---sous-classes"><span class="header-section-number">4.2</span> Syntaxe - sous-classes</h2>
+<ul>
+<li>Une interface peut étendre <strong>une ou plusieurs autres interfaces</strong> avec <code>extends</code></li>
+<li>Une classe signale l’interface qu’elle implémente grâce au mot- clé <code>implements</code></li>
+<li>Une classe peut étendre (extends) <strong>une et une seule classe</strong> mais implémenter (<code>implements</code>) <strong>une ou plusieurs interfaces</strong></li>
+</ul>
+</section>
+<section id="syntaxe---sous-classes-1" class="level2 smaller" data-number="4.3">
+<h2 class="smaller anchored" data-number="4.3" data-anchor-id="syntaxe---sous-classes-1"><span class="header-section-number">4.3</span> Syntaxe - sous-classes</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb16"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb16-1"><a href="#cb16-1"></a><span class="kw">public</span> <span class="kw">class</span> Humain <span class="kw">implements</span> Carnivore<span class="op">,</span> Herbivore <span class="op">{</span></span>
+<span id="cb16-2"><a href="#cb16-2"></a></span>
+<span id="cb16-3"><a href="#cb16-3"></a>    <span class="at">@Override</span></span>
+<span id="cb16-4"><a href="#cb16-4"></a>    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">manger</span><span class="op">(</span>Animal animal<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb16-5"><a href="#cb16-5"></a>        <span class="co">// ...</span></span>
+<span id="cb16-6"><a href="#cb16-6"></a>    <span class="op">}</span></span>
+<span id="cb16-7"><a href="#cb16-7"></a></span>
+<span id="cb16-8"><a href="#cb16-8"></a>    <span class="at">@Override</span></span>
+<span id="cb16-9"><a href="#cb16-9"></a>    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">manger</span><span class="op">(</span>Vegetal vegetal<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb16-10"><a href="#cb16-10"></a>        <span class="co">// ...</span></span>
+<span id="cb16-11"><a href="#cb16-11"></a>    <span class="op">}</span></span>
+<span id="cb16-12"><a href="#cb16-12"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Nous pouvons aussi regrouper les 2 interfaces dans une nouvelle interface :</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb17"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb17-1"><a href="#cb17-1"></a><span class="kw">public</span> <span class="kw">interface</span> Omnivore <span class="kw">extends</span> Carnivore<span class="op">,</span> Herbivore <span class="op">{</span></span>
+<span id="cb17-2"><a href="#cb17-2"></a></span>
+<span id="cb17-3"><a href="#cb17-3"></a><span class="op">}</span></span>
+<span id="cb17-4"><a href="#cb17-4"></a></span>
+<span id="cb17-5"><a href="#cb17-5"></a><span class="kw">public</span> <span class="kw">class</span> Humain <span class="kw">extends</span> Omnivore <span class="op">{</span></span>
+<span id="cb17-6"><a href="#cb17-6"></a>    <span class="co">// ...</span></span>
+<span id="cb17-7"><a href="#cb17-7"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="interface-comparable" class="level2" data-number="4.4">
+<h2 data-number="4.4" class="anchored" data-anchor-id="interface-comparable"><span class="header-section-number">4.4</span> Interface Comparable</h2>
+<ul>
+<li>L’interface <code>Comparable</code>, nécessite l’implémentation de la méthode <code>compareTo</code></li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb18"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb18-1"><a href="#cb18-1"></a><span class="kw">public</span> <span class="kw">interface</span> <span class="bu">Comparable</span><span class="op">&lt;</span>T<span class="op">&gt;</span> <span class="op">{</span></span>
+<span id="cb18-2"><a href="#cb18-2"></a>   <span class="co">/**</span> </span>
+<span id="cb18-3"><a href="#cb18-3"></a>    <span class="co">*</span> Doit retourner<span class="co">:</span></span>
+<span id="cb18-4"><a href="#cb18-4"></a>    <span class="co">*</span> <span class="co">-</span> un entier n<span class="co">é</span>gatif quand x <span class="er">&lt;</span> y</span>
+<span id="cb18-5"><a href="#cb18-5"></a>    <span class="co">*</span> <span class="co">-</span> un entier positif quand x <span class="co">&gt;</span> y</span>
+<span id="cb18-6"><a href="#cb18-6"></a>    <span class="co">*</span> <span class="co">-</span> <span class="co">0</span> quand x<span class="co">.</span>equals<span class="co">(</span>y<span class="co">)</span></span>
+<span id="cb18-7"><a href="#cb18-7"></a>    <span class="co">*/</span></span>
+<span id="cb18-8"><a href="#cb18-8"></a>    <span class="kw">public</span> <span class="dt">int</span> <span class="fu">compareTo</span><span class="op">(</span>T o<span class="op">);</span></span>
+<span id="cb18-9"><a href="#cb18-9"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<ul>
+<li>L’interface Comparable est destinée à la comparaison d’objets de la même classe</li>
+</ul>
+</section>
+<section id="comparable---exemple" class="level2 smaller" data-number="4.5">
+<h2 class="smaller anchored" data-number="4.5" data-anchor-id="comparable---exemple"><span class="header-section-number">4.5</span> Comparable - exemple</h2>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb19"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb19-1"><a href="#cb19-1"></a><span class="kw">public</span> <span class="kw">class</span> Personne <span class="kw">implements</span> <span class="bu">Comparable</span><span class="op">&lt;</span>Personne<span class="op">&gt;</span> <span class="op">{</span></span>
+<span id="cb19-2"><a href="#cb19-2"></a>    <span class="kw">private</span> <span class="bu">String</span> nom<span class="op">;</span></span>
+<span id="cb19-3"><a href="#cb19-3"></a>    <span class="kw">private</span> <span class="dt">int</span> age<span class="op">;</span></span>
+<span id="cb19-4"><a href="#cb19-4"></a></span>
+<span id="cb19-5"><a href="#cb19-5"></a>    <span class="co">// ...</span></span>
+<span id="cb19-6"><a href="#cb19-6"></a></span>
+<span id="cb19-7"><a href="#cb19-7"></a>    <span class="at">@Override</span></span>
+<span id="cb19-8"><a href="#cb19-8"></a>    <span class="kw">public</span> <span class="dt">int</span> <span class="fu">compareTo</span><span class="op">(</span>Personne o<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb19-9"><a href="#cb19-9"></a>        <span class="co">// par ordre alphabétique du nom</span></span>
+<span id="cb19-10"><a href="#cb19-10"></a>        <span class="cf">return</span> <span class="kw">this</span><span class="op">.</span><span class="fu">nom</span><span class="op">.</span><span class="fu">compareTo</span><span class="op">(</span>o<span class="op">.</span><span class="fu">nom</span><span class="op">);</span></span>
+<span id="cb19-11"><a href="#cb19-11"></a>    <span class="op">}</span></span>
+<span id="cb19-12"><a href="#cb19-12"></a></span>
+<span id="cb19-13"><a href="#cb19-13"></a>    <span class="co">// Il est fortement recommandé de redéfinir equals lorsqu'on implémente compareTo</span></span>
+<span id="cb19-14"><a href="#cb19-14"></a>    <span class="co">// on doit toujours avoir (x.compareTo(y)==0) == (x.equals(y))</span></span>
+<span id="cb19-15"><a href="#cb19-15"></a>    <span class="at">@Override</span></span>
+<span id="cb19-16"><a href="#cb19-16"></a>    <span class="kw">public</span> <span class="dt">boolean</span> <span class="fu">equals</span><span class="op">(</span><span class="bu">Object</span> o<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb19-17"><a href="#cb19-17"></a>        <span class="co">// ... </span></span>
+<span id="cb19-18"><a href="#cb19-18"></a>    <span class="op">}</span></span>
+<span id="cb19-19"><a href="#cb19-19"></a></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Certaines méthodes du JDK comme <code>Collections.sort</code> utilisent <code>Comparable</code>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb20"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb20-1"><a href="#cb20-1"></a><span class="kw">import</span> <span class="im">java</span><span class="op">.</span><span class="im">util</span><span class="op">.</span><span class="im">Arrays</span><span class="op">;</span></span>
+<span id="cb20-2"><a href="#cb20-2"></a><span class="kw">import</span> <span class="im">java</span><span class="op">.</span><span class="im">util</span><span class="op">.</span><span class="im">Collections</span><span class="op">;</span></span>
+<span id="cb20-3"><a href="#cb20-3"></a></span>
+<span id="cb20-4"><a href="#cb20-4"></a><span class="dt">var</span> personnes <span class="op">=</span> <span class="bu">Arrays</span><span class="op">.</span><span class="fu">asList</span><span class="op">(</span><span class="kw">new</span> <span class="fu">Personne</span><span class="op">(</span><span class="st">"Bob"</span><span class="op">,</span> <span class="dv">20</span><span class="op">),</span> <span class="kw">new</span> <span class="fu">Personne</span><span class="op">(</span><span class="st">"Alice"</span><span class="op">,</span> <span class="dv">22</span><span class="op">));</span></span>
+<span id="cb20-5"><a href="#cb20-5"></a><span class="co">// Trie les personnes par ordre alphabétique</span></span>
+<span id="cb20-6"><a href="#cb20-6"></a><span class="bu">Collections</span><span class="op">.</span><span class="fu">sort</span><span class="op">(</span>personnes<span class="op">);</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="sealed-interface" class="level2" data-number="4.6">
+<h2 data-number="4.6" class="anchored" data-anchor-id="sealed-interface"><span class="header-section-number">4.6</span> Sealed interface</h2>
+<ul>
+<li>Depuis Java 17, nous pouvons restreindre quelles classes peuvent implémenter une interface.</li>
+<li>Pour cela, on utilise le mot-clé <code>sealed</code> et on spécifie les sous-types autorisés avec <code>permits</code></li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb21"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb21-1"><a href="#cb21-1"></a><span class="kw">public</span> <span class="kw">sealed</span> <span class="kw">interface</span> Forme <span class="kw">permits</span> Cercle<span class="op">,</span> <span class="bu">Rectangle</span><span class="op">,</span> Triangle <span class="op">{</span></span>
+<span id="cb21-2"><a href="#cb21-2"></a>    <span class="dt">double</span> <span class="fu">surface</span><span class="op">();</span></span>
+<span id="cb21-3"><a href="#cb21-3"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="sealed---sous-classes" class="level2" data-number="4.7">
+<h2 data-number="4.7" class="anchored" data-anchor-id="sealed---sous-classes"><span class="header-section-number">4.7</span> Sealed - sous-classes</h2>
+<ul>
+<li>Les sous-classes doivent avoir le mot-clé suivant :
+<ul>
+<li><code>final</code> : La sous-classe ne peut pas être sous-classée davantage.</li>
+<li><code>sealed</code>: La sous-classe peut restreindre encore plus l’héritage en spécifiant à son tour des sous-types autorisés.</li>
+<li><code>non-sealed</code>: la sous-classe peut être sous-classée sans restriction</li>
+</ul></li>
+</ul>
+</section>
+<section id="sealed---intérêt" class="level2" data-number="4.8">
+<h2 data-number="4.8" class="anchored" data-anchor-id="sealed---intérêt"><span class="header-section-number">4.8</span> Sealed - intérêt</h2>
+<ul>
+<li><strong>vérification à la compilation</strong>. Dans des expressions <code>switch</code>, permet de s’assurer que tous les cas sont couverts</li>
+<li><strong>Documentation claire</strong> : Les sealed interfaces définissent explicitement quels sont les sous-types possibles, ce qui rend l’intention du développeur plus claire.</li>
+</ul>
+</section>
+<section id="default-methods" class="level2" data-number="4.9">
+<h2 data-number="4.9" class="anchored" data-anchor-id="default-methods"><span class="header-section-number">4.9</span> default methods</h2>
+<ul>
+<li>Les méthodes par défaut (ou default methods) ont été introduites avec Java 8.</li>
+<li>Elles permettent aux interfaces d’avoir des implémentations de méthodes concrètes</li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb22"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb22-1"><a href="#cb22-1"></a><span class="kw">public</span> <span class="kw">interface</span> Vehicule <span class="op">{</span></span>
+<span id="cb22-2"><a href="#cb22-2"></a>    <span class="co">// Méthode abstraite</span></span>
+<span id="cb22-3"><a href="#cb22-3"></a>    <span class="dt">void</span> <span class="fu">demarrer</span><span class="op">();</span></span>
+<span id="cb22-4"><a href="#cb22-4"></a></span>
+<span id="cb22-5"><a href="#cb22-5"></a>    <span class="co">// Méthode par défaut</span></span>
+<span id="cb22-6"><a href="#cb22-6"></a>    <span class="kw">default</span> <span class="dt">void</span> <span class="fu">klaxonner</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb22-7"><a href="#cb22-7"></a>        <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span><span class="st">"Tut-tut !"</span><span class="op">);</span></span>
+<span id="cb22-8"><a href="#cb22-8"></a>    <span class="op">}</span></span>
+<span id="cb22-9"><a href="#cb22-9"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="default---utilisation" class="level2" data-number="4.10">
+<h2 data-number="4.10" class="anchored" data-anchor-id="default---utilisation"><span class="header-section-number">4.10</span> default - utilisation</h2>
+<ul>
+<li>Evolution d’une interface sans casser les implémentations existantes</li>
+<li>Réutilisation de code</li>
+</ul>
+<p>Différence avec <code>abstract class</code> :</p>
+<ul>
+<li>une classe abstraite peut avoir des attributs</li>
+</ul>
+</section>
+<section id="default---conflits" class="level2" data-number="4.11">
+<h2 data-number="4.11" class="anchored" data-anchor-id="default---conflits"><span class="header-section-number">4.11</span> default - conflits</h2>
+<p>Des conflits peuvent apparaître.</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb23"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb23-1"><a href="#cb23-1"></a><span class="kw">public</span> <span class="kw">interface</span> InterfaceA <span class="op">{</span></span>
+<span id="cb23-2"><a href="#cb23-2"></a>    <span class="kw">default</span> <span class="dt">void</span> <span class="fu">afficher</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb23-3"><a href="#cb23-3"></a>        <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span><span class="st">"Interface A"</span><span class="op">);</span></span>
+<span id="cb23-4"><a href="#cb23-4"></a>    <span class="op">}</span></span>
+<span id="cb23-5"><a href="#cb23-5"></a><span class="op">}</span></span>
+<span id="cb23-6"><a href="#cb23-6"></a></span>
+<span id="cb23-7"><a href="#cb23-7"></a><span class="kw">public</span> <span class="kw">interface</span> InterfaceB <span class="op">{</span></span>
+<span id="cb23-8"><a href="#cb23-8"></a>    <span class="kw">default</span> <span class="dt">void</span> <span class="fu">afficher</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb23-9"><a href="#cb23-9"></a>        <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span><span class="st">"Interface B"</span><span class="op">);</span></span>
+<span id="cb23-10"><a href="#cb23-10"></a>    <span class="op">}</span></span>
+<span id="cb23-11"><a href="#cb23-11"></a><span class="op">}</span></span>
+<span id="cb23-12"><a href="#cb23-12"></a></span>
+<span id="cb23-13"><a href="#cb23-13"></a><span class="kw">public</span> <span class="kw">class</span> MaClasse <span class="kw">implements</span> InterfaceA<span class="op">,</span> InterfaceB <span class="op">{</span></span>
+<span id="cb23-14"><a href="#cb23-14"></a>    <span class="co">// Résolution du conflit en redéfinissant la méthode</span></span>
+<span id="cb23-15"><a href="#cb23-15"></a>    <span class="at">@Override</span></span>
+<span id="cb23-16"><a href="#cb23-16"></a>    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">afficher</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb23-17"><a href="#cb23-17"></a>        <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span><span class="st">"MaClasse résout le conflit"</span><span class="op">);</span></span>
+<span id="cb23-18"><a href="#cb23-18"></a>    <span class="op">}</span></span>
+<span id="cb23-19"><a href="#cb23-19"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Il faut les résoudre en redéfinissant la méthode.</p>
+</section>
+<section id="default---super" class="level2" data-number="4.12">
+<h2 data-number="4.12" class="anchored" data-anchor-id="default---super"><span class="header-section-number">4.12</span> default - super</h2>
+<ul>
+<li>vous pouvez appeler l’une ou l’autre interface avec <code>Interface.super.method()</code></li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb24"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb24-1"><a href="#cb24-1"></a><span class="kw">public</span> <span class="kw">class</span> MaClasse <span class="kw">implements</span> InterfaceA<span class="op">,</span> InterfaceB <span class="op">{</span></span>
+<span id="cb24-2"><a href="#cb24-2"></a>    <span class="co">// Résolution du conflit en redéfinissant la méthode</span></span>
+<span id="cb24-3"><a href="#cb24-3"></a>    <span class="at">@Override</span></span>
+<span id="cb24-4"><a href="#cb24-4"></a>    <span class="kw">public</span> <span class="dt">void</span> <span class="fu">afficher</span><span class="op">()</span> <span class="op">{</span></span>
+<span id="cb24-5"><a href="#cb24-5"></a>        InterfaceA<span class="op">.</span><span class="fu">super</span><span class="op">.</span><span class="fu">afficher</span><span class="op">();</span></span>
+<span id="cb24-6"><a href="#cb24-6"></a>    <span class="op">}</span></span>
+<span id="cb24-7"><a href="#cb24-7"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

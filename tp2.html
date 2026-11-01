@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.37">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Mikaël Valot">
+
+<title>TP2 - Gestion de magasin / de bibliothèque – ALSI54 Programmation Java</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-88e8eab2b9e74ff2b2dcb2dc0227e102.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-35673c1328022ec05f8a1bab69fe76b7.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-88e8eab2b9e74ff2b2dcb2dc0227e102.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-626bc743731229bd8adb76e0f8fa352c.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-626bc743731229bd8adb76e0f8fa352c.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-626bc743731229bd8adb76e0f8fa352c.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">TP2 - Gestion de magasin / de bibliothèque</li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+      <a href="./index.html" class="sidebar-logo-link">
+      <img src="./figures/logo-noir.png" alt="" class="sidebar-logo light-content py-0 d-lg-inline d-none">
+      <img src="./figures/logo-noir.png" alt="" class="sidebar-logo dark-content py-0 d-lg-inline d-none">
+      </a>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Cours</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cm1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">CM1 - Syntaxe de base</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">TPs</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tp1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">TP1 - Environnement de développement, Jeu de rôle</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul class="collapse">
+  <li><a href="#installation" id="toc-installation" class="nav-link active" data-scroll-target="#installation"><span class="header-section-number">1</span> Installation</a></li>
+  <li><a href="#exercice-1-gestion-de-magasin" id="toc-exercice-1-gestion-de-magasin" class="nav-link" data-scroll-target="#exercice-1-gestion-de-magasin"><span class="header-section-number">2</span> Exercice 1 : Gestion de Magasin</a>
+  <ul class="collapse">
+  <li><a href="#organisation-des-fichiers-dans-un-package" id="toc-organisation-des-fichiers-dans-un-package" class="nav-link" data-scroll-target="#organisation-des-fichiers-dans-un-package"><span class="header-section-number">2.1</span> Organisation des fichiers dans un package</a></li>
+  <li><a href="#classes-à-créer" id="toc-classes-à-créer" class="nav-link" data-scroll-target="#classes-à-créer"><span class="header-section-number">2.2</span> Classes à créer</a></li>
+  </ul></li>
+  <li><a href="#exercice-2-gestion-de-bibliothèque" id="toc-exercice-2-gestion-de-bibliothèque" class="nav-link" data-scroll-target="#exercice-2-gestion-de-bibliothèque"><span class="header-section-number">3</span> Exercice 2: Gestion de bibliothèque</a>
+  <ul class="collapse">
+  <li><a href="#partie-1-classe-livre" id="toc-partie-1-classe-livre" class="nav-link" data-scroll-target="#partie-1-classe-livre"><span class="header-section-number">3.1</span> Partie 1 : Classe Livre</a></li>
+  <li><a href="#partie-2-classe-etagere" id="toc-partie-2-classe-etagere" class="nav-link" data-scroll-target="#partie-2-classe-etagere"><span class="header-section-number">3.2</span> Partie 2 : Classe Etagere</a></li>
+  <li><a href="#partie-3-programme-principal" id="toc-partie-3-programme-principal" class="nav-link" data-scroll-target="#partie-3-programme-principal"><span class="header-section-number">3.3</span> Partie 3 : Programme principal</a></li>
+  <li><a href="#exemple-dutilisation" id="toc-exemple-dutilisation" class="nav-link" data-scroll-target="#exemple-dutilisation"><span class="header-section-number">3.4</span> Exemple d’utilisation</a></li>
+  <li><a href="#partie-4-lecture-de-fichier-csv" id="toc-partie-4-lecture-de-fichier-csv" class="nav-link" data-scroll-target="#partie-4-lecture-de-fichier-csv"><span class="header-section-number">3.5</span> Partie 4: Lecture de fichier csv</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">TP2 - Gestion de magasin / de bibliothèque</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Mikaël Valot </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<!-- TODO créer type ListeProduit, menu main crée des clients mais pas dans le menu 
+supprimerProduit du panier pas appelé ! => ajouter au menu 
+Bon TP, étudiants engagés. Les tests c'est bien !!
+-->
+<section id="installation" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Installation</h1>
+<p>Après avoir cliqué sur le lien GitHub classroom, votre repository GitHub est créé. Vous devez :</p>
+<ol type="1">
+<li>cloner le repo localement : <code>git clone &lt;colle url de votre repo&gt;</code></li>
+<li>ouvrir le dossier cloné alsi54-java-tp2-ZZZ avec votre IDE</li>
+<li>vérifier que les tests s’exécutent correctement :
+<ul>
+<li>aller dans src/test/java/magasin, clic-droit -&gt; Run Tests</li>
+</ul></li>
+</ol>
+</section>
+<section id="exercice-1-gestion-de-magasin" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Exercice 1 : Gestion de Magasin</h1>
+<p>Créer un programme Java qui simule un magasin en ligne.</p>
+<section id="organisation-des-fichiers-dans-un-package" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="organisation-des-fichiers-dans-un-package"><span class="header-section-number">2.1</span> Organisation des fichiers dans un package</h2>
+<ul>
+<li>Créez un package nommé <code>magasin</code>.</li>
+<li>Dans ce package, créez les classes suivantes :
+<ul>
+<li>Produit.java</li>
+<li>Client.java</li>
+<li>Panier.java</li>
+<li>Commande.java</li>
+<li>Magasin.java</li>
+<li>Main.java</li>
+</ul></li>
+</ul>
+</section>
+<section id="classes-à-créer" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="classes-à-créer"><span class="header-section-number">2.2</span> Classes à créer</h2>
+<section id="produit" class="level3" data-number="2.2.1">
+<h3 data-number="2.2.1" class="anchored" data-anchor-id="produit"><span class="header-section-number">2.2.1</span> Produit</h3>
+<p>Classe représentant un produit</p>
+<ul>
+<li>Attributs : id, nom, prix</li>
+<li>Méthodes :
+<ul>
+<li>Constructeur pour initialiser les attributs.</li>
+<li>Getters et setters pour accéder et modifier les attributs.</li>
+<li><code>afficherDetails()</code> pour afficher les détails du produit.</li>
+</ul></li>
+</ul>
+</section>
+<section id="client" class="level3" data-number="2.2.2">
+<h3 data-number="2.2.2" class="anchored" data-anchor-id="client"><span class="header-section-number">2.2.2</span> Client</h3>
+<p>Classe représentant un client</p>
+<ul>
+<li>Attributs : nom, email</li>
+<li>Méthodes :
+<ul>
+<li>Constructeur pour initialiser les attributs.</li>
+<li>Getters et setters pour accéder et modifier les attributs.</li>
+<li><code>afficherDetails()</code> pour afficher les informations du client.</li>
+</ul></li>
+</ul>
+</section>
+<section id="panier" class="level3" data-number="2.2.3">
+<h3 data-number="2.2.3" class="anchored" data-anchor-id="panier"><span class="header-section-number">2.2.3</span> Panier</h3>
+<p>Classe représentant le panier d’un client</p>
+<ul>
+<li>Attributs : produits (liste des produits ajoutés au panier)</li>
+<li>Méthodes :
+<ul>
+<li><code>ajouterProduit(Produit produit)</code> pour ajouter un produit au panier.</li>
+<li><code>supprimerProduit(Produit produit)</code> pour supprimer un produit du panier.</li>
+<li><code>afficher()</code> pour afficher les produits dans le panier.</li>
+<li><code>calculerTotal()</code> pour calculer le montant total du panier.</li>
+<li><code>vider()</code> pour supprimer tous les produits du panier.</li>
+</ul></li>
+</ul>
+</section>
+<section id="commande" class="level3" data-number="2.2.4">
+<h3 data-number="2.2.4" class="anchored" data-anchor-id="commande"><span class="header-section-number">2.2.4</span> Commande</h3>
+<p>Classe représentant une commande passée par un client</p>
+<ul>
+<li>Attributs : client, produitsCommandes, total, dateHeure (de type <code>java.time.LocalDateTime</code>)</li>
+<li>Méthodes :
+<ul>
+<li>Constructeur pour initialiser une commande avec un <code>Client</code> et un <code>Panier</code>.
+<ul>
+<li>attention à bien copier les ArrayList !</li>
+</ul></li>
+<li><code>afficherDetails()</code> pour afficher les informations sur la commande.</li>
+</ul></li>
+</ul>
+</section>
+<section id="magasin" class="level3" data-number="2.2.5">
+<h3 data-number="2.2.5" class="anchored" data-anchor-id="magasin"><span class="header-section-number">2.2.5</span> Magasin</h3>
+<p>Classe représentant le magasin</p>
+<ul>
+<li>Attributs : produits (liste des produits disponibles dans le magasin)</li>
+<li>Méthodes :
+<ul>
+<li><code>ajouterProduit(Produit produit)</code> pour ajouter un produit au magasin.</li>
+<li><code>afficherProduitsDisponibles()</code> pour afficher les produits disponibles.</li>
+<li><code>trouverProduitParId(int id)</code> pour trouver un produit par son id.</li>
+</ul></li>
+</ul>
+</section>
+<section id="main" class="level3" data-number="2.2.6">
+<h3 data-number="2.2.6" class="anchored" data-anchor-id="main"><span class="header-section-number">2.2.6</span> Main</h3>
+<p>Classe principale contenant la méthode main()</p>
+<ol type="1">
+<li>Initialise le magasin avec des produits prédéfinis, par exemple une souris, un clavier, écouteurs, …:</li>
+<li>Demande le nom et email du client</li>
+<li>Afficher le menu interactif. Il doit permettre les fonctions suivantes :
+<ul>
+<li>Création des clients, des produits et des magasins.</li>
+<li>Interaction avec le client pour afficher les produits, ajouter au panier et passer une commande.<br>
+</li>
+<li>le passage de commande vide le panier. Exemple de menu :</li>
+</ul></li>
+</ol>
+<pre><code>--- Menu Magasin ---
+1. Afficher les produits disponibles
+2. Ajouter un produit au panier
+3. Afficher le panier
+4. Passer la commande
+5. Afficher les commandes
+6. Quitter</code></pre>
+</section>
+</section>
+</section>
+<section id="exercice-2-gestion-de-bibliothèque" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Exercice 2: Gestion de bibliothèque</h1>
+<p>Dans le cadre de la gestion des livres d’une bibliothèque, on souhaite organiser les livres sur des étagères selon des domaines spécifiques (littérature, chimie, informatique, etc.).</p>
+<p>Pour cela, on va utiliser deux classes :</p>
+<ul>
+<li>une classe Livre pour représenter chaque livre,</li>
+<li>une classe Etagere pour gérer les livres placés sur une étagère donnée.</li>
+</ul>
+<section id="partie-1-classe-livre" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="partie-1-classe-livre"><span class="header-section-number">3.1</span> Partie 1 : Classe Livre</h2>
+<p>Créez une classe Livre qui représente un livre avec les attributs suivants :</p>
+<ul>
+<li>titre : Le titre du livre (chaîne de caractères).</li>
+<li>code : Le code unique du livre (entier).</li>
+<li>auteur : L’auteur du livre (chaîne de caractères).</li>
+<li>nbPages : Le nombre de pages du livre (entier).</li>
+<li>anneeEdition : L’année d’édition du livre (entier).</li>
+</ul>
+<p>Exigences :</p>
+<ul>
+<li>Implémentez un constructeur qui permet d’initialiser tous ces attributs lors de la création d’un livre.</li>
+<li>Implémentez les méthodes getters et setters pour accéder à ces attributs.</li>
+<li>Implémentez une méthode <code>toString()</code> pour afficher les informations d’un livre dans un format lisible.</li>
+</ul>
+</section>
+<section id="partie-2-classe-etagere" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="partie-2-classe-etagere"><span class="header-section-number">3.2</span> Partie 2 : Classe Etagere</h2>
+<p>Créez une classe Etagere qui représente une étagère dans une bibliothèque. Cette classe doit contenir :</p>
+<ul>
+<li>code : Un code unique pour identifier l’étagère (entier).</li>
+<li>domaine : Le domaine des livres sur cette étagère (chaîne de caractères). Par exemple : “Littérature”, “Chimie”, “Informatique”.</li>
+<li>capacite: nombre max de livres à mettre dans cette étagère</li>
+<li>livres : Un <code>ArrayList</code> de livres placés sur cette étagère.</li>
+</ul>
+<ol type="1">
+<li>Ajout d’un livre :
+<ul>
+<li>Implémentez une méthode <code>ajouterLivre(Livre livre)</code> pour ajouter un livre à l’étagère.</li>
+</ul></li>
+<li>Suppression d’un livre :
+<ul>
+<li>Implémentez une méthode <code>supprimerLivre(int code)</code> pour supprimer un livre en utilisant son code unique.</li>
+</ul></li>
+<li>Somme des pages :
+<ul>
+<li>Implémentez une méthode <code>sommePages()</code> pour calculer et retourner la somme du nombre total de pages de tous les livres de l’étagère.</li>
+</ul></li>
+<li>Recherche d’un livre par titre :
+<ul>
+<li>Implémentez une méthode <code>chercherLivreParTitre(String titre)</code> qui retourne le code du livre recherché. Si le livre n’existe pas, retournez un message indiquant que le livre n’a pas été trouvé.</li>
+</ul></li>
+<li>Recherche des petits livres :
+<ul>
+<li>Implémentez une méthode <code>chercherPetitsLivres(int seuil)</code> qui affiche tous les livres ayant un nombre de pages inférieur à un seuil donné.</li>
+</ul></li>
+<li>Affichage des nouveaux livres :
+<ul>
+<li>Implémentez une méthode <code>afficherNouveauxLivres(int anneeActuelle)</code> qui affiche les titres et codes des livres édités durant l’année en cours.</li>
+</ul></li>
+<li>Changer le nombre de pages d’un livre :
+<ul>
+<li>Implémentez une méthode <code>changerNbPages(int code, int nbPages)</code> pour modifier le nombre de pages d’un livre identifié par son code.</li>
+</ul></li>
+<li>Affichage des livres :
+<ul>
+<li>Implémentez une méthode <code>afficherLivres()</code> qui affiche les détails de tous les livres présents sur l’étagère.</li>
+</ul></li>
+<li>Trie:
+<ul>
+<li>Trier les livres par nombre de pages</li>
+</ul></li>
+<li>Recherche :
+<ul>
+<li>la méthode <code>chercherTitresParAuteur</code>, qui retourne un tableau de chaînes de caractères contenant les titres des livres d’un auteur spécifié.</li>
+</ul></li>
+</ol>
+</section>
+<section id="partie-3-programme-principal" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="partie-3-programme-principal"><span class="header-section-number">3.3</span> Partie 3 : Programme principal</h2>
+<p>Créez un programme dans une classe <code>BibliothequeTest</code> qui permet de :</p>
+<ol type="1">
+<li>Créer une étagère pour un domaine donné (par exemple, “Littérature”).</li>
+<li>Ajouter plusieurs livres à cette étagère. (ajouter les livres de l’exemple d’utilisation ci-dessous)</li>
+<li>Utiliser les différentes méthodes de la classe Etagere pour :
+<ul>
+<li>Afficher les livres présents sur l’étagère.</li>
+<li>Calculer et afficher la somme totale des pages.</li>
+<li>Rechercher un livre par son titre.</li>
+<li>Afficher les livres ayant un nombre de pages inférieur à un seuil donné.</li>
+<li>Afficher les titres et codes des livres édités durant l’année en cours.</li>
+<li>Modifier le nombre de pages d’un livre en fonction de son code.</li>
+<li>Supprimer un livre par son code.</li>
+</ul></li>
+<li>Afficher de nouveau la liste des livres après suppression.</li>
+</ol>
+</section>
+<section id="exemple-dutilisation" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="exemple-dutilisation"><span class="header-section-number">3.4</span> Exemple d’utilisation</h2>
+<p>Créez deux étagères :</p>
+<ul>
+<li>Une pour le domaine “Chimie”.</li>
+<li>Une pour le domaine “Informatique”.</li>
+</ul>
+<p>Livres à ajouter :</p>
+<ul>
+<li>Etagère Chimie :
+<ol type="1">
+<li>“La chimie organique”, code : 201, auteur : John McMurry, 1200 pages, édition : 2019</li>
+<li>“Introduction à la chimie analytique”, code : 202, auteur : Daniel C. Harris, 800 pages, édition : 2021</li>
+<li>“Chimie générale”, code : 203, auteur : Raymond Chang, 1000 pages, édition : 2018</li>
+</ol></li>
+<li>Etagère Informatique :
+<ol type="1">
+<li>“Introduction aux algorithmes”, code : 301, auteur : Thomas H. Cormen, 1300 pages, édition : 2020</li>
+<li>“Design Patterns”, code : 302, auteur : Erich Gamma, 400 pages, édition : 1994</li>
+<li>“Java pour les débutants”, code : 303, auteur : Herbert Schildt, 700 pages, édition : 2019</li>
+</ol></li>
+</ul>
+</section>
+<section id="partie-4-lecture-de-fichier-csv" class="level2" data-number="3.5">
+<h2 data-number="3.5" class="anchored" data-anchor-id="partie-4-lecture-de-fichier-csv"><span class="header-section-number">3.5</span> Partie 4: Lecture de fichier csv</h2>
+<p>Créez une classe <code>Bibliothèque</code> avec :</p>
+<ul>
+<li>une liste d’étagères</li>
+<li>une méthode <code>charger(File f)</code> qui va lire un fichier .csv contenant les données des livres, et les ajouter à la liste de livres de la bonne étagère.</li>
+</ul>
+<p>Vous créerez un fichier <code>livres.csv</code> contenant les données suivantes :</p>
+<pre><code>titre,code,auteur,nbPages,anneeEdition,étagère
+La chimie organique,201,John McMurry,1200,2019,Chimie
+Introduction à la chimie analytique,202,Daniel C. Harris,800,2021,Chimie
+Chimie générale,203,Raymond Chang,1000,2018,Chimie
+Introduction aux algorithmes,301,Thomas H. Cormen,1300,2020,Informatique
+Design Patterns,302,Erich Gamma,400,1994,Informatique
+Java pour les débutants,303,Herbert Schildt,700,2019,Informatique</code></pre>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

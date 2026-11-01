@@ -1,0 +1,991 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.37">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Mikaël Valot">
+
+<title>TP1 - Environnement de développement, Jeu de rôle – ALSI54 Programmation Java</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-88e8eab2b9e74ff2b2dcb2dc0227e102.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-35673c1328022ec05f8a1bab69fe76b7.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-88e8eab2b9e74ff2b2dcb2dc0227e102.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-626bc743731229bd8adb76e0f8fa352c.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-626bc743731229bd8adb76e0f8fa352c.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-626bc743731229bd8adb76e0f8fa352c.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./tp1.html">TPs</a></li><li class="breadcrumb-item"><a href="./tp1.html">TP1 - Environnement de développement, Jeu de rôle</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+      <a href="./index.html" class="sidebar-logo-link">
+      <img src="./figures/logo-noir.png" alt="" class="sidebar-logo light-content py-0 d-lg-inline d-none">
+      <img src="./figures/logo-noir.png" alt="" class="sidebar-logo dark-content py-0 d-lg-inline d-none">
+      </a>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Cours</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./cm1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">CM1 - Syntaxe de base</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">TPs</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./tp1.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">TP1 - Environnement de développement, Jeu de rôle</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul class="collapse">
+  <li><a href="#compiler-et-exécuter-du-code-avec-le-jdk" id="toc-compiler-et-exécuter-du-code-avec-le-jdk" class="nav-link active" data-scroll-target="#compiler-et-exécuter-du-code-avec-le-jdk"><span class="header-section-number">1</span> Compiler et exécuter du code avec le JDK</a></li>
+  <li><a href="#utiliser-jshell-pour-tester-du-code-rapidement" id="toc-utiliser-jshell-pour-tester-du-code-rapidement" class="nav-link" data-scroll-target="#utiliser-jshell-pour-tester-du-code-rapidement"><span class="header-section-number">2</span> Utiliser JShell pour tester du code rapidement</a></li>
+  <li><a href="#premier-projet-avec-intellij-idea" id="toc-premier-projet-avec-intellij-idea" class="nav-link" data-scroll-target="#premier-projet-avec-intellij-idea"><span class="header-section-number">3</span> Premier projet avec IntelliJ Idea</a>
+  <ul class="collapse">
+  <li><a href="#quelques-raccourcis-utiles" id="toc-quelques-raccourcis-utiles" class="nav-link" data-scroll-target="#quelques-raccourcis-utiles"><span class="header-section-number">3.1</span> Quelques raccourcis utiles</a></li>
+  </ul></li>
+  <li><a href="#jeu-de-rôle" id="toc-jeu-de-rôle" class="nav-link" data-scroll-target="#jeu-de-rôle"><span class="header-section-number">4</span> Jeu de rôle</a>
+  <ul class="collapse">
+  <li><a href="#préparation" id="toc-préparation" class="nav-link" data-scroll-target="#préparation"><span class="header-section-number">4.1</span> Préparation</a></li>
+  <li><a href="#classe-plateau" id="toc-classe-plateau" class="nav-link" data-scroll-target="#classe-plateau"><span class="header-section-number">4.2</span> Classe Plateau</a></li>
+  <li><a href="#classe-personnage" id="toc-classe-personnage" class="nav-link" data-scroll-target="#classe-personnage"><span class="header-section-number">4.3</span> Classe Personnage</a></li>
+  <li><a href="#ajouter-le-personnage-au-plateau" id="toc-ajouter-le-personnage-au-plateau" class="nav-link" data-scroll-target="#ajouter-le-personnage-au-plateau"><span class="header-section-number">4.4</span> Ajouter le Personnage au Plateau</a></li>
+  <li><a href="#déplacement-au-clavier" id="toc-déplacement-au-clavier" class="nav-link" data-scroll-target="#déplacement-au-clavier"><span class="header-section-number">4.5</span> Déplacement au clavier</a></li>
+  <li><a href="#afficher-des-ennemis" id="toc-afficher-des-ennemis" class="nav-link" data-scroll-target="#afficher-des-ennemis"><span class="header-section-number">4.6</span> Afficher des Ennemis</a></li>
+  <li><a href="#faire-bouger-les-ennemis" id="toc-faire-bouger-les-ennemis" class="nav-link" data-scroll-target="#faire-bouger-les-ennemis"><span class="header-section-number">4.7</span> Faire bouger les ennemis</a></li>
+  <li><a href="#détection-de-collision" id="toc-détection-de-collision" class="nav-link" data-scroll-target="#détection-de-collision"><span class="header-section-number">4.8</span> Détection de collision</a></li>
+  <li><a href="#idées-daméliorations" id="toc-idées-daméliorations" class="nav-link" data-scroll-target="#idées-daméliorations"><span class="header-section-number">4.9</span> Idées d’améliorations</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./tp1.html">TPs</a></li><li class="breadcrumb-item"><a href="./tp1.html">TP1 - Environnement de développement, Jeu de rôle</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">TP1 - Environnement de développement, Jeu de rôle</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Mikaël Valot </p>
+          </div>
+  </div>
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="compiler-et-exécuter-du-code-avec-le-jdk" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Compiler et exécuter du code avec le JDK</h1>
+<ol type="1">
+<li><p>Installez Oracle 25: <a href="https://www.oracle.com/java/technologies/downloads/#jdk25-windows" class="uri">https://www.oracle.com/java/technologies/downloads/#jdk25-windows</a></p>
+<ol type="a">
+<li>ouvrez une ligne de commande et testez l’installation avec <code>java -version</code></li>
+</ol></li>
+<li><p>Créez un répertoire “java_tp1”</p></li>
+<li><p>Dans ce répertoire, créez un fichier <code>PremierProgramme.java</code> avec le contenu suivant:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb1-1"><a href="#cb1-1"></a><span class="co">/**</span> </span>
+<span id="cb1-2"><a href="#cb1-2"></a> <span class="co">*</span> Ce programme imprime</span>
+<span id="cb1-3"><a href="#cb1-3"></a> <span class="co">*</span> <span class="co">"</span>Hello World<span class="co">"</span> sur la sortie standard</span>
+<span id="cb1-4"><a href="#cb1-4"></a> <span class="co">*/</span></span>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="kw">public</span> <span class="kw">class</span> PremierProgramme <span class="op">{</span></span>
+<span id="cb1-6"><a href="#cb1-6"></a>    <span class="kw">public</span> <span class="dt">static</span> <span class="dt">void</span> <span class="fu">main</span><span class="op">(</span><span class="bu">String</span><span class="op">[]</span> args<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb1-7"><a href="#cb1-7"></a>        <span class="co">// imprime sur la sortie</span></span>
+<span id="cb1-8"><a href="#cb1-8"></a>        <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span><span class="st">"Hello World!"</span><span class="op">);</span> </span>
+<span id="cb1-9"><a href="#cb1-9"></a>    <span class="op">}</span></span>
+<span id="cb1-10"><a href="#cb1-10"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
+<li><p>ouvrez une ligne de commande windows et compilez le programme avec <code>javac PremierProgramme.java</code></p></li>
+<li><p>tapez <code>dir</code>. Qu’observez-vous ?</p></li>
+<li><p>lancez le programme avec <code>java PremierProgramme</code></p></li>
+<li><p>affichez le bytecode désassemblé avec <code>javap -v PremierProgramme.class</code>. Ne cherchez pas trop à comprendre les instructions bytecode, cet exercice montre que notre code Java a été compilé en instructions élémentaires compréhensibles par la JVM.</p></li>
+<li><p>générez la documentation</p>
+<ol type="a">
+<li>créez un répertoire “doc”: <code>mkdir doc</code></li>
+<li>générez la documentation avec <code>javadoc PremierProgramme.java -d doc</code></li>
+<li>Ouvrez le fichier <code>doc/index.html</code> produit avec un navigateur</li>
+<li>Pouvez-vous retrouver la description du programme ?</li>
+</ol></li>
+<li><p>Modifiez la ligne 8 de votre programme pour qu’il affiche le premier argument passé à la fonction main:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb2-1"><a href="#cb2-1"></a><span class="co">/**</span> </span>
+<span id="cb2-2"><a href="#cb2-2"></a> <span class="co">*</span> Ce programme imprime</span>
+<span id="cb2-3"><a href="#cb2-3"></a> <span class="co">*</span> <span class="co">"</span>Hello <span class="co">{</span>arg<span class="co">[0]}</span> <span class="co">!"</span> sur la sortie standard</span>
+<span id="cb2-4"><a href="#cb2-4"></a> <span class="co">*/</span></span>
+<span id="cb2-5"><a href="#cb2-5"></a><span class="kw">public</span> <span class="kw">class</span> PremierProgramme <span class="op">{</span></span>
+<span id="cb2-6"><a href="#cb2-6"></a>    <span class="kw">public</span> <span class="dt">static</span> <span class="dt">void</span> <span class="fu">main</span><span class="op">(</span><span class="bu">String</span><span class="op">[]</span> args<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb2-7"><a href="#cb2-7"></a>        <span class="co">// imprime sur la sortie</span></span>
+<span id="cb2-8"><a href="#cb2-8"></a>        <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span><span class="st">"Hello "</span> <span class="op">+</span> args<span class="op">[</span><span class="dv">0</span><span class="op">]</span> <span class="op">+</span> <span class="st">" !"</span><span class="op">);</span> </span>
+<span id="cb2-9"><a href="#cb2-9"></a>    <span class="op">}</span></span>
+<span id="cb2-10"><a href="#cb2-10"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
+<li><p>Exécutez le programme en passant un argument: <code>java PremierProgramme "Le Monde"</code></p></li>
+</ol>
+</section>
+<section id="utiliser-jshell-pour-tester-du-code-rapidement" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Utiliser JShell pour tester du code rapidement</h1>
+<p>JShell est un outil fourni depuis le JDK 9. JShell permet d’écrire du code Java (expressions, instructions, déclaration, …) qui est évalué individuellement sans avoir besoin de le placer dans une classe ou une méthode. C’est un outil de type “REPL” (Read-Eval-Print-Loop) semblable à celui de Python. Ce type d’outil est très pratique pour explorer une API, expérimenter du code ou pour apprendre un langage.</p>
+<ol type="1">
+<li><p>Lancez JShell avec la commande <code>jshell</code></p></li>
+<li><p>L’invite suggère de lire l’introduction. Tapez la commande <code>/help intro</code></p></li>
+<li><p>Tapez ensuite <code>/help</code> pour avoir la liste de toutes les commandes</p></li>
+<li><p>Exécutez les lignes suivantes, et observez les résultats:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb3"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb3-1"><a href="#cb3-1"></a><span class="dv">2</span> <span class="op">+</span> <span class="dv">2</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="dt">int</span> a<span class="op">,</span> b</span>
+<span id="cb3-3"><a href="#cb3-3"></a>a <span class="op">=</span> <span class="dv">2</span></span>
+<span id="cb3-4"><a href="#cb3-4"></a>b <span class="op">=</span> <span class="dv">3</span></span>
+<span id="cb3-5"><a href="#cb3-5"></a><span class="dt">int</span> c <span class="op">=</span> a <span class="op">*</span> b</span>
+<span id="cb3-6"><a href="#cb3-6"></a>c <span class="op">&gt;</span> <span class="dv">3</span></span>
+<span id="cb3-7"><a href="#cb3-7"></a>c<span class="op">++</span></span>
+<span id="cb3-8"><a href="#cb3-8"></a><span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span><span class="st">"Hello world"</span><span class="op">)</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
+<li><p>Tapez <code>/list</code> pour revoir l’historique des commandes</p></li>
+<li><p>Repérez le numéro d’instruction correspondant à <code>c++</code> et exécutez la à nouveau avec <code>/&lt;numéro&gt;</code>. Par exemple si c’est la no 8, tapez <code>/8</code>.</p></li>
+<li><p>Copiez le code suivant avec ctrl-c:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb4"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb4-1"><a href="#cb4-1"></a><span class="cf">for</span> <span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> <span class="dv">5</span><span class="op">;</span> i<span class="op">++)</span> <span class="op">{</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a>    <span class="cf">if</span> <span class="op">(</span>i <span class="op">%</span> <span class="dv">2</span> <span class="op">==</span> <span class="dv">0</span><span class="op">)</span> <span class="op">{</span></span>
+<span id="cb4-3"><a href="#cb4-3"></a>        <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span>i <span class="op">+</span> <span class="st">" est pair"</span><span class="op">);</span></span>
+<span id="cb4-4"><a href="#cb4-4"></a>    <span class="op">}</span></span>
+<span id="cb4-5"><a href="#cb4-5"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
+<li><p>Pour coller du code multi-ligne dans JShell, il faut d’abord le mettre en mode édition. Tapez <code>/edit</code> puis collez et exécutez le code précédent.</p></li>
+<li><p>Essayez les différents éléments de syntaxe présentés en cours:</p>
+<ol type="a">
+<li>opérateurs arithmétiques</li>
+<li>opérateurs relationnels</li>
+<li>opérateurs logiques</li>
+<li>instructions conditionnelles</li>
+<li>boucles</li>
+</ol></li>
+<li><p>Déclarez une classe <code>Person</code>, comme vu en cours</p></li>
+<li><p>instanciez des objets de la classe</p></li>
+<li><p>utilisez ses attributs et méthodes</p></li>
+</ol>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Dans JShell, si vous n’avez qu’une instruction par ligne, il n’est pas nécessaire de la terminer par un <code>;</code>. Par contre vous pouvez taper plusieurs instructions sur une seule ligne en les séparant avec <code>;</code>.</p>
+</div>
+</div>
+</section>
+<section id="premier-projet-avec-intellij-idea" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Premier projet avec IntelliJ Idea</h1>
+<ol type="1">
+<li><p>Suivez la procédure décrite dans Moodle pour installer IntelliJ: <a href="https://moodle.myefrei.fr/mod/resource/view.php?id=95987">Procédure inscription JetBrains</a></p></li>
+<li><p>Créez un nouveau projet: <a href="https://www.javatpoint.com/intellij-idea-first-java-program">IntelliJ IDEA First Java Program</a></p></li>
+<li><p>Lancez le programme.</p>
+<ol type="a">
+<li>Quel fichier est produit après le “build” ? Où est-il situé ?</li>
+<li>Quel programme est exécuté en ligne de commande ?</li>
+<li>Quels sont ses arguments ?</li>
+</ol></li>
+<li><p>Modifiez le programme pour demander à l’utilisateur de saisir un nom, en utilisant la classe <code>Scanner</code>:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb5-1"><a href="#cb5-1"></a><span class="kw">import</span> <span class="im">java</span><span class="op">.</span><span class="im">util</span><span class="op">.</span><span class="im">Scanner</span><span class="op">;</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a></span>
+<span id="cb5-3"><a href="#cb5-3"></a><span class="kw">public</span> <span class="kw">class</span> MyClass <span class="op">{</span></span>
+<span id="cb5-4"><a href="#cb5-4"></a>    <span class="kw">public</span> <span class="dt">static</span> <span class="dt">void</span> <span class="fu">main</span><span class="op">(</span><span class="bu">String</span><span class="op">[]</span> args<span class="op">)</span> <span class="op">{</span></span>
+<span id="cb5-5"><a href="#cb5-5"></a>        <span class="bu">Scanner</span> scanner <span class="op">=</span> <span class="kw">new</span> <span class="bu">Scanner</span><span class="op">(</span><span class="bu">System</span><span class="op">.</span><span class="fu">in</span><span class="op">);</span></span>
+<span id="cb5-6"><a href="#cb5-6"></a>        <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span><span class="st">"Enter your name: "</span><span class="op">);</span></span>
+<span id="cb5-7"><a href="#cb5-7"></a>        <span class="bu">String</span> name <span class="op">=</span> scanner<span class="op">.</span><span class="fu">nextLine</span><span class="op">();</span></span>
+<span id="cb5-8"><a href="#cb5-8"></a>        <span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">println</span><span class="op">(</span><span class="st">"Hello "</span> <span class="op">+</span> name <span class="op">+</span> <span class="st">" !"</span><span class="op">);</span></span>
+<span id="cb5-9"><a href="#cb5-9"></a>    <span class="op">}</span></span>
+<span id="cb5-10"><a href="#cb5-10"></a><span class="op">}</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div></li>
+</ol>
+<section id="quelques-raccourcis-utiles" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="quelques-raccourcis-utiles"><span class="header-section-number">3.1</span> Quelques raccourcis utiles</h2>
+<p>Essayez les raccourcis suivants:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Raccourci</th>
+<th>Description</th>
+<th>Utilisation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><kbd>Ctrl</kbd><kbd>Q</kbd></td>
+<td>Quick documentation</td>
+<td>curseur sur une classe, attribut ou méthode puis tapez le raccourci</td>
+</tr>
+<tr class="even">
+<td><kbd>Ctrl</kbd> click ou <kbd>Ctrl</kbd><kbd>B</kbd></td>
+<td>Declaration</td>
+<td>curseur sur une classe, attribut ou méthode puis tapez le raccourci</td>
+</tr>
+<tr class="odd">
+<td><kbd>Ctrl</kbd><kbd>Alt</kbd><kbd>←</kbd></td>
+<td>Back</td>
+<td>après avoir fait ctrl-click, utiliser ce raccourci pour revenir</td>
+</tr>
+<tr class="even">
+<td><kbd>Ctrl</kbd><kbd>Shift</kbd><kbd>Backspace</kbd></td>
+<td>Last edit location</td>
+<td>tapez du code, naviguez vers d’autres classes puis revenez au point de départ</td>
+</tr>
+<tr class="odd">
+<td><kbd>Ctrl</kbd><kbd>N</kbd></td>
+<td>Navigate class</td>
+<td>tapez le raccourci, puis saisir le nom d’une classe comme <code>String</code></td>
+</tr>
+<tr class="even">
+<td><kbd>Ctrl</kbd><kbd>F12</kbd></td>
+<td>File structure</td>
+<td>dans une classe, tapez le raccourci, puis saisir le nom d’une méthode ou attribut pour naviguer vers sa définition</td>
+</tr>
+<tr class="odd">
+<td><kbd>Ctrl</kbd><kbd>Shift</kbd><kbd>F</kbd></td>
+<td>Find in files</td>
+<td>tapez le raccourci, puis du texte contenu dans un fichier</td>
+</tr>
+<tr class="even">
+<td><kbd>shift</kbd><kbd>shift</kbd></td>
+<td>search everywhere</td>
+<td>recherche une commande ou setting IntelliJ, ou une classe, fichier du projet, …</td>
+</tr>
+</tbody>
+</table>
+<p>Avec de l’habitude, ils vont vous permettre de naviguer rapidement dans votre code mais aussi dans les API du JDK.</p>
+</section>
+</section>
+<section id="jeu-de-rôle" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Jeu de rôle</h1>
+<p>Lors de ce TP, nous allons créer un petit jeu sous format texte. L’utilisateur pourra créer un personnage puis le faire évoluer sur un plateau. Lorsque le joueur rencontrera des ennemis, il y aura une phase de combat tour à tour avec des pertes de points de vie aléatoires.</p>
+<section id="préparation" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="préparation"><span class="header-section-number">4.1</span> Préparation</h2>
+<p>Utilisez le lien moodle pour créer votre projet sur GitHub classroom. Vous devrez commit &amp; push votre code à la fin du TP.</p>
+</section>
+<section id="classe-plateau" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="classe-plateau"><span class="header-section-number">4.2</span> Classe Plateau</h2>
+<ol type="1">
+<li>Créez un package <code>jeu</code></li>
+<li>Dans ce package, créez une classe <code>Plateau</code> contenant les attributs <code>char[][] grille</code>, <code>int largeur</code>, <code>int hauteur</code>.</li>
+<li>Implémentez un constructeur qui prend en paramètre la <code>largeur</code> et la <code>hauteur</code>, et qui initialise la grille avec des caractères <code>.</code></li>
+<li>Implémentez une méthode <code>afficher</code>, qui va imprimer la grille sur la console</li>
+<li>Créez une classe <code>JeuMain</code>, contenant une méthode principale <code>main</code> qui crée un plateau et l’affiche. Exécutez le programme.</li>
+</ol>
+</section>
+<section id="classe-personnage" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="classe-personnage"><span class="header-section-number">4.3</span> Classe Personnage</h2>
+<ol type="1">
+<li>Dans le package <code>jeu</code>, créez une classe <code>Personnage</code> avec les attributs <code>int ligne</code>, <code>int colonne</code> et <code>char symbole</code></li>
+<li>Implémentez un constructeur prenant 3 paramètres pour initialiser les 3 attributs</li>
+<li>Implémentez une méthode <code>public void deplacer(int dligne, int dcolonne)</code> qui va modifier les coordonnées <code>ligne</code> et <code>colonne</code></li>
+<li>Ajoutez les “getters” pour les attributs: créez 3 méthodes
+<ol type="a">
+<li><code>public int getLigne()</code></li>
+<li><code>public int getColonne()</code></li>
+<li><code>public char getSymbole()</code></li>
+</ol></li>
+</ol>
+</section>
+<section id="ajouter-le-personnage-au-plateau" class="level2" data-number="4.4">
+<h2 data-number="4.4" class="anchored" data-anchor-id="ajouter-le-personnage-au-plateau"><span class="header-section-number">4.4</span> Ajouter le Personnage au Plateau</h2>
+<p>Dans la classe <code>Plateau</code>:</p>
+<ol type="1">
+<li>Ajoutez un attribut <code>joueur</code> de type <code>Personnage</code></li>
+<li>Modifiez le constructeur de <code>Plateau</code> pour initialiser l’attribut <code>joueur</code> en le positionnant au centre de la grille.</li>
+<li>Modifiez la méthode <code>afficher</code> pour afficher le joueur</li>
+<li>Ajoutez une méthode <code>public void deplacerJoueur(int dligne, int dcolonne)</code> qui va déplacer le joueur dans la grille. Pensez à tester les limites de la grille. Le déplacement ne doit pas avoir lieu si il fait déplacer le joueur en dehors de la grille.</li>
+</ol>
+<p>Dans la classe <code>JeuMain</code>:</p>
+<ol type="1">
+<li>Testez les déplacements en ajoutant le code suivant:</li>
+</ol>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb6"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb6-1"><a href="#cb6-1"></a><span class="co">// à gauche</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a>plateau<span class="op">.</span><span class="fu">deplacerJoueur</span><span class="op">(</span><span class="dv">0</span><span class="op">,</span> <span class="op">-</span><span class="dv">1</span><span class="op">);</span></span>
+<span id="cb6-3"><a href="#cb6-3"></a>plateau<span class="op">.</span><span class="fu">afficher</span><span class="op">();</span></span>
+<span id="cb6-4"><a href="#cb6-4"></a><span class="co">// en haut</span></span>
+<span id="cb6-5"><a href="#cb6-5"></a>plateau<span class="op">.</span><span class="fu">deplacerJoueur</span><span class="op">(-</span><span class="dv">1</span><span class="op">,</span> <span class="dv">0</span><span class="op">);</span></span>
+<span id="cb6-6"><a href="#cb6-6"></a>plateau<span class="op">.</span><span class="fu">afficher</span><span class="op">();</span></span>
+<span id="cb6-7"><a href="#cb6-7"></a><span class="co">// à droite</span></span>
+<span id="cb6-8"><a href="#cb6-8"></a>plateau<span class="op">.</span><span class="fu">deplacerJoueur</span><span class="op">(</span><span class="dv">0</span><span class="op">,</span> <span class="dv">1</span><span class="op">);</span></span>
+<span id="cb6-9"><a href="#cb6-9"></a>plateau<span class="op">.</span><span class="fu">afficher</span><span class="op">();</span></span>
+<span id="cb6-10"><a href="#cb6-10"></a><span class="co">// en bas</span></span>
+<span id="cb6-11"><a href="#cb6-11"></a>plateau<span class="op">.</span><span class="fu">deplacerJoueur</span><span class="op">(+</span><span class="dv">1</span><span class="op">,</span> <span class="dv">0</span><span class="op">);</span></span>
+<span id="cb6-12"><a href="#cb6-12"></a>plateau<span class="op">.</span><span class="fu">afficher</span><span class="op">();</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</section>
+<section id="déplacement-au-clavier" class="level2" data-number="4.5">
+<h2 data-number="4.5" class="anchored" data-anchor-id="déplacement-au-clavier"><span class="header-section-number">4.5</span> Déplacement au clavier</h2>
+<p>Nous allons ajouter de l’interactivité en permettant à l’utilisateur de déplacer le personnage en utilisant le clavier. Sur un clavier AZERTY, les touches utilisés seront :</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Touche</th>
+<th>Déplacement</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>z</td>
+<td>haut</td>
+</tr>
+<tr class="even">
+<td>q</td>
+<td>gauche</td>
+</tr>
+<tr class="odd">
+<td>s</td>
+<td>bas</td>
+</tr>
+<tr class="even">
+<td>d</td>
+<td>droite</td>
+</tr>
+<tr class="odd">
+<td>x</td>
+<td>quitter le jeu</td>
+</tr>
+</tbody>
+</table>
+<ol type="1">
+<li>Dans <code>JeuMain</code>, utilisez la classe <code>Scanner</code> pour demander à l’utilisateur de saisir un déplacement, puis déplacez le joueur dans la grille.</li>
+<li>Mettre ce code dans une boucle qui se termine lorsque l’utilisateur saisit <code>x</code>.</li>
+</ol>
+</section>
+<section id="afficher-des-ennemis" class="level2" data-number="4.6">
+<h2 data-number="4.6" class="anchored" data-anchor-id="afficher-des-ennemis"><span class="header-section-number">4.6</span> Afficher des Ennemis</h2>
+<p>Pour rendre le jeu un peu plus intéressant, nous allons ajouter des ennemis qu’il va falloir éviter. Les ennemis vont se déplacer aléatoirement. En cas de collision, le joueur perd la partie.</p>
+<ol type="1">
+<li>Dans la classe Plateau, ajoutez un tableau d’<code>ennemis</code>.</li>
+<li>Initialisez un certain nombre d’ennemis dans le constructeur, avec des positions arbitraires.</li>
+<li>Implémentez une méthode <code>private void placerPersonnage(Personnage personnage)</code> qui va placer un personnage (joueur ou ennemi) sur la grille.</li>
+<li>Modifiez le constructeur pour placer le joueur et les ennemis en utilisant la méthode <code>placerPersonnage</code>.</li>
+<li>Testez votre programme.</li>
+</ol>
+</section>
+<section id="faire-bouger-les-ennemis" class="level2" data-number="4.7">
+<h2 data-number="4.7" class="anchored" data-anchor-id="faire-bouger-les-ennemis"><span class="header-section-number">4.7</span> Faire bouger les ennemis</h2>
+<p>Nous allons maintenant faire bouger les ennemis aléatoirement. Dans la classe <code>Plateau</code>:</p>
+<ol type="1">
+<li>Implémentez la méthode <code>private int getRandomNumber(int max)</code> qui va renvoyer un entier aléatoire <code>n</code> avec <code>0 &lt;= n &lt; max</code>. Vous devrez utiliser la méthode du JDK <code>Math.random()</code></li>
+<li>Implémentez <code>public void deplacerPersonnage(Personnage personnage, int dligne, int dcolonne)</code> qui pourra être appelée pour déplacer avec le joueur ou les ennemis. Modifiez <code>deplacerJoueur</code> pour appeler cette nouvelle méthode.</li>
+<li>Implémentez une méthode <code>public void deplacerEnnemi(Personnage ennemi)</code> qui va aléatoirement déplacer un ennemi. Vous devrez tirer un nombre au hasard, et en fonction du résultat déplacer à gauche, bas, haut, droite, ou pas du tout.</li>
+<li>Implémentez une méthode <code>public void deplacerEnnemis()</code>, qui va déplacer tous les ennemis.</li>
+<li>Modifiez <code>JeuMain</code> pour appeler notre nouvelle méthode <code>deplacerEnnemis()</code> et testez si elle fonctionne comme attendu.</li>
+</ol>
+</section>
+<section id="détection-de-collision" class="level2" data-number="4.8">
+<h2 data-number="4.8" class="anchored" data-anchor-id="détection-de-collision"><span class="header-section-number">4.8</span> Détection de collision</h2>
+<p>Afin de déterminer si la partie est perdue, il faut détecter si le joueur rencontre un ennemi.</p>
+<ol type="1">
+<li>Dans la classe <code>Personnage</code>, implémentez une méthode <code>public boolean memeCase(Personnage autre)</code> qui renvoie true si <code>autre</code> est sur la même case que <code>this</code>.</li>
+<li>Dans la classe <code>Plateau</code>, ajoutez une méthode <code>public boolean detecterCollision()</code> qui renvoie true si le <code>joueur</code> est sur la même case qu’un ennemi.</li>
+<li>Modifiez <code>JeuMain</code> pour terminer le jeu et afficher un message si le joueur rencontre un ennemi.</li>
+</ol>
+</section>
+<section id="idées-daméliorations" class="level2" data-number="4.9">
+<h2 data-number="4.9" class="anchored" data-anchor-id="idées-daméliorations"><span class="header-section-number">4.9</span> Idées d’améliorations</h2>
+<p>Si il vous reste du temps, vous pouvez améliorer ce jeu de plusieurs manières:</p>
+<ul>
+<li>ajouter des obstacles</li>
+<li>ajouter des <code>pointsDeVie</code> à la classe <code>Personnage</code> pour ne pas mourir immédiatement.</li>
+<li>permettre d’attaquer les ennemis. Les ennemis peuvent aussi avoir des points de vie.</li>
+<li>ajouter des armes sur le plateau. Chaque arme a un attribut <code>pointsAttaque</code> qui fait perdre plus ou moins de points de vie.</li>
+<li>rendre les ennemis plus intelligents: ils doivent se diriger vers le joueur.</li>
+</ul>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Pour effacer la console après chaque saisie, vous pouvez utiliser le code suivant:</p>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb7"><pre class="sourceCode numberSource java number-lines code-with-copy"><code class="sourceCode java"><span id="cb7-1"><a href="#cb7-1"></a><span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">print</span><span class="op">(</span><span class="st">"</span><span class="sc">\033</span><span class="st">[H</span><span class="sc">\033</span><span class="st">[2J"</span><span class="op">);</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a><span class="bu">System</span><span class="op">.</span><span class="fu">out</span><span class="op">.</span><span class="fu">flush</span><span class="op">();</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p>Par contre cela ne fonctionne pas dans la console d’IntelliJ. Il faut lancer le programme depuis une ligne de commande windows.</p>
+</div>
+</div>
+<!-- TODO
+faire le début du TP après les slides JDK. 
+-->
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
