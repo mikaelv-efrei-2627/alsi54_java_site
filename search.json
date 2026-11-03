@@ -802,56 +802,88 @@
     "href": "tp2.html",
     "title": "TP2 - Gestion de magasin / de bibliothèque",
     "section": "",
-    "text": "Après avoir cliqué sur le lien GitHub classroom, votre repository GitHub est créé. Vous devez :\n\ncloner le repo localement : git clone &lt;colle url de votre repo&gt;\nouvrir le dossier cloné alsi54-java-tp2-ZZZ avec votre IDE\nvérifier que les tests s’exécutent correctement :\n\naller dans src/test/java/magasin, clic-droit -&gt; Run Tests"
+    "text": "Après avoir cliqué sur le lien GitHub classroom, votre repository GitHub est créé. Vous devez :\n\ncloner le repo localement : git clone &lt;colle url de votre repo&gt;\nouvrir le dossier cloné alsi54-java-tp2-ZZZ avec votre IDE\nvérifier que les tests s’exécutent correctement :\n\naller dans src/test/java/magasin, clic-droit -&gt; Run Tests",
+    "crumbs": [
+      "TPs",
+      "TP2 - Gestion de magasin / de bibliothèque"
+    ]
   },
   {
     "objectID": "tp2.html#organisation-des-fichiers-dans-un-package",
     "href": "tp2.html#organisation-des-fichiers-dans-un-package",
     "title": "TP2 - Gestion de magasin / de bibliothèque",
     "section": "2.1 Organisation des fichiers dans un package",
-    "text": "2.1 Organisation des fichiers dans un package\n\nCréez un package nommé magasin.\nDans ce package, créez les classes suivantes :\n\nProduit.java\nClient.java\nPanier.java\nCommande.java\nMagasin.java\nMain.java"
+    "text": "2.1 Organisation des fichiers dans un package\n\nCréez un package nommé magasin.\nDans ce package, créez les classes suivantes :\n\nProduit.java\nClient.java\nPanier.java\nCommande.java\nMagasin.java\nMain.java",
+    "crumbs": [
+      "TPs",
+      "TP2 - Gestion de magasin / de bibliothèque"
+    ]
   },
   {
     "objectID": "tp2.html#classes-à-créer",
     "href": "tp2.html#classes-à-créer",
     "title": "TP2 - Gestion de magasin / de bibliothèque",
     "section": "2.2 Classes à créer",
-    "text": "2.2 Classes à créer\n\n2.2.1 Produit\nClasse représentant un produit\n\nAttributs : id, nom, prix\nMéthodes :\n\nConstructeur pour initialiser les attributs.\nGetters et setters pour accéder et modifier les attributs.\nafficherDetails() pour afficher les détails du produit.\n\n\n\n\n2.2.2 Client\nClasse représentant un client\n\nAttributs : nom, email\nMéthodes :\n\nConstructeur pour initialiser les attributs.\nGetters et setters pour accéder et modifier les attributs.\nafficherDetails() pour afficher les informations du client.\n\n\n\n\n2.2.3 Panier\nClasse représentant le panier d’un client\n\nAttributs : produits (liste des produits ajoutés au panier)\nMéthodes :\n\najouterProduit(Produit produit) pour ajouter un produit au panier.\nsupprimerProduit(Produit produit) pour supprimer un produit du panier.\nafficher() pour afficher les produits dans le panier.\ncalculerTotal() pour calculer le montant total du panier.\nvider() pour supprimer tous les produits du panier.\n\n\n\n\n2.2.4 Commande\nClasse représentant une commande passée par un client\n\nAttributs : client, produitsCommandes, total, dateHeure (de type java.time.LocalDateTime)\nMéthodes :\n\nConstructeur pour initialiser une commande avec un Client et un Panier.\n\nattention à bien copier les ArrayList !\n\nafficherDetails() pour afficher les informations sur la commande.\n\n\n\n\n2.2.5 Magasin\nClasse représentant le magasin\n\nAttributs : produits (liste des produits disponibles dans le magasin)\nMéthodes :\n\najouterProduit(Produit produit) pour ajouter un produit au magasin.\nafficherProduitsDisponibles() pour afficher les produits disponibles.\ntrouverProduitParId(int id) pour trouver un produit par son id.\n\n\n\n\n2.2.6 Main\nClasse principale contenant la méthode main()\n\nInitialise le magasin avec des produits prédéfinis, par exemple une souris, un clavier, écouteurs, …:\nDemande le nom et email du client\nAfficher le menu interactif. Il doit permettre les fonctions suivantes :\n\nCréation des clients, des produits et des magasins.\nInteraction avec le client pour afficher les produits, ajouter au panier et passer une commande.\n\nle passage de commande vide le panier. Exemple de menu :\n\n\n--- Menu Magasin ---\n1. Afficher les produits disponibles\n2. Ajouter un produit au panier\n3. Afficher le panier\n4. Passer la commande\n5. Afficher les commandes\n6. Quitter"
+    "text": "2.2 Classes à créer\n\n2.2.1 Produit\nClasse représentant un produit\n\nAttributs : id, nom, prix\nMéthodes :\n\nConstructeur pour initialiser les attributs.\nGetters et setters pour accéder et modifier les attributs.\nafficherDetails() pour afficher les détails du produit.\n\n\n\n\n2.2.2 Client\nClasse représentant un client\n\nAttributs : nom, email\nMéthodes :\n\nConstructeur pour initialiser les attributs.\nGetters et setters pour accéder et modifier les attributs.\nafficherDetails() pour afficher les informations du client.\n\n\n\n\n2.2.3 Panier\nClasse représentant le panier d’un client\n\nAttributs : produits (liste des produits ajoutés au panier)\nMéthodes :\n\najouterProduit(Produit produit) pour ajouter un produit au panier.\nsupprimerProduit(Produit produit) pour supprimer un produit du panier.\nafficher() pour afficher les produits dans le panier.\ncalculerTotal() pour calculer le montant total du panier.\nvider() pour supprimer tous les produits du panier.\n\n\n\n\n2.2.4 Commande\nClasse représentant une commande passée par un client\n\nAttributs : client, produitsCommandes, total, dateHeure (de type java.time.LocalDateTime)\nMéthodes :\n\nConstructeur pour initialiser une commande avec un Client et un Panier.\n\nattention à bien copier les ArrayList !\n\nafficherDetails() pour afficher les informations sur la commande.\n\n\n\n\n2.2.5 Magasin\nClasse représentant le magasin\n\nAttributs : produits (liste des produits disponibles dans le magasin)\nMéthodes :\n\najouterProduit(Produit produit) pour ajouter un produit au magasin.\nafficherProduitsDisponibles() pour afficher les produits disponibles.\ntrouverProduitParId(int id) pour trouver un produit par son id.\n\n\n\n\n2.2.6 Main\nClasse principale contenant la méthode main()\n\nInitialise le magasin avec des produits prédéfinis, par exemple une souris, un clavier, écouteurs, …:\nDemande le nom et email du client\nAfficher le menu interactif. Il doit permettre les fonctions suivantes :\n\nCréation des clients, des produits et des magasins.\nInteraction avec le client pour afficher les produits, ajouter au panier et passer une commande.\n\nle passage de commande vide le panier. Exemple de menu :\n\n\n--- Menu Magasin ---\n1. Afficher les produits disponibles\n2. Ajouter un produit au panier\n3. Afficher le panier\n4. Passer la commande\n5. Afficher les commandes\n6. Quitter",
+    "crumbs": [
+      "TPs",
+      "TP2 - Gestion de magasin / de bibliothèque"
+    ]
   },
   {
     "objectID": "tp2.html#partie-1-classe-livre",
     "href": "tp2.html#partie-1-classe-livre",
     "title": "TP2 - Gestion de magasin / de bibliothèque",
     "section": "3.1 Partie 1 : Classe Livre",
-    "text": "3.1 Partie 1 : Classe Livre\nCréez une classe Livre qui représente un livre avec les attributs suivants :\n\ntitre : Le titre du livre (chaîne de caractères).\ncode : Le code unique du livre (entier).\nauteur : L’auteur du livre (chaîne de caractères).\nnbPages : Le nombre de pages du livre (entier).\nanneeEdition : L’année d’édition du livre (entier).\n\nExigences :\n\nImplémentez un constructeur qui permet d’initialiser tous ces attributs lors de la création d’un livre.\nImplémentez les méthodes getters et setters pour accéder à ces attributs.\nImplémentez une méthode toString() pour afficher les informations d’un livre dans un format lisible."
+    "text": "3.1 Partie 1 : Classe Livre\nCréez une classe Livre qui représente un livre avec les attributs suivants :\n\ntitre : Le titre du livre (chaîne de caractères).\ncode : Le code unique du livre (entier).\nauteur : L’auteur du livre (chaîne de caractères).\nnbPages : Le nombre de pages du livre (entier).\nanneeEdition : L’année d’édition du livre (entier).\n\nExigences :\n\nImplémentez un constructeur qui permet d’initialiser tous ces attributs lors de la création d’un livre.\nImplémentez les méthodes getters et setters pour accéder à ces attributs.\nImplémentez une méthode toString() pour afficher les informations d’un livre dans un format lisible.",
+    "crumbs": [
+      "TPs",
+      "TP2 - Gestion de magasin / de bibliothèque"
+    ]
   },
   {
     "objectID": "tp2.html#partie-2-classe-etagere",
     "href": "tp2.html#partie-2-classe-etagere",
     "title": "TP2 - Gestion de magasin / de bibliothèque",
     "section": "3.2 Partie 2 : Classe Etagere",
-    "text": "3.2 Partie 2 : Classe Etagere\nCréez une classe Etagere qui représente une étagère dans une bibliothèque. Cette classe doit contenir :\n\ncode : Un code unique pour identifier l’étagère (entier).\ndomaine : Le domaine des livres sur cette étagère (chaîne de caractères). Par exemple : “Littérature”, “Chimie”, “Informatique”.\ncapacite: nombre max de livres à mettre dans cette étagère\nlivres : Un ArrayList de livres placés sur cette étagère.\n\n\nAjout d’un livre :\n\nImplémentez une méthode ajouterLivre(Livre livre) pour ajouter un livre à l’étagère.\n\nSuppression d’un livre :\n\nImplémentez une méthode supprimerLivre(int code) pour supprimer un livre en utilisant son code unique.\n\nSomme des pages :\n\nImplémentez une méthode sommePages() pour calculer et retourner la somme du nombre total de pages de tous les livres de l’étagère.\n\nRecherche d’un livre par titre :\n\nImplémentez une méthode chercherLivreParTitre(String titre) qui retourne le code du livre recherché. Si le livre n’existe pas, retournez un message indiquant que le livre n’a pas été trouvé.\n\nRecherche des petits livres :\n\nImplémentez une méthode chercherPetitsLivres(int seuil) qui affiche tous les livres ayant un nombre de pages inférieur à un seuil donné.\n\nAffichage des nouveaux livres :\n\nImplémentez une méthode afficherNouveauxLivres(int anneeActuelle) qui affiche les titres et codes des livres édités durant l’année en cours.\n\nChanger le nombre de pages d’un livre :\n\nImplémentez une méthode changerNbPages(int code, int nbPages) pour modifier le nombre de pages d’un livre identifié par son code.\n\nAffichage des livres :\n\nImplémentez une méthode afficherLivres() qui affiche les détails de tous les livres présents sur l’étagère.\n\nTrie:\n\nTrier les livres par nombre de pages\n\nRecherche :\n\nla méthode chercherTitresParAuteur, qui retourne un tableau de chaînes de caractères contenant les titres des livres d’un auteur spécifié."
+    "text": "3.2 Partie 2 : Classe Etagere\nCréez une classe Etagere qui représente une étagère dans une bibliothèque. Cette classe doit contenir :\n\ncode : Un code unique pour identifier l’étagère (entier).\ndomaine : Le domaine des livres sur cette étagère (chaîne de caractères). Par exemple : “Littérature”, “Chimie”, “Informatique”.\ncapacite: nombre max de livres à mettre dans cette étagère\nlivres : Un ArrayList de livres placés sur cette étagère.\n\n\nAjout d’un livre :\n\nImplémentez une méthode ajouterLivre(Livre livre) pour ajouter un livre à l’étagère.\n\nSuppression d’un livre :\n\nImplémentez une méthode supprimerLivre(int code) pour supprimer un livre en utilisant son code unique.\n\nSomme des pages :\n\nImplémentez une méthode sommePages() pour calculer et retourner la somme du nombre total de pages de tous les livres de l’étagère.\n\nRecherche d’un livre par titre :\n\nImplémentez une méthode chercherLivreParTitre(String titre) qui retourne le code du livre recherché. Si le livre n’existe pas, retournez un message indiquant que le livre n’a pas été trouvé.\n\nRecherche des petits livres :\n\nImplémentez une méthode chercherPetitsLivres(int seuil) qui affiche tous les livres ayant un nombre de pages inférieur à un seuil donné.\n\nAffichage des nouveaux livres :\n\nImplémentez une méthode afficherNouveauxLivres(int anneeActuelle) qui affiche les titres et codes des livres édités durant l’année en cours.\n\nChanger le nombre de pages d’un livre :\n\nImplémentez une méthode changerNbPages(int code, int nbPages) pour modifier le nombre de pages d’un livre identifié par son code.\n\nAffichage des livres :\n\nImplémentez une méthode afficherLivres() qui affiche les détails de tous les livres présents sur l’étagère.\n\nTrie:\n\nTrier les livres par nombre de pages\n\nRecherche :\n\nla méthode chercherTitresParAuteur, qui retourne un tableau de chaînes de caractères contenant les titres des livres d’un auteur spécifié.",
+    "crumbs": [
+      "TPs",
+      "TP2 - Gestion de magasin / de bibliothèque"
+    ]
   },
   {
     "objectID": "tp2.html#partie-3-programme-principal",
     "href": "tp2.html#partie-3-programme-principal",
     "title": "TP2 - Gestion de magasin / de bibliothèque",
     "section": "3.3 Partie 3 : Programme principal",
-    "text": "3.3 Partie 3 : Programme principal\nCréez un programme dans une classe BibliothequeTest qui permet de :\n\nCréer une étagère pour un domaine donné (par exemple, “Littérature”).\nAjouter plusieurs livres à cette étagère. (ajouter les livres de l’exemple d’utilisation ci-dessous)\nUtiliser les différentes méthodes de la classe Etagere pour :\n\nAfficher les livres présents sur l’étagère.\nCalculer et afficher la somme totale des pages.\nRechercher un livre par son titre.\nAfficher les livres ayant un nombre de pages inférieur à un seuil donné.\nAfficher les titres et codes des livres édités durant l’année en cours.\nModifier le nombre de pages d’un livre en fonction de son code.\nSupprimer un livre par son code.\n\nAfficher de nouveau la liste des livres après suppression."
+    "text": "3.3 Partie 3 : Programme principal\nCréez un programme dans une classe BibliothequeTest qui permet de :\n\nCréer une étagère pour un domaine donné (par exemple, “Littérature”).\nAjouter plusieurs livres à cette étagère. (ajouter les livres de l’exemple d’utilisation ci-dessous)\nUtiliser les différentes méthodes de la classe Etagere pour :\n\nAfficher les livres présents sur l’étagère.\nCalculer et afficher la somme totale des pages.\nRechercher un livre par son titre.\nAfficher les livres ayant un nombre de pages inférieur à un seuil donné.\nAfficher les titres et codes des livres édités durant l’année en cours.\nModifier le nombre de pages d’un livre en fonction de son code.\nSupprimer un livre par son code.\n\nAfficher de nouveau la liste des livres après suppression.",
+    "crumbs": [
+      "TPs",
+      "TP2 - Gestion de magasin / de bibliothèque"
+    ]
   },
   {
     "objectID": "tp2.html#exemple-dutilisation",
     "href": "tp2.html#exemple-dutilisation",
     "title": "TP2 - Gestion de magasin / de bibliothèque",
     "section": "3.4 Exemple d’utilisation",
-    "text": "3.4 Exemple d’utilisation\nCréez deux étagères :\n\nUne pour le domaine “Chimie”.\nUne pour le domaine “Informatique”.\n\nLivres à ajouter :\n\nEtagère Chimie :\n\n“La chimie organique”, code : 201, auteur : John McMurry, 1200 pages, édition : 2019\n“Introduction à la chimie analytique”, code : 202, auteur : Daniel C. Harris, 800 pages, édition : 2021\n“Chimie générale”, code : 203, auteur : Raymond Chang, 1000 pages, édition : 2018\n\nEtagère Informatique :\n\n“Introduction aux algorithmes”, code : 301, auteur : Thomas H. Cormen, 1300 pages, édition : 2020\n“Design Patterns”, code : 302, auteur : Erich Gamma, 400 pages, édition : 1994\n“Java pour les débutants”, code : 303, auteur : Herbert Schildt, 700 pages, édition : 2019"
+    "text": "3.4 Exemple d’utilisation\nCréez deux étagères :\n\nUne pour le domaine “Chimie”.\nUne pour le domaine “Informatique”.\n\nLivres à ajouter :\n\nEtagère Chimie :\n\n“La chimie organique”, code : 201, auteur : John McMurry, 1200 pages, édition : 2019\n“Introduction à la chimie analytique”, code : 202, auteur : Daniel C. Harris, 800 pages, édition : 2021\n“Chimie générale”, code : 203, auteur : Raymond Chang, 1000 pages, édition : 2018\n\nEtagère Informatique :\n\n“Introduction aux algorithmes”, code : 301, auteur : Thomas H. Cormen, 1300 pages, édition : 2020\n“Design Patterns”, code : 302, auteur : Erich Gamma, 400 pages, édition : 1994\n“Java pour les débutants”, code : 303, auteur : Herbert Schildt, 700 pages, édition : 2019",
+    "crumbs": [
+      "TPs",
+      "TP2 - Gestion de magasin / de bibliothèque"
+    ]
   },
   {
     "objectID": "tp2.html#partie-4-lecture-de-fichier-csv",
     "href": "tp2.html#partie-4-lecture-de-fichier-csv",
     "title": "TP2 - Gestion de magasin / de bibliothèque",
     "section": "3.5 Partie 4: Lecture de fichier csv",
-    "text": "3.5 Partie 4: Lecture de fichier csv\nCréez une classe Bibliothèque avec :\n\nune liste d’étagères\nune méthode charger(File f) qui va lire un fichier .csv contenant les données des livres, et les ajouter à la liste de livres de la bonne étagère.\n\nVous créerez un fichier livres.csv contenant les données suivantes :\ntitre,code,auteur,nbPages,anneeEdition,étagère\nLa chimie organique,201,John McMurry,1200,2019,Chimie\nIntroduction à la chimie analytique,202,Daniel C. Harris,800,2021,Chimie\nChimie générale,203,Raymond Chang,1000,2018,Chimie\nIntroduction aux algorithmes,301,Thomas H. Cormen,1300,2020,Informatique\nDesign Patterns,302,Erich Gamma,400,1994,Informatique\nJava pour les débutants,303,Herbert Schildt,700,2019,Informatique"
+    "text": "3.5 Partie 4: Lecture de fichier csv\nCréez une classe Bibliothèque avec :\n\nune liste d’étagères\nune méthode charger(File f) qui va lire un fichier .csv contenant les données des livres, et les ajouter à la liste de livres de la bonne étagère.\n\nVous créerez un fichier livres.csv contenant les données suivantes :\ntitre,code,auteur,nbPages,anneeEdition,étagère\nLa chimie organique,201,John McMurry,1200,2019,Chimie\nIntroduction à la chimie analytique,202,Daniel C. Harris,800,2021,Chimie\nChimie générale,203,Raymond Chang,1000,2018,Chimie\nIntroduction aux algorithmes,301,Thomas H. Cormen,1300,2020,Informatique\nDesign Patterns,302,Erich Gamma,400,1994,Informatique\nJava pour les débutants,303,Herbert Schildt,700,2019,Informatique",
+    "crumbs": [
+      "TPs",
+      "TP2 - Gestion de magasin / de bibliothèque"
+    ]
   },
   {
     "objectID": "cm4-slides.html#happy-path",
@@ -1630,182 +1662,286 @@
     "href": "cm2.html",
     "title": "CM2 - Encapsulation, immuabilité, tableaux",
     "section": "",
-    "text": "L’encapsulation est le principe qui consiste à limiter la visibilité de la structure d’une classe\nCette restriction peut s’appliquer aux :\n\nattributs\nméthodes\n\nencapsulation totale: masquer complètement les attributs aux éléments en dehors de la classe\n\n\n\n\n\nCacher la complexité de l’objet\nRestreint l’accès à certaines méthodes et attributs\nPermet la modification de certaines méthodes sans perturber l’utilisateur\nDéfinition de droits d’accès avec les mots clés public, protected, private ou rien du tout (modificateur par défaut).\n\n\n\n\nDevant une classe, un attribut ou une méthode, nous pouvons utiliser les modificateurs suivants:\n\nprivate: visibilité limitée à la classe\nprotected : visibilité limitée aux sous-classes et aux classes du même package.\npublic : visibilité pour toutes les classes et tous les packages\nnéant : visibilité limitée aux membres d’un même package\n\n\n\n\n\n\n\nModifier\nClasse\nPackage\nSous-classe\nAutres\n\n\n\n\npublic\nO\nO\nO\nO\n\n\nprotected\nO\nO\nO\nN\n\n\nnéant\nO\nO\nN\nN\n\n\nprivate\nO\nN\nN\nN\n\n\n\n\nEn pratique:\n\nIl est rare d’utiliser le modificateur par défaut.\nPour les attributs, il est déconseillé d’utiliser public pour respecter le principe d’encapsulation\n\n\n\n\n\npublic class Point {\n    // attributs privés. \n    // Leur accès est contrôlé avec les getter/setters\n    private double x;\n    private double y;\n\n    public Point(double x, double y) {\n        this.x = x;\n        this.y = y;\n    }\n\n    public double getX() {\n        return x;\n    }\n\n    protected void setX(double x) {\n        this.x = x;\n    }\n\n    public double getY() {\n        return y;\n    }\n\n    protected void setY(double x) {\n        this.x = x;\n    }\n\n    /* Fait pivoter le point d'un angle donné en radians */\n    public void rotate(double angle) {\n        // Calcul des coordonnées polaires à partir des coordonnées cartésiennes\n        double r = Math.sqrt(x * x + y * y);\n        double theta = Math.atan2(y, x);\n\n        // Mise à jour de l'angle\n        theta += angle;\n\n        // Recalcul des coordonnées cartésiennes après rotation\n        this.x = r * Math.cos(theta);\n        this.y = r * Math.sin(theta);\n    }\n}\n\n\n\npublic class Point {\n    // Coordonnées polaires\n    private double r;     // distance radiale\n    private double theta; // angle en radians\n\n    // Constructeur prenant des coordonnées cartésiennes\n    public Point(double x, double y) {\n        this.r = Math.sqrt(x * x + y * y);\n        this.theta = Math.atan2(y, x);\n    }\n\n    public double getX() {\n        return r * Math.cos(theta);\n    }\n\n    public double getY() {\n        return r * Math.sin(theta);\n    }\n\n    /* Fait pivoter le point d'un angle donné en radians */\n    public void rotate(double angle) {\n        this.theta += angle;\n    }\n}\n\nLes méthodes publiques de la classe restent identiques: on utilise toujours les coordonnées cartésiennes.\nC’est le principe d’encapsulation: la structure interne de la classe n’est pas visible de l’extérieur.\n\n\n\n\nAfin de contrôler l’accès aux attributs d’une classe, il est fréquent de déclarer des accesseurs.\n\nUn accesseur en lecture sera nommé get + nom de l’attribut, ou pour les boolean: is+ nom de l’attribut\nUn accesseur en écriture sera nommé set + nom de l’attribut\n\nprivate String attribut;\n\npublic String getAttribut() {\n    return attribut;\n}\n\nprotected void setAttribut(String att) {\n    this.attribut = att;\n}\n\n\n\n\nne pas implémenter systématiquement\n\ncela expose la structure interne, en particulier si le setter est public\n\nimplémenter si nécessaire\n\naccès contrôlé avec visibilité\nun setter peut vérifier qu’une valeur est valide\nun getter peut valider ou transformer une valeur avant de la retourner\npour exposer certaines propriétés à d’autres classes\n\ngetters/setters intelligents\n\nméthodes d’accès métier qui encapsulent la logique d’accès\nsetSalary =&gt; augmenterSalaire(double pourcentage)\n\nutiliser les propriétés immuables (voir ci-dessous)"
+    "text": "L’encapsulation est le principe qui consiste à limiter la visibilité de la structure d’une classe\nCette restriction peut s’appliquer aux :\n\nattributs\nméthodes\n\nencapsulation totale: masquer complètement les attributs aux éléments en dehors de la classe\n\n\n\n\n\nCacher la complexité de l’objet\nRestreint l’accès à certaines méthodes et attributs\nPermet la modification de certaines méthodes sans perturber l’utilisateur\nDéfinition de droits d’accès avec les mots clés public, protected, private ou rien du tout (modificateur par défaut).\n\n\n\n\nDevant une classe, un attribut ou une méthode, nous pouvons utiliser les modificateurs suivants:\n\nprivate: visibilité limitée à la classe\nprotected : visibilité limitée aux sous-classes et aux classes du même package.\npublic : visibilité pour toutes les classes et tous les packages\nnéant : visibilité limitée aux membres d’un même package\n\n\n\n\n\n\n\nModifier\nClasse\nPackage\nSous-classe\nAutres\n\n\n\n\npublic\nO\nO\nO\nO\n\n\nprotected\nO\nO\nO\nN\n\n\nnéant\nO\nO\nN\nN\n\n\nprivate\nO\nN\nN\nN\n\n\n\n\nEn pratique:\n\nIl est rare d’utiliser le modificateur par défaut.\nPour les attributs, il est déconseillé d’utiliser public pour respecter le principe d’encapsulation\n\n\n\n\n\npublic class Point {\n    // attributs privés. \n    // Leur accès est contrôlé avec les getter/setters\n    private double x;\n    private double y;\n\n    public Point(double x, double y) {\n        this.x = x;\n        this.y = y;\n    }\n\n    public double getX() {\n        return x;\n    }\n\n    protected void setX(double x) {\n        this.x = x;\n    }\n\n    public double getY() {\n        return y;\n    }\n\n    protected void setY(double x) {\n        this.x = x;\n    }\n\n    /* Fait pivoter le point d'un angle donné en radians */\n    public void rotate(double angle) {\n        // Calcul des coordonnées polaires à partir des coordonnées cartésiennes\n        double r = Math.sqrt(x * x + y * y);\n        double theta = Math.atan2(y, x);\n\n        // Mise à jour de l'angle\n        theta += angle;\n\n        // Recalcul des coordonnées cartésiennes après rotation\n        this.x = r * Math.cos(theta);\n        this.y = r * Math.sin(theta);\n    }\n}\n\n\n\npublic class Point {\n    // Coordonnées polaires\n    private double r;     // distance radiale\n    private double theta; // angle en radians\n\n    // Constructeur prenant des coordonnées cartésiennes\n    public Point(double x, double y) {\n        this.r = Math.sqrt(x * x + y * y);\n        this.theta = Math.atan2(y, x);\n    }\n\n    public double getX() {\n        return r * Math.cos(theta);\n    }\n\n    public double getY() {\n        return r * Math.sin(theta);\n    }\n\n    /* Fait pivoter le point d'un angle donné en radians */\n    public void rotate(double angle) {\n        this.theta += angle;\n    }\n}\n\nLes méthodes publiques de la classe restent identiques: on utilise toujours les coordonnées cartésiennes.\nC’est le principe d’encapsulation: la structure interne de la classe n’est pas visible de l’extérieur.\n\n\n\n\nAfin de contrôler l’accès aux attributs d’une classe, il est fréquent de déclarer des accesseurs.\n\nUn accesseur en lecture sera nommé get + nom de l’attribut, ou pour les boolean: is+ nom de l’attribut\nUn accesseur en écriture sera nommé set + nom de l’attribut\n\nprivate String attribut;\n\npublic String getAttribut() {\n    return attribut;\n}\n\nprotected void setAttribut(String att) {\n    this.attribut = att;\n}\n\n\n\n\nne pas implémenter systématiquement\n\ncela expose la structure interne, en particulier si le setter est public\n\nimplémenter si nécessaire\n\naccès contrôlé avec visibilité\nun setter peut vérifier qu’une valeur est valide\nun getter peut valider ou transformer une valeur avant de la retourner\npour exposer certaines propriétés à d’autres classes\n\ngetters/setters intelligents\n\nméthodes d’accès métier qui encapsulent la logique d’accès\nsetSalary =&gt; augmenterSalaire(double pourcentage)\n\nutiliser les propriétés immuables (voir ci-dessous)",
+    "crumbs": [
+      "Cours",
+      "CM2 - Encapsulation, immuabilité, tableaux"
+    ]
   },
   {
     "objectID": "cm2.html#encapsulation",
     "href": "cm2.html#encapsulation",
     "title": "CM2 - Encapsulation, immuabilité, tableaux",
     "section": "",
-    "text": "L’encapsulation est le principe qui consiste à limiter la visibilité de la structure d’une classe\nCette restriction peut s’appliquer aux :\n\nattributs\nméthodes\n\nencapsulation totale: masquer complètement les attributs aux éléments en dehors de la classe"
+    "text": "L’encapsulation est le principe qui consiste à limiter la visibilité de la structure d’une classe\nCette restriction peut s’appliquer aux :\n\nattributs\nméthodes\n\nencapsulation totale: masquer complètement les attributs aux éléments en dehors de la classe",
+    "crumbs": [
+      "Cours",
+      "CM2 - Encapsulation, immuabilité, tableaux"
+    ]
   },
   {
     "objectID": "cm2.html#visibilité",
     "href": "cm2.html#visibilité",
     "title": "CM2 - Encapsulation, immuabilité, tableaux",
     "section": "",
-    "text": "Cacher la complexité de l’objet\nRestreint l’accès à certaines méthodes et attributs\nPermet la modification de certaines méthodes sans perturber l’utilisateur\nDéfinition de droits d’accès avec les mots clés public, protected, private ou rien du tout (modificateur par défaut)."
+    "text": "Cacher la complexité de l’objet\nRestreint l’accès à certaines méthodes et attributs\nPermet la modification de certaines méthodes sans perturber l’utilisateur\nDéfinition de droits d’accès avec les mots clés public, protected, private ou rien du tout (modificateur par défaut).",
+    "crumbs": [
+      "Cours",
+      "CM2 - Encapsulation, immuabilité, tableaux"
+    ]
   },
   {
     "objectID": "cm2.html#les-modificateurs",
     "href": "cm2.html#les-modificateurs",
     "title": "CM2 - Encapsulation, immuabilité, tableaux",
     "section": "",
-    "text": "Devant une classe, un attribut ou une méthode, nous pouvons utiliser les modificateurs suivants:\n\nprivate: visibilité limitée à la classe\nprotected : visibilité limitée aux sous-classes et aux classes du même package.\npublic : visibilité pour toutes les classes et tous les packages\nnéant : visibilité limitée aux membres d’un même package"
+    "text": "Devant une classe, un attribut ou une méthode, nous pouvons utiliser les modificateurs suivants:\n\nprivate: visibilité limitée à la classe\nprotected : visibilité limitée aux sous-classes et aux classes du même package.\npublic : visibilité pour toutes les classes et tous les packages\nnéant : visibilité limitée aux membres d’un même package",
+    "crumbs": [
+      "Cours",
+      "CM2 - Encapsulation, immuabilité, tableaux"
+    ]
   },
   {
     "objectID": "cm2.html#les-modificateurs-résumé",
     "href": "cm2.html#les-modificateurs-résumé",
     "title": "CM2 - Encapsulation, immuabilité, tableaux",
     "section": "",
-    "text": "Modifier\nClasse\nPackage\nSous-classe\nAutres\n\n\n\n\npublic\nO\nO\nO\nO\n\n\nprotected\nO\nO\nO\nN\n\n\nnéant\nO\nO\nN\nN\n\n\nprivate\nO\nN\nN\nN\n\n\n\n\nEn pratique:\n\nIl est rare d’utiliser le modificateur par défaut.\nPour les attributs, il est déconseillé d’utiliser public pour respecter le principe d’encapsulation"
+    "text": "Modifier\nClasse\nPackage\nSous-classe\nAutres\n\n\n\n\npublic\nO\nO\nO\nO\n\n\nprotected\nO\nO\nO\nN\n\n\nnéant\nO\nO\nN\nN\n\n\nprivate\nO\nN\nN\nN\n\n\n\n\nEn pratique:\n\nIl est rare d’utiliser le modificateur par défaut.\nPour les attributs, il est déconseillé d’utiliser public pour respecter le principe d’encapsulation",
+    "crumbs": [
+      "Cours",
+      "CM2 - Encapsulation, immuabilité, tableaux"
+    ]
   },
   {
     "objectID": "cm2.html#exemple-point-cartésien",
     "href": "cm2.html#exemple-point-cartésien",
     "title": "CM2 - Encapsulation, immuabilité, tableaux",
     "section": "",
-    "text": "public class Point {\n    // attributs privés. \n    // Leur accès est contrôlé avec les getter/setters\n    private double x;\n    private double y;\n\n    public Point(double x, double y) {\n        this.x = x;\n        this.y = y;\n    }\n\n    public double getX() {\n        return x;\n    }\n\n    protected void setX(double x) {\n        this.x = x;\n    }\n\n    public double getY() {\n        return y;\n    }\n\n    protected void setY(double x) {\n        this.x = x;\n    }\n\n    /* Fait pivoter le point d'un angle donné en radians */\n    public void rotate(double angle) {\n        // Calcul des coordonnées polaires à partir des coordonnées cartésiennes\n        double r = Math.sqrt(x * x + y * y);\n        double theta = Math.atan2(y, x);\n\n        // Mise à jour de l'angle\n        theta += angle;\n\n        // Recalcul des coordonnées cartésiennes après rotation\n        this.x = r * Math.cos(theta);\n        this.y = r * Math.sin(theta);\n    }\n}"
+    "text": "public class Point {\n    // attributs privés. \n    // Leur accès est contrôlé avec les getter/setters\n    private double x;\n    private double y;\n\n    public Point(double x, double y) {\n        this.x = x;\n        this.y = y;\n    }\n\n    public double getX() {\n        return x;\n    }\n\n    protected void setX(double x) {\n        this.x = x;\n    }\n\n    public double getY() {\n        return y;\n    }\n\n    protected void setY(double x) {\n        this.x = x;\n    }\n\n    /* Fait pivoter le point d'un angle donné en radians */\n    public void rotate(double angle) {\n        // Calcul des coordonnées polaires à partir des coordonnées cartésiennes\n        double r = Math.sqrt(x * x + y * y);\n        double theta = Math.atan2(y, x);\n\n        // Mise à jour de l'angle\n        theta += angle;\n\n        // Recalcul des coordonnées cartésiennes après rotation\n        this.x = r * Math.cos(theta);\n        this.y = r * Math.sin(theta);\n    }\n}",
+    "crumbs": [
+      "Cours",
+      "CM2 - Encapsulation, immuabilité, tableaux"
+    ]
   },
   {
     "objectID": "cm2.html#exemple-point-polaire",
     "href": "cm2.html#exemple-point-polaire",
     "title": "CM2 - Encapsulation, immuabilité, tableaux",
     "section": "",
-    "text": "public class Point {\n    // Coordonnées polaires\n    private double r;     // distance radiale\n    private double theta; // angle en radians\n\n    // Constructeur prenant des coordonnées cartésiennes\n    public Point(double x, double y) {\n        this.r = Math.sqrt(x * x + y * y);\n        this.theta = Math.atan2(y, x);\n    }\n\n    public double getX() {\n        return r * Math.cos(theta);\n    }\n\n    public double getY() {\n        return r * Math.sin(theta);\n    }\n\n    /* Fait pivoter le point d'un angle donné en radians */\n    public void rotate(double angle) {\n        this.theta += angle;\n    }\n}\n\nLes méthodes publiques de la classe restent identiques: on utilise toujours les coordonnées cartésiennes.\nC’est le principe d’encapsulation: la structure interne de la classe n’est pas visible de l’extérieur."
+    "text": "public class Point {\n    // Coordonnées polaires\n    private double r;     // distance radiale\n    private double theta; // angle en radians\n\n    // Constructeur prenant des coordonnées cartésiennes\n    public Point(double x, double y) {\n        this.r = Math.sqrt(x * x + y * y);\n        this.theta = Math.atan2(y, x);\n    }\n\n    public double getX() {\n        return r * Math.cos(theta);\n    }\n\n    public double getY() {\n        return r * Math.sin(theta);\n    }\n\n    /* Fait pivoter le point d'un angle donné en radians */\n    public void rotate(double angle) {\n        this.theta += angle;\n    }\n}\n\nLes méthodes publiques de la classe restent identiques: on utilise toujours les coordonnées cartésiennes.\nC’est le principe d’encapsulation: la structure interne de la classe n’est pas visible de l’extérieur.",
+    "crumbs": [
+      "Cours",
+      "CM2 - Encapsulation, immuabilité, tableaux"
+    ]
   },
   {
     "objectID": "cm2.html#getters-et-setters",
     "href": "cm2.html#getters-et-setters",
     "title": "CM2 - Encapsulation, immuabilité, tableaux",
     "section": "",
-    "text": "Afin de contrôler l’accès aux attributs d’une classe, il est fréquent de déclarer des accesseurs.\n\nUn accesseur en lecture sera nommé get + nom de l’attribut, ou pour les boolean: is+ nom de l’attribut\nUn accesseur en écriture sera nommé set + nom de l’attribut\n\nprivate String attribut;\n\npublic String getAttribut() {\n    return attribut;\n}\n\nprotected void setAttribut(String att) {\n    this.attribut = att;\n}"
+    "text": "Afin de contrôler l’accès aux attributs d’une classe, il est fréquent de déclarer des accesseurs.\n\nUn accesseur en lecture sera nommé get + nom de l’attribut, ou pour les boolean: is+ nom de l’attribut\nUn accesseur en écriture sera nommé set + nom de l’attribut\n\nprivate String attribut;\n\npublic String getAttribut() {\n    return attribut;\n}\n\nprotected void setAttribut(String att) {\n    this.attribut = att;\n}",
+    "crumbs": [
+      "Cours",
+      "CM2 - Encapsulation, immuabilité, tableaux"
+    ]
   },
   {
     "objectID": "cm2.html#getters-et-setters-bonnes-pratiques",
     "href": "cm2.html#getters-et-setters-bonnes-pratiques",
     "title": "CM2 - Encapsulation, immuabilité, tableaux",
     "section": "",
-    "text": "ne pas implémenter systématiquement\n\ncela expose la structure interne, en particulier si le setter est public\n\nimplémenter si nécessaire\n\naccès contrôlé avec visibilité\nun setter peut vérifier qu’une valeur est valide\nun getter peut valider ou transformer une valeur avant de la retourner\npour exposer certaines propriétés à d’autres classes\n\ngetters/setters intelligents\n\nméthodes d’accès métier qui encapsulent la logique d’accès\nsetSalary =&gt; augmenterSalaire(double pourcentage)\n\nutiliser les propriétés immuables (voir ci-dessous)"
+    "text": "ne pas implémenter systématiquement\n\ncela expose la structure interne, en particulier si le setter est public\n\nimplémenter si nécessaire\n\naccès contrôlé avec visibilité\nun setter peut vérifier qu’une valeur est valide\nun getter peut valider ou transformer une valeur avant de la retourner\npour exposer certaines propriétés à d’autres classes\n\ngetters/setters intelligents\n\nméthodes d’accès métier qui encapsulent la logique d’accès\nsetSalary =&gt; augmenterSalaire(double pourcentage)\n\nutiliser les propriétés immuables (voir ci-dessous)",
+    "crumbs": [
+      "Cours",
+      "CM2 - Encapsulation, immuabilité, tableaux"
+    ]
   },
   {
     "objectID": "cm2.html#final",
     "href": "cm2.html#final",
     "title": "CM2 - Encapsulation, immuabilité, tableaux",
     "section": "2.1 Final",
-    "text": "2.1 Final\nLe mot-clé final peut être placé:\n\ndevant un attribut\ndevant une variable\ndevant une méthode ou une définition de classe\n\ninterdit la redéfinition ou les sous-classes, voir plus loin"
+    "text": "2.1 Final\nLe mot-clé final peut être placé:\n\ndevant un attribut\ndevant une variable\ndevant une méthode ou une définition de classe\n\ninterdit la redéfinition ou les sous-classes, voir plus loin",
+    "crumbs": [
+      "Cours",
+      "CM2 - Encapsulation, immuabilité, tableaux"
+    ]
   },
   {
     "objectID": "cm2.html#attribut-final",
     "href": "cm2.html#attribut-final",
     "title": "CM2 - Encapsulation, immuabilité, tableaux",
     "section": "2.2 Attribut final",
-    "text": "2.2 Attribut final\nUn attribut final est immuable (en: immutable). Il est initialisé dans le constructeur et ne peut pas être modifié par la suite.\npublic class Point {\n    public final int x;\n    public final int y;\n\n    Point(int x, int y) {\n        this.x = x;\n        this.y = y;\n    }\n}\n\n// ...\nPoint p = new Point(2, 3);\np.x = 5; // erreur de compilation"
+    "text": "2.2 Attribut final\nUn attribut final est immuable (en: immutable). Il est initialisé dans le constructeur et ne peut pas être modifié par la suite.\npublic class Point {\n    public final int x;\n    public final int y;\n\n    Point(int x, int y) {\n        this.x = x;\n        this.y = y;\n    }\n}\n\n// ...\nPoint p = new Point(2, 3);\np.x = 5; // erreur de compilation",
+    "crumbs": [
+      "Cours",
+      "CM2 - Encapsulation, immuabilité, tableaux"
+    ]
   },
   {
     "objectID": "cm2.html#pourquoi-utiliser-limmuabilité",
     "href": "cm2.html#pourquoi-utiliser-limmuabilité",
     "title": "CM2 - Encapsulation, immuabilité, tableaux",
     "section": "2.3 pourquoi utiliser l’immuabilité ?",
-    "text": "2.3 pourquoi utiliser l’immuabilité ?\nUn objet immuable peut être passé en argument à de multiples méthodes en étant certain de son état au retour.\n\nlecture du code plus aisée, permet de raisonner sur le code\npartage de l’objet entre plusieurs Threads\n\nModifier un objet immuable = renvoyer une nouvelle instance modifiée\n\nL’immuabilité est un concept clé de la programmation fonctionnelle."
+    "text": "2.3 pourquoi utiliser l’immuabilité ?\nUn objet immuable peut être passé en argument à de multiples méthodes en étant certain de son état au retour.\n\nlecture du code plus aisée, permet de raisonner sur le code\npartage de l’objet entre plusieurs Threads\n\nModifier un objet immuable = renvoyer une nouvelle instance modifiée\n\nL’immuabilité est un concept clé de la programmation fonctionnelle.",
+    "crumbs": [
+      "Cours",
+      "CM2 - Encapsulation, immuabilité, tableaux"
+    ]
   },
   {
     "objectID": "cm2.html#exemples-de-classes-immuables",
     "href": "cm2.html#exemples-de-classes-immuables",
     "title": "CM2 - Encapsulation, immuabilité, tableaux",
     "section": "2.4 Exemples de classes immuables",
-    "text": "2.4 Exemples de classes immuables\n\njava.lang.String\njava.time.LocalDate\njava.util.UUID"
+    "text": "2.4 Exemples de classes immuables\n\njava.lang.String\njava.time.LocalDate\njava.util.UUID",
+    "crumbs": [
+      "Cours",
+      "CM2 - Encapsulation, immuabilité, tableaux"
+    ]
   },
   {
     "objectID": "cm2.html#records",
     "href": "cm2.html#records",
     "title": "CM2 - Encapsulation, immuabilité, tableaux",
     "section": "2.5 Records",
-    "text": "2.5 Records\nDepuis Java 14, nous pouvons utiliser les classes record.\n\nTous leurs attributs sont immuables.\ndes méthodes sont générées automatiquement: accesseurs, toString, equals, hashCode\n\npublic record Point (int x, int y) {}\nvar p = new Point(2, 3);\np.x(); // accesseur\np.toString(); \np.equals(new Point(2, 3));"
+    "text": "2.5 Records\nDepuis Java 14, nous pouvons utiliser les classes record.\n\nTous leurs attributs sont immuables.\ndes méthodes sont générées automatiquement: accesseurs, toString, equals, hashCode\n\npublic record Point (int x, int y) {}\nvar p = new Point(2, 3);\np.x(); // accesseur\np.toString(); \np.equals(new Point(2, 3));",
+    "crumbs": [
+      "Cours",
+      "CM2 - Encapsulation, immuabilité, tableaux"
+    ]
   },
   {
     "objectID": "cm2.html#variable-immuables",
     "href": "cm2.html#variable-immuables",
     "title": "CM2 - Encapsulation, immuabilité, tableaux",
     "section": "2.6 Variable immuables",
-    "text": "2.6 Variable immuables\nfinal peut être utilisé pour une variable locale\nfinal int min;\nmin = Math.min(x, y);\ni = 3; // erreur de compilation\n\nfinal var s = \"hello\";\ns = \"world\"; // erreur de compilation\n\nBonne pratique: marquer les variables qui ne changent pas avec final.\nCela permet au lecteur de raisonner et se dire “ok, cette variable ne changera jamais”.\n\n\nUn développeur passe beaucoup plus de temps à lire du code qu’à en écrire. Un code facile à lire et comprendre sera plus facile à maintenir et faire évoluer.\nEn Scala et Kotlin, le mot-clé val permet de déclarer une variable immuable. En Java, il faut ajouter le mot final, ce qui est plus verbeux. Les développeurs Java ont par conséquence moins tendance à appliquer cette bonne pratique.\nSolution: utiliser Lombok val"
+    "text": "2.6 Variable immuables\nfinal peut être utilisé pour une variable locale\nfinal int min;\nmin = Math.min(x, y);\ni = 3; // erreur de compilation\n\nfinal var s = \"hello\";\ns = \"world\"; // erreur de compilation\n\nBonne pratique: marquer les variables qui ne changent pas avec final.\nCela permet au lecteur de raisonner et se dire “ok, cette variable ne changera jamais”.\n\n\nUn développeur passe beaucoup plus de temps à lire du code qu’à en écrire. Un code facile à lire et comprendre sera plus facile à maintenir et faire évoluer.\nEn Scala et Kotlin, le mot-clé val permet de déclarer une variable immuable. En Java, il faut ajouter le mot final, ce qui est plus verbeux. Les développeurs Java ont par conséquence moins tendance à appliquer cette bonne pratique.\nSolution: utiliser Lombok val",
+    "crumbs": [
+      "Cours",
+      "CM2 - Encapsulation, immuabilité, tableaux"
+    ]
   },
   {
     "objectID": "cm2.html#variables-de-classe",
     "href": "cm2.html#variables-de-classe",
     "title": "CM2 - Encapsulation, immuabilité, tableaux",
     "section": "3.1 Variables de classe",
-    "text": "3.1 Variables de classe\npublic class Car {\n    private String name;\n    private String engine;\n    \n    private static int numberOfCars;\n    \n    public Car(String name, String engine) {\n        this.name = name;\n        this.engine = engine;\n        numberOfCars++;\n    }\n\n    // getters et setters\n}\n\nA chaque instanciation de la classe Car avec new Car(...), la variable numberOfCars est incrémentée."
+    "text": "3.1 Variables de classe\npublic class Car {\n    private String name;\n    private String engine;\n    \n    private static int numberOfCars;\n    \n    public Car(String name, String engine) {\n        this.name = name;\n        this.engine = engine;\n        numberOfCars++;\n    }\n\n    // getters et setters\n}\n\nA chaque instanciation de la classe Car avec new Car(...), la variable numberOfCars est incrémentée.",
+    "crumbs": [
+      "Cours",
+      "CM2 - Encapsulation, immuabilité, tableaux"
+    ]
   },
   {
     "objectID": "cm2.html#constantes",
     "href": "cm2.html#constantes",
     "title": "CM2 - Encapsulation, immuabilité, tableaux",
     "section": "3.2 Constantes",
-    "text": "3.2 Constantes\n\nSi l’on combine final et static, on obtient une variable de classe qui ne peut pas être modifiée\nC’est donc une constante !\n\npublic class Person {\n    private int age;\n\n    private static final int AGE_MAJEUR = 18;\n\n    // constructeurs, getters et setters\n\n    public boolean isMajeur() {\n        return age &gt;= AGE_MAJEUR;\n    }\n}\n\nConvention: les constantes sont en MAJUSCULES\n\nVoir LocalDate"
+    "text": "3.2 Constantes\n\nSi l’on combine final et static, on obtient une variable de classe qui ne peut pas être modifiée\nC’est donc une constante !\n\npublic class Person {\n    private int age;\n\n    private static final int AGE_MAJEUR = 18;\n\n    // constructeurs, getters et setters\n\n    public boolean isMajeur() {\n        return age &gt;= AGE_MAJEUR;\n    }\n}\n\nConvention: les constantes sont en MAJUSCULES\n\nVoir LocalDate",
+    "crumbs": [
+      "Cours",
+      "CM2 - Encapsulation, immuabilité, tableaux"
+    ]
   },
   {
     "objectID": "cm2.html#variables-de-classes---bonnes-pratiques",
     "href": "cm2.html#variables-de-classes---bonnes-pratiques",
     "title": "CM2 - Encapsulation, immuabilité, tableaux",
     "section": "3.3 Variables de classes - bonnes pratiques",
-    "text": "3.3 Variables de classes - bonnes pratiques\n\nUne variable de classe mutable (non-finale):\n\nne devrait jamais être public.\nest une variable globale, son état est imprévisible si tout le monde peut la modifier\npose problème dans les programmes multi-threads\ndoit être strictement contrôlée pour l’accès en écriture\nreste en mémoire pendant toute l’exécution du programme\nest plus difficile à tester\nest en général déconseillée, sauf utilisation particulière\n\nconfiguration, compteur, cache, singleton, …\n\n\nLes constantes peuvent être public, sauf si elles ne sont utilisées que dans la classe."
+    "text": "3.3 Variables de classes - bonnes pratiques\n\nUne variable de classe mutable (non-finale):\n\nne devrait jamais être public.\nest une variable globale, son état est imprévisible si tout le monde peut la modifier\npose problème dans les programmes multi-threads\ndoit être strictement contrôlée pour l’accès en écriture\nreste en mémoire pendant toute l’exécution du programme\nest plus difficile à tester\nest en général déconseillée, sauf utilisation particulière\n\nconfiguration, compteur, cache, singleton, …\n\n\nLes constantes peuvent être public, sauf si elles ne sont utilisées que dans la classe.",
+    "crumbs": [
+      "Cours",
+      "CM2 - Encapsulation, immuabilité, tableaux"
+    ]
   },
   {
     "objectID": "cm2.html#méthodes-de-classe",
     "href": "cm2.html#méthodes-de-classe",
     "title": "CM2 - Encapsulation, immuabilité, tableaux",
     "section": "3.4 Méthodes de classe",
-    "text": "3.4 Méthodes de classe\nUne méthode de classe est à utiliser lorsque une méthode:\n\na un rapport avec la classe\nn’a pas besoin des attributs de l’instance\nou lorsqu’elle doit accéder à des variables de classe"
+    "text": "3.4 Méthodes de classe\nUne méthode de classe est à utiliser lorsque une méthode:\n\na un rapport avec la classe\nn’a pas besoin des attributs de l’instance\nou lorsqu’elle doit accéder à des variables de classe",
+    "crumbs": [
+      "Cours",
+      "CM2 - Encapsulation, immuabilité, tableaux"
+    ]
   },
   {
     "objectID": "cm2.html#méthodes-de-classe---exemple-1",
     "href": "cm2.html#méthodes-de-classe---exemple-1",
     "title": "CM2 - Encapsulation, immuabilité, tableaux",
     "section": "3.5 Méthodes de classe - Exemple 1",
-    "text": "3.5 Méthodes de classe - Exemple 1\npublic record Note(double note) {\n    public static Note fromString(String noteStr) {\n        return new Note(Double.parseDouble(noteStr));\n    }\n\n    public static double moyenne(Note[] notes) {\n        double somme = 0;\n        for (int i = 0; i &lt; notes.length; i++) {\n            somme += notes[i].note;\n        }\n        return somme / notes.length;\n    }\n}\n\nNote[] notes = { new Note(10), Note.fromString(\"12.5\"), new Note(20) };\nSystem.out.println(Note.moyenne(notes));\n\n\nLes méthodes de classe peuvent être utilisées pour définir des constructeurs alternatifs, qui ont un nom explicite.\nVoir par exemple LocalDate"
+    "text": "3.5 Méthodes de classe - Exemple 1\npublic record Note(double note) {\n    public static Note fromString(String noteStr) {\n        return new Note(Double.parseDouble(noteStr));\n    }\n\n    public static double moyenne(Note[] notes) {\n        double somme = 0;\n        for (int i = 0; i &lt; notes.length; i++) {\n            somme += notes[i].note;\n        }\n        return somme / notes.length;\n    }\n}\n\nNote[] notes = { new Note(10), Note.fromString(\"12.5\"), new Note(20) };\nSystem.out.println(Note.moyenne(notes));\n\n\nLes méthodes de classe peuvent être utilisées pour définir des constructeurs alternatifs, qui ont un nom explicite.\nVoir par exemple LocalDate",
+    "crumbs": [
+      "Cours",
+      "CM2 - Encapsulation, immuabilité, tableaux"
+    ]
   },
   {
     "objectID": "cm2.html#méthodes-de-classe---exemple-2",
     "href": "cm2.html#méthodes-de-classe---exemple-2",
     "title": "CM2 - Encapsulation, immuabilité, tableaux",
     "section": "3.6 Méthodes de classe - Exemple 2",
-    "text": "3.6 Méthodes de classe - Exemple 2\nFonction pures\n\npas d’effet de bord: ne change pas de variables globales, pas d’entrées / sorties\ndéterministe: produit toujours le même résultat pour une entrée donnée\n\npublic class MathUtil {\n    public static long factorielle(int n) {\n        long result = 1;\n        for (int i = 1; i &lt;= n; i++) {\n            result *= i;\n        }\n        return result;\n    }\n}"
+    "text": "3.6 Méthodes de classe - Exemple 2\nFonction pures\n\npas d’effet de bord: ne change pas de variables globales, pas d’entrées / sorties\ndéterministe: produit toujours le même résultat pour une entrée donnée\n\npublic class MathUtil {\n    public static long factorielle(int n) {\n        long result = 1;\n        for (int i = 1; i &lt;= n; i++) {\n            result *= i;\n        }\n        return result;\n    }\n}",
+    "crumbs": [
+      "Cours",
+      "CM2 - Encapsulation, immuabilité, tableaux"
+    ]
   },
   {
     "objectID": "cm2.html#déclaration",
     "href": "cm2.html#déclaration",
     "title": "CM2 - Encapsulation, immuabilité, tableaux",
     "section": "4.1 Déclaration",
-    "text": "4.1 Déclaration\nLa classe ArrayList du JDK dispose d’une taille dynamique.\n\nses éléments peuvent être facilement ajoutés ou supprimés.\n\nimport java.util.ArrayList;\nArrayList&lt;Type&gt; arrayList = new ArrayList&lt;&gt;();\n\nPour les types primitifs, il faut utiliser les classes enveloppes pour qu’ils puissent être traitées comme des objets.\n\npour des entiers nous devons utiliser Integer et non int.\n\nArrayList&lt;Integer&gt; arrayList = new ArrayList&lt;&gt;();\n\n\n\n\n\n\n\nTip\n\n\n\nLes types primitifs int, boolean, double, … ne sont pas des objets. Pour pouvoir les traiter comme des objets, le JDK fournit des classes enveloppes (en: boxed types).\nElles ont le même nom que le type primitif correspondant mais commencent par une majuscule."
+    "text": "4.1 Déclaration\nLa classe ArrayList du JDK dispose d’une taille dynamique.\n\nses éléments peuvent être facilement ajoutés ou supprimés.\n\nimport java.util.ArrayList;\nArrayList&lt;Type&gt; arrayList = new ArrayList&lt;&gt;();\n\nPour les types primitifs, il faut utiliser les classes enveloppes pour qu’ils puissent être traitées comme des objets.\n\npour des entiers nous devons utiliser Integer et non int.\n\nArrayList&lt;Integer&gt; arrayList = new ArrayList&lt;&gt;();\n\n\n\n\n\n\n\nTip\n\n\n\nLes types primitifs int, boolean, double, … ne sont pas des objets. Pour pouvoir les traiter comme des objets, le JDK fournit des classes enveloppes (en: boxed types).\nElles ont le même nom que le type primitif correspondant mais commencent par une majuscule.",
+    "crumbs": [
+      "Cours",
+      "CM2 - Encapsulation, immuabilité, tableaux"
+    ]
   },
   {
     "objectID": "cm2.html#utilisation",
     "href": "cm2.html#utilisation",
     "title": "CM2 - Encapsulation, immuabilité, tableaux",
     "section": "4.2 Utilisation",
-    "text": "4.2 Utilisation\nMéthodes courantes:\nArrayList&lt;String&gt; arrayList = new ArrayList&lt;&gt;();\n\n// Ajout d’un élément :\narrayList.add(\"red\");\narrayList.add(\"green\");\narrayList.add(\"blue\");\n\n// Suppression d’un élément :\narrayList.remove(0);\n\n// Accès à un élément par son indice\narrayList.get(1);\n\n// Modification d’un élément\narrayList.set(1, \"bleu\");\n\n// Longueur d’une ArrayList\narrayList.size();"
+    "text": "4.2 Utilisation\nMéthodes courantes:\nArrayList&lt;String&gt; arrayList = new ArrayList&lt;&gt;();\n\n// Ajout d’un élément :\narrayList.add(\"red\");\narrayList.add(\"green\");\narrayList.add(\"blue\");\n\n// Suppression d’un élément :\narrayList.remove(0);\n\n// Accès à un élément par son indice\narrayList.get(1);\n\n// Modification d’un élément\narrayList.set(1, \"bleu\");\n\n// Longueur d’une ArrayList\narrayList.size();",
+    "crumbs": [
+      "Cours",
+      "CM2 - Encapsulation, immuabilité, tableaux"
+    ]
   },
   {
     "objectID": "cm2.html#initialisation",
     "href": "cm2.html#initialisation",
     "title": "CM2 - Encapsulation, immuabilité, tableaux",
     "section": "4.3 Initialisation",
-    "text": "4.3 Initialisation\nNous pouvons initialiser un ArrayList directement:\n\nsoit avec Collections.addAll\n\nimport java.util.ArrayList;\nimport java.util.Collections;\n\nArrayList&lt;String&gt; arrayList = new ArrayList&lt;&gt;();\nCollections.addAll(arrayList, \"Alice\", \"Bob\", \"Charlie\");\n\nsoit avec List.of (depuis Java 9)\n\nimport java.util.ArrayList;\nimport java.util.List;\n\nArrayList&lt;String&gt; arrayList = new ArrayList&lt;&gt;(List.of(\"Alice\", \"Bob\", \"Charlie\"));"
+    "text": "4.3 Initialisation\nNous pouvons initialiser un ArrayList directement:\n\nsoit avec Collections.addAll\n\nimport java.util.ArrayList;\nimport java.util.Collections;\n\nArrayList&lt;String&gt; arrayList = new ArrayList&lt;&gt;();\nCollections.addAll(arrayList, \"Alice\", \"Bob\", \"Charlie\");\n\nsoit avec List.of (depuis Java 9)\n\nimport java.util.ArrayList;\nimport java.util.List;\n\nArrayList&lt;String&gt; arrayList = new ArrayList&lt;&gt;(List.of(\"Alice\", \"Bob\", \"Charlie\"));",
+    "crumbs": [
+      "Cours",
+      "CM2 - Encapsulation, immuabilité, tableaux"
+    ]
   },
   {
     "objectID": "cm2.html#parcours-dun-arraylist",
     "href": "cm2.html#parcours-dun-arraylist",
     "title": "CM2 - Encapsulation, immuabilité, tableaux",
     "section": "4.4 Parcours d’un ArrayList",
-    "text": "4.4 Parcours d’un ArrayList\n\nfor classique avec un indice. A utiliser si on a besoin de l’indice\n\nfor (int i = 0; i &lt; list.size(); i++) {\n    System.out.println(list.get(i));\n}\n\nfor-each. Plus simple et plus lisible\n\nfor (String name: arrayList) {\n    System.out.println(name);\n}\n\nautres possibilités: Iterator, forEach avec Lambda (voir plus loin)"
+    "text": "4.4 Parcours d’un ArrayList\n\nfor classique avec un indice. A utiliser si on a besoin de l’indice\n\nfor (int i = 0; i &lt; list.size(); i++) {\n    System.out.println(list.get(i));\n}\n\nfor-each. Plus simple et plus lisible\n\nfor (String name: arrayList) {\n    System.out.println(name);\n}\n\nautres possibilités: Iterator, forEach avec Lambda (voir plus loin)",
+    "crumbs": [
+      "Cours",
+      "CM2 - Encapsulation, immuabilité, tableaux"
+    ]
   },
   {
     "objectID": "cm2.html#arraylist-sous-le-capot",
     "href": "cm2.html#arraylist-sous-le-capot",
     "title": "CM2 - Encapsulation, immuabilité, tableaux",
     "section": "4.5 ArrayList: sous le capot",
-    "text": "4.5 ArrayList: sous le capot\nImplémentation simplifiée:\npublic class ArrayList&lt;E&gt; {\n    private static final int DEFAULT_CAPACITY = 10;\n\n    private Object[] elementData; \n    private int size;\n\n    public ArrayList() {\n        this(DEFAULT_CAPACITY);\n    }\n\n    public ArrayList(int initialCapacity) {\n        if (initialCapacity &gt; 0) {\n            this.elementData = new Object[initialCapacity];\n        }\n    }\n\n    public boolean add(E e) {\n        if (size == elementData.length)\n            elementData = grow();  \n        elementData[s] = e;\n        size = s + 1;\n        return true;\n    }\n\n    // ... autres méthodes\n}\n\nLa structure sous-jacente est un tableau. Lorsque la size atteint la capacité du tableau, le tableau est étendu avec grow() (recopie de tous les éléments dans un nouveau tableau plus grand).\nBonne pratique: si vous connaissez le nombre d’éléments, utilisez le constructeur ArrayList(int initialCapacity)"
+    "text": "4.5 ArrayList: sous le capot\nImplémentation simplifiée:\npublic class ArrayList&lt;E&gt; {\n    private static final int DEFAULT_CAPACITY = 10;\n\n    private Object[] elementData; \n    private int size;\n\n    public ArrayList() {\n        this(DEFAULT_CAPACITY);\n    }\n\n    public ArrayList(int initialCapacity) {\n        if (initialCapacity &gt; 0) {\n            this.elementData = new Object[initialCapacity];\n        }\n    }\n\n    public boolean add(E e) {\n        if (size == elementData.length)\n            elementData = grow();  \n        elementData[s] = e;\n        size = s + 1;\n        return true;\n    }\n\n    // ... autres méthodes\n}\n\nLa structure sous-jacente est un tableau. Lorsque la size atteint la capacité du tableau, le tableau est étendu avec grow() (recopie de tous les éléments dans un nouveau tableau plus grand).\nBonne pratique: si vous connaissez le nombre d’éléments, utilisez le constructeur ArrayList(int initialCapacity)",
+    "crumbs": [
+      "Cours",
+      "CM2 - Encapsulation, immuabilité, tableaux"
+    ]
   },
   {
     "objectID": "cm5.html",
